@@ -1,12 +1,23 @@
 <?php
+Route::get('/PDF', function () { 
+
+$pdf = \PDF::loadView('frontend/datosImprimir');
+return $pdf->stream();
+})->name('frontend.pdf');
+
+
 Route::get('/', function () { 
-    return view('frontend/home');
+    return view('frontend.home');
  })->name('frontend.home');
  
  Route::get('/plantilla', function () { 
     return view('frontend/datos');
  })->name('frontend.datos');
- 
+
+ Route::get('/plantillaImprime', function () { 
+    return view('frontend/datosImprimir');
+ })->name('frontend.imprimir');
+
  Route::get('/administracion', function () { 
     return redirect('/admin/home');
  })->name('administracion');

@@ -1,6 +1,6 @@
-<script src="{{ asset('frontend/js') }}/jquery-2.1.4.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
 	<script>
+
 
 	$.ajaxSetup({
     headers: {
@@ -305,4 +305,5 @@ function verifica(dato) {
 		}
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
 @yield('javascript')

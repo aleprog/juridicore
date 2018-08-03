@@ -11,11 +11,76 @@ use App\Http\Controllers\Ajax\SelectController;
 class RegistroController extends Controller
 {
     public function registroP(Request $request){
-		$identificacion=$request->identificacion;
 
-		if($request->enviarV!=0)
-		{
+			$identificacion=$request->identificacion;
+			$nombres=$request->nombres;
+			$apellidos=$request->apellidos;
+			$semestre=$request->semestre;
+			$direccion=$request->direccion;
+			$convencional=$request->convencional;
+			$celular=$request->celular;
+			$carrera=$request->carrera;
+			$correo_institucional=$request->correo_institucional;
+				$this->validate($request,[
+				'identificacion'=>'required|unique:mysql_solicitudescj.postulants',	
+				
+					],['identiticacion.uniqued'=>'Ya posee una solicitud en procesos',
+				]);
+		  $objPostulant=new Postulant();
+		  $objPostulant->identificacion=$identificacion;
+		  $objPostulant->nombres=$nombres;
+		  $objPostulant->apellidos=$apellidos;
+		  $objPostulant->semestre=$semestre;
+		  $objPostulant->direccion=$direccion;
+		  $objPostulant->celular=$celular;
+		  $objPostulant->carrera=$carrera;
+		  $objPostulant->correo_institucional=$correo_institucional;
+
+		  $objPostulant->convencional=$convencional;
+		  $objPostulant->save();
+		   
+		  $objRequest=new RequestPostulant();
+		  $objRequest->postulant_id=$objPostulant->id;
+		  $objRequest->save();
+		  
+		  $message="Grabado Exitoso, porfavor imprima la solicitud";
+		  $objPostulant=Postulant::where(['identificacion'=>$identificacion,'estado'=>'A'])->get()->toArray();
+		  $idv=$objPostulant[0]['id'];
+
+		  $objPostulant=$objPostulant[0];
+		  
+		  $datos['data']=$objPostulant;
+		  $datos['message']=$message;
+		  $datos['id']=$idv;
+		  $identificacion=$objPostulant['identificacion'];
+		  $nombres=$objPostulant['nombres'];
+		  $apellidos=$objPostulant['apellidos'];
+		  $nivel=$objPostulant['semestre'];
+		  $carrera=$objPostulant['carrera'];
+		  $correo_institucional=$objPostulant['correo_institucional'];
+		  $convencional=$objPostulant['convencional'];
+		  $celular=$objPostulant['celular'];
+			$datos['message']=$message;
+			$datos['pp']="1";
+			$pdf = \PDF::loadView('frontend/datosImprimir',compact(
+				'identificacion',
+				'nombres',
+				'apellidos',
+				'nivel',
+				'carrera',
+				'correo_institucional',
+				'convencional',
+				'celular'));
+				return $pdf->stream();
+
+	//	return redirect()->route('frontend.imprimir')->with($datos);
+	}
+	public function registroPP(Request $request)
+    {
+		
+        $identificacion=$request->identificacion;
 			$objPostulant=Postulant::where(['identificacion'=>$identificacion,'estado'=>'A'])->get()->toArray();
+			
 			if($objPostulant!=[])
 			{
 				$idv=$objPostulant[0]['id'];
@@ -58,51 +123,7 @@ class RegistroController extends Controller
 				$message="No tiene Solicitud Ingresada";
 				$datos['message']=$message;
 			}			
-		 	
+			return redirect()->route('frontend.home')->with($datos);
 
-		}else
-		{
-			$nombres=$request->nombres;
-			$apellidos=$request->apellidos;
-			$semestre=$request->semestre;
-			$direccion=$request->direccion;
-			$convencional=$request->convencional;
-			$celular=$request->celular;
-			$carrera=$request->carrera;
-			$correo_institucional=$request->correo_institucional;
-				$this->validate($request,[
-				'identificacion'=>'required|unique:mysql_solicitudescj.postulants',	
-				
-					],['identiticacion.uniqued'=>'Ya posee una solicitud en procesos',
-				]);
-
-		  $objPostulant=new Postulant();
-		  $objPostulant->identificacion=$identificacion;
-		  $objPostulant->nombres=$nombres;
-		  $objPostulant->apellidos=$apellidos;
-		  $objPostulant->semestre=$semestre;
-		  $objPostulant->direccion=$direccion;
-		  $objPostulant->celular=$celular;
-		  $objPostulant->carrera=$carrera;
-		  $objPostulant->correo_institucional=$correo_institucional;
-
-		  $objPostulant->convencional=$convencional;
-		  $objPostulant->save();
-		   
-		  $objRequest=new RequestPostulant();
-		  $objRequest->postulant_id=$objPostulant->id;
-		  $objRequest->save();
-		  
-		  $message="Grabado Exitoso, porfavor imprima la solicitud";
-		  
-		    $datos['data']=['identificacion'=>$identificacion,'nombres'=>$nombres,'apellidos'=>$apellidos,
-					'semestre'=>$semestre,
-					'direccion'=>$direccion,'convencional'=>$convencional,'celular'=>$celular,'carrera'=>$carrera,'correo_institucional'=>$correo_institucional];
-			$datos['message']=$message;
-			$datos['pp']="1";
-			
-		}
-		
-		return redirect()->route('frontend.home')->with($datos);
-	}
+    }
 }

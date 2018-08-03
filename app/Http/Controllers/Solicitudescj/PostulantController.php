@@ -11,6 +11,9 @@ use Spatie\Permission\Models\Role;
 use App\Mail\CreateUserStudent as CreateUserStudent;
 use Yajra\Datatables\Datatables;
 use Mail;
+use App\Core\Entities\Solicitudescj\Postulant;
+use App\Core\Entities\Solicitudescj\RequestPostulant;
+use App\Http\Controllers\Ajax\SelectController;
 
 class PostulantController extends Controller
 {
@@ -30,7 +33,8 @@ class PostulantController extends Controller
 		
 		return view('modules.Solicitudescj.postulants.index');
 
-	}
+    }
+    
 
 	public function getDatatable()
     {

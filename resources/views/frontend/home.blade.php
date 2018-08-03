@@ -32,8 +32,15 @@ function soloNumeros(e){
 					@endforeach
 				
 		@endif
-	
+
 function imprimir() {
+	var doc = new jsPDF('p','pt','a4',true);
+		var specialElementHandlers = {
+			'#editor': function (element, renderer) {
+				return true;
+			}
+		};
+	
 	var identificacion='{{session("data")["identificacion"]}}';
 	var nombres='{{session("data")["nombres"]}}';
 	var apellidos='{{session("data")["apellidos"]}}';
@@ -43,6 +50,7 @@ function imprimir() {
 
 	var celular='{{session("data")["celular"]}}';
 	var semestre='{{session("data")["semestre"]}}';
+	var correo_institucional='{{session("data")["correo_institucional"]}}';
 
 								var html;
 								var disp_setting = "toolbar=yes,location=no,";
@@ -51,7 +59,7 @@ function imprimir() {
 								//var contenido= document.getElementById("areaImprimir").innerHTML;
 								var docprint = window.open("", "", disp_setting);
 								docprint.document.open();
-								 html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"';
+								html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"';
 								html += '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
 								html += '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">';
 								html += '<head><title></title>';
@@ -60,14 +68,22 @@ function imprimir() {
 								html += 'font-family:Verdana, Geneva, sans-serif; font-size:12px;}';
 								html += 'a{color:#000;text-decoration:none;} ';
 								html += '</style>';
-								html += '</head><body onLoad="self.print()"><center>';
-								html+='<div class="col-lg-12" style="height:1000px">';
-								html+='<center><img src="/images/fondoO.jpeg" width="180px" height="150px"></center>';
+								html += '</head><body><center>';
+								html+='<div id="content" class="col-lg-12" style="height:1000px">';
+								html+='<table border="0">';
+								html+='<tr>';
+								html+='<td><img src="{{url('images/ug.png')}}" width="90px" height="95px" style="padding:25px"></td>';
+								html+='<td><center><h3>UNIVERSIDAD DE GUAYAQUIL</h3></center><center><h3>FACULTAD DE JURISPRUDENCIA Y CIENCIAS SOCIALES</h3></center></td>';
+								html+='<td><img src="'+imgj+'" width="70px" height="95px" style="padding:25px"></td>';
+								html+='</tr></table>'
 								html+='<div style="padding:25px 25px 25px 25px" margin-top="100px">';
-								html+='<h1>Solicitud de Practicas Pre Profesionales</h1>';
+								html+='<hr/>';
+								html+='<center><h1>FICHA DE INSCRIPCION</h1></center>';
+								html+='<center><h1>COORDINACIÓN DE VINCULACION SOCIAL Y </h1></center>';
+								html+='<center><h1>PRÁCTICAS PRE PROFESIONALES</h1></center>';
 								html+='<hr/>';
 								html+='<br/>';
-								html+='<table width="100%" padding:"25px">';
+								html+='<table width="100%" padding:"25px" background="/images/fondo1.png">';
 								html+='<tr>';
 								html+='<td>';
 								html+='<h2 align="justify">Carrera:</h2>';
@@ -127,18 +143,26 @@ function imprimir() {
 								html+='<br/>';
 		
 								html+='</div>';
-								html+='</div>';
 								html+='<p style="bottom:0;left:0;position:relative" align="justify">';
 								html+='Esta Solicitud es impresa desde la Web y sera verificada por su identificación';
 								html+='al momento de entregar en la secretaria de la Facultad';
 								html+='<p/>';
+								html+='</div>';
+								html+='<div id="editor">';
+								html+='</div>';
 								html +='</body>';
 								html+='</html>';
 
+								
 								docprint.document.write(html);
 								docprint.document.close();
+								doc.fromHTML(html, 15, 15, {
+									'width': 500,
+									'elementHandlers': specialElementHandlers
+								});
+								doc.save('sample-file.pdf');
+							
 								docprint.focus();
-
 }
 
 

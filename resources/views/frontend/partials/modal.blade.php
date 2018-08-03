@@ -20,7 +20,7 @@ Solicitud de Prácticas Pre Profesionales
 				
 					<div class="agileits-w3layouts-info">
 					<div style="background: url('/images/fondo.jpeg') no-repeat center;background-size: 500px 400px;">
-					<form class="form-horizontal" method="POST" action="{{ route ('registroP')}}">
+					<form class="form-horizontal" method="POST" action="{{ route ('registroP')}}"  target="_blank">
 					{{ csrf_field() }}
 
 					<fieldset>
@@ -110,7 +110,7 @@ Solicitud de Prácticas Pre Profesionales
 					<div class="form-group">
 					  <label class="col-md-4 control-label" for="enviar"></label>
 					  <div class="col-md-8">
-						<button id="enviarV"value="0" type="submit" name="enviarV" class="btn btn-primary">Enviar Solicitud</button>
+						<button id="enviarV"value="0" type="submit" name="enviarV" class="btn btn-primary" onclick="alert('Su transaccion sera procesada , dele click en aceptar para poder imprimir la solicitud...')">Enviar Solicitud</button>
 						<button id="cerrar" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cerrar </button>
 					  </div>
 					</div>
@@ -128,9 +128,8 @@ Solicitud de Prácticas Pre Profesionales
 				<div id="tabRegistered" class="tab-pane fade">
 				<div class="modal-body">
 					<div class="agileits-w3layouts-info">
-					<form class="form-horizontal" method="POST" action="{{ route ('registroP')}}">
+					<form class="form-horizontal" method="POST" action="{{ route ('registroPP')}}">
 					{{ csrf_field() }}
-					<form class="form-horizontal" method="POST" action="{{ route ('registroP')}}">
 
 					<fieldset>
 
@@ -144,7 +143,7 @@ Solicitud de Prácticas Pre Profesionales
 
 					  </div>
 					  <div class="col-md-1">
-					  	<button class="btn btn-primary" type="submit" value="1" name="enviarV" id="enviarV">Verifcar </button>
+					  	<button class="btn btn-primary" type="submit" value="1" name="enviarV" id="enviarV">Verificar </button>
 
 					  </div>
 					 </form>
