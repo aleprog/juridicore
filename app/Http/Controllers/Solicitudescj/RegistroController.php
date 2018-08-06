@@ -62,7 +62,7 @@ class RegistroController extends Controller
 		  $celular=$objPostulant['celular'];
 			$datos['message']=$message;
 			$datos['pp']="1";
-			$pdf = \PDF::loadView('frontend/datosImprimir',compact(
+			return view('frontend.datosimprimir',compact(
 				'identificacion',
 				'nombres',
 				'apellidos',
@@ -71,7 +71,7 @@ class RegistroController extends Controller
 				'correo_institucional',
 				'convencional',
 				'celular'));
-				return $pdf->stream();
+				//return $pdf->stream();
 
 	//	return redirect()->route('frontend.imprimir')->with($datos);
 	}

@@ -1,106 +1,76 @@
-{{--<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>--}}
-<script type="text/javascript" src="{{asset('js/jquery/jquery2.js')}}"></script>
-	<script>
+@extends('layouts.app')
 
+@section('contentheader_title')
+	JuridiCore
+@endsection
 
-	$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-		// You can also use "$(window).load(function() {"
-		$(function () {
-			   var a = $("#dciudad").val();
-
-			 $("#ciudad").val(a).change();
-			 //revisar
-			// Slideshow 4
-			$("#slider4").responsiveSlides({
-				auto: true,
-				pager: true,
-				nav: true,
-				speed: 500,
-				namespace: "callbacks",
-				before: function () {
-					$('.events').append("<li>before event fired.</li>");
-				},
-				after: function () {
-					$('.events').append("<li>after event fired.</li>");
-				}
-			});
-
-		});
-	</script>
-	<script>
-		// You can also use "$(window).load(function() {"
-		$(function () {
-			// Slideshow 4
-			$("#slider3").responsiveSlides({
-				auto: true,
-				pager: false,
-				nav: false,
-				speed: 500,
-				namespace: "callbacks",
-				before: function () {
-					$('.events').append("<li>before event fired.</li>");
-				},
-				after: function () {
-					$('.events').append("<li>after event fired.</li>");
-				}
-			});
-
-		});
-    </script>
-	<script src="{{ asset('js/modules') }}/utils.js"></script>
-    <script src="{{ asset('js/modules') }}/Core.js"></script>
-
-    <script src="{{ asset('frontend/js') }}/responsiveslides.min.js"></script>
-    <script src="{{ asset('frontend/js') }}/bars.js"></script>
-    <script src="{{ asset('frontend/js') }}/jarallax.js"></script>
-    <script src="{{ asset('frontend/js') }}/SmoothScroll.min.js"></script>
-	<script src="{{ asset('adminlte/plugins/notifications/pnotify.min.js') }}"></script>
-	<script type="text/javascript">
-		/* init Jarallax */
-		$('.jarallax').jarallax({
-			speed: 0.5,
-			imgWidth: 1366,
-			imgHeight: 768
-		})
-    </script>
-        <script type="text/javascript" src="{{ asset('frontend/js') }}/easing.js"></script>
-
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			$(".scroll").click(function (event) {
-				event.preventDefault();
-				$('html,body').animate({
-					scrollTop: $(this.hash).offset().top
-				}, 1000);
-			});
-		});
-	</script>
-	<!-- here stars scrolling icon -->
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$("#dependencia").hide();				
-
-				var defaults = {
-				containerID: 'toTop', // fading element id
-				containerHoverID: 'toTopHover', // fading element hover id
-				scrollSpeed: 1200,
-				easingType: 'linear' 
-				};
-
-			$().UItoTop({
-				easingType: 'easeOutQuart'
-			});
-
-		});
-	</script>
-    <!-- //here ends scrolling icon -->
-            <script src="{{ asset('frontend/js') }}/move-top.js"></script>
-            <script src="{{ asset('frontend/js') }}/bootstrap.js"></script>
+@section('contentheader_description')
+	Sistema Integrado 
+@endsection
+@section('css')
+    <link href="{{ url('adminlte/plugins/notifications/sweetalert.css') }}" rel="stylesheet">
+@endsection
+@section('javascript')
 <script>
+function verificacc()
+{
+	var b=0;
+	var lugar=$("#lugar").val();
+	var sup=$("#supervisor").val();
+	var hor=$("#horario").val();
+
+	if(lugar=='')
+	{
+		alert("Debe Completar el campo lugar!")
+
+		b=1;
+	}
+	if(sup==''||sup==0)
+	{
+		
+		alert("Debe Completar el campo Supervisor!")
+
+		b=1;
+
+	}
+	if(hor=='')
+	{
+		alert("Debe Completar el campo horario!")
+
+		b=1;
+
+	}
+	if(b==0)
+	{
+		document.getElementById("btnvgenv").click()
+		alert('De click en aceptar para enviar su solicitud de asignacion de tutor');
+	}
+}
+$("#lugar").on('change', function () {
+
+    $("#supervisor").html('');
+
+    if (this.value != '') {
+
+        var objApiRest = new AJAXRest('/supervisor', {
+            valor: this.value,
+        }, 'post');
+        objApiRest.extractDataAjax(function (_resultContent) {
+            if (_resultContent.status == 200) {
+
+                $("#supervisor").append("<option value='0' selected='selected'>* SUPERVISOR *</option>");
+
+                $.each(_resultContent.message, function (_key, _value) {
+                    $("#supervisor").append("<option value='" + _value.id + "'>" + _value.descripcion + "</option>")
+                });
+
+            } else {
+                alertToast("No hay supervisores asignados en la ubicacion escogida", 3500);
+            }
+        });
+
+    }
+});
 function valida(campo) {
     var numero = campo;
     var suma = 0;
@@ -245,20 +215,7 @@ function valida(campo) {
 return b;
 
 }
-$('input[name^="identificacion"]').on('keydown', function (e) {
-    if ((e.which === 9) || (e.which === 13)) {
-		var dato = $('input[name^="identificacion"]').val();
-		if(dato.length<10)
-		{
-			alert("Formato incorrecto de cedula , verifique el numero sea igual a 10 digitos")
-			$("#dependencia").hide();	
 
-		}else{
-			verifica(dato); 
-		}
-
-    }
-});
 function validarEmail(dato) {
 	var valor=$('#'+dato+'').val();
 	switch(dato)
@@ -305,7 +262,91 @@ function verifica(dato) {
 			$("#dependencia").hide();	
 		}
 }
+
+$(document).ready(function () {
+    $(function () {
+	var lugar=$("#lugar").val();
+	var sup=$("#supervisor").val();
+	var hor=$("#horario").val();
+	var cc=$("#cc").val();
+	
+			
+	switch(cc)
+	{
+		case '0':
+				$("#btnvgverificadiv").show();
+				$("#divmensaje").hide();
+				document.getElementById('lugar').disabled=false;
+				document.getElementById('supervisor').disabled=false;
+				document.getElementById('horariosd').disabled=false;
+				
+		break;
+	
+		default:
+				document.getElementById('lugar').disabled=true;
+				document.getElementById('supervisor').disabled=true;
+				document.getElementById('horariosd').setAttribute("disabled","disabled");
+				$("#btnvgverificadiv").hide();
+				$("#divmensaje").show();
+		break;
+	}
+      
+
+    });
+   
+});
+
 </script>
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>--}}
-<script type="text/javascript" src="{{asset('js/jspdf.min.js')}}"></script>
-@yield('javascript')
+<script type="text/javascript">
+function soloNumeros(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 48 && key <= 57)
+}
+			
+    </script>
+
+@endsection
+@section('content')
+<hr/>
+<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-heading">Inicio</div>
+
+					<div class="panel-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="tabbable" id="tabs-999753">
+										<ul class="nav nav-tabs">
+											<li class="nav-item active">
+												<a class="nav-link active" href="#panel-778868" data-toggle="tab">Datos Personales</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#panel-717633" data-toggle="tab">													Asignacion de tutor
+</a>
+											</li>
+										</ul>
+										<div class="tab-content">
+											<div class="tab-pane active" id="panel-778868">
+												<p>
+												@include('frontend.partials.contenidov')
+												</p>
+											</div>
+											<div class="tab-pane" id="panel-717633">
+												<p>
+												@include('frontend.partials.contenidoasigna')
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+@endsection
+

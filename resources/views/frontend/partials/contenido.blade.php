@@ -185,11 +185,43 @@
 
 							  </div>
 							  
-							   <div class="col-md-4">
+							   <div class="col-md-12">
 							  	<label class="col-md-12 control-label" for="convencional">Area de preferencia</label>  
 
-								{!! Form::select('area', ['CIVIL'=>'CIVIL','PENAL'=>'PENAL','LABORAL'=>'LABORAL','FAMILIA'=>'FAMILIA','VIOLENCIA INTRAFAMILIAR'=>'VIOLENCIA INTRAFAMILIAR','INQUILINATO'=>'INQUILINATO','FISCALIA'=>'FISCALIA','DEFENSORIA PUBLICA'=>'DEFENSORIA PUBLICA','CONSTITUCIONAL'=>'CONSTITUCIONAL'], session('data')["area"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"area","name"=>"area"]) !!}
+								 <div class="col-md-12">
+							   <hr/>
+							  	<label class="col-md-12 control-label" for="convencional">Area de preferencia</label>  
+								<hr/>
+										<div class="col-md-4"> 
+								<label>CIVIL</label>{!!Form::checkbox('civil', session('data')['civil'] ,   session('data')['civil']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>PENAL</label>{!!Form::checkbox('penal',  session('data')['penal'] ,  session('data')['penal']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>LABORAL</label>{!!Form::checkbox('laboral',  session('data')['laboral'] ,  session('data')['laboral']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>FAMILIA</label>{!!Form::checkbox('familia',  session('data')['familia'] ,  session('data')['familia']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label><span style="font-size:12px">VIOLENCIA INTRAFAMILIAR</span></label>{!!Form::checkbox('violenciaf',  session('data')['violenciaf'] ,  session('data')['violenciaf']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>INQUILINATO</label>{!!Form::checkbox('inquilinato',  session('data')['inquilinato'] ,  session('data')['inquilinato']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>FISCALIA</label>{!!Form::checkbox('fiscalia',  session('data')['fiscalia'] ,  session('data')['fiscalia'] ) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>DEFENSORIA PUBLICA</label>{!!Form::checkbox('defensoria',  session('data')['defensoria'] ,  session('data')['defensoria']) !!}
+								</div>
+								<div class="col-md-4"> 
+								<label>CONSTITUCIONAL</label>{!!Form::checkbox('constitucional',  session('data')['constitucional'] ,  session('data')['constitucional']) !!}
+								</div>
+
 							  </div>
+							   </div>
 							  <div class="col-md-12">
 			<hr/></div>
 							</div>
@@ -224,7 +256,7 @@
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Foto</label>
 								  <div class="col-md-6">
-									<input type="file" class="form-control" name="foto"accept="application/pdf">
+									<input type="file" class="form-control" name="foto" accept="image/jpeg">
 								  </div>
 								</div>
 								<div class="form-group">
@@ -258,7 +290,7 @@
 								<div class="form-group">
 								
 								  <div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary">Enviar</button>
+									<button type="submit" class="btn btn-primary" value="1" name="btnvg">Enviar</button>
 								  </div>
 								</div>
 							  </form>

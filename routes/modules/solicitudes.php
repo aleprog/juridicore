@@ -1,5 +1,6 @@
 <?php
     Route::post('registroP', 'Solicitudescj\RegistroController@registroP')->name('registroP');
+    Route::post('registroPP', 'Solicitudescj\RegistroController@registroPP')->name('registroPP');
 
 Route::group(['prefix' => 'asesor', 'as' => 'asesor.'], function () {
     Route::post('provinciaCiudad', 'Solicitudes\SolicitudesController@provinciaCiudad');

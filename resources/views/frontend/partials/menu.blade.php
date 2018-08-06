@@ -19,7 +19,7 @@
 						<ul class="nav navbar-nav link-effect-4">
 							<li class="active"><a href="{{route('frontend.home')}}" data-hover="Home">inicio</a> </li>
 							<li class="nav-item dropdown">
-							 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Practicas</a>
+							 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Practicas</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 								 <a class="dropdown-item" href="#">Cronograma</a> 
 								 <a class="dropdown-item" href="#">Requisitos</a> 

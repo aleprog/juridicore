@@ -16,7 +16,7 @@
 															<table width="100%" >
 															<tr>
 															<td>
-															<img src="{{url('/images/u.png')}}"  width="100px" height="120px">
+															<img src="{{url('/images/ug.png')}}"  width="100px" height="120px">
 															</td>
 															<td>	 <center>
 																			<h5>UNIVERSIDAD DE GUAYAQUIL</h5>
@@ -26,7 +26,7 @@
 																
 																<td>
 																
-																<img src="{{url('/images/jurs.png')}}"style="float:right" width="80px" height="120px">
+																<img src="{{url('/images/juris.png')}}"style="float:right" width="80px" height="120px">
 
 																</td>
 																</tr>

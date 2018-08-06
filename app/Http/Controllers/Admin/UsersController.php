@@ -36,7 +36,7 @@ class UsersController extends Controller
     public function create()
     {
 
-        $roles = Role::get()->pluck('name', 'name');
+        $roles = Role::get()->pluck('name', 'abv');
         
 
 

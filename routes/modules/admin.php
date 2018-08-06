@@ -5,7 +5,6 @@ $pdf = \PDF::loadView('frontend/datosImprimir');
 return $pdf->stream();
 })->name('frontend.pdf');
 
-
 Route::get('/', function () { 
     return view('frontend.home');
  })->name('frontend.home');
@@ -21,6 +20,7 @@ Route::get('/', function () {
  Route::get('/administracion', function () { 
     return redirect('/admin/home');
  })->name('administracion');
+ 
 Route::post('storage/create', 'StorageController@save')->name('storage.create');
 Route::get('formulario', 'StorageController@index');
 Route::get('storage/{archivo}', function ($archivo) {

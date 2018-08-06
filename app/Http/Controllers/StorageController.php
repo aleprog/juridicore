@@ -138,7 +138,11 @@ $solicitud_sellada = $request->file('solicitud_sellada');
 								];*/
 		if($objPostulant>0)
 			{
-				$objRequestPostulant=RequestPostulant::where(['postulant_id'=>$id,'estado'=>'A'])->update(['state_id'=>1]);
+				if($request->btnvg!=3)
+				{
+					$objRequestPostulant=RequestPostulant::where(['postulant_id'=>$id,'estado'=>'A'])->update(['state_id'=>1]);
+				}
+				
 				
 				
 			}

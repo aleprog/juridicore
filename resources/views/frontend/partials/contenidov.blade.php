@@ -273,7 +273,7 @@
 								<div class="form-group">
 								
 								  <div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary" value="2" name="btnvg">Grabar</button>
+									<button type="submit" class="btn btn-primary" value="3" name="btnvg">Grabar</button>
 								  </div>
 								</div>
 							  </form>
