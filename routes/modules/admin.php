@@ -1,7 +1,7 @@
 <?php
 Route::get('/PDF', function () { 
 
-$pdf = \PDF::loadView('frontend/datosImprimir');
+$pdf = \PDF::loadView('frontend/datosimprimir');
 return $pdf->stream();
 })->name('frontend.pdf');
 
@@ -14,7 +14,7 @@ Route::get('/', function () {
  })->name('frontend.datos');
 
  Route::get('/plantillaImprime', function () { 
-    return view('frontend/datosImprimir');
+    return view('frontend/datosimprimir');
  })->name('frontend.imprimir');
 
  Route::get('/administracion', function () { 

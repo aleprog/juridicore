@@ -71,9 +71,9 @@ class PostulantController extends Controller
 
     public function statusRequest(Request $request){
 
-        //dd($request);
         $postulantRequest = RequestPostulant::where('postulant_id',$request->id)->first(); 
-        $postulant = Postulant::find($request->id); 
+
+		$postulant = Postulant::find($request->id); 
         //dd($postulantRequest,$request->id);      
         $postulantRequest->state_id=$request->status;
         $postulantRequest->save();
