@@ -7,15 +7,23 @@ $(document).ready(function(){
 
         event.preventDefault();
         var save="save";
-        PedirConfirmacion('0',save,event);
-        
+        PedirConfirmacion('0',save,event,'FrmSupervisor');     
 
 
-});
+    });
+
+    $("#btnRechazo").on('click', function (event) {
+
+        event.preventDefault();
+        var save="save";
+        PedirConfirmacion('0',save,event,'FrmRechazo');     
+
+
+    });
 
 
 
-function PedirConfirmacion(id,dato,event)
+function PedirConfirmacion(id,dato,event,frm)
 {
 
     swal({ title:                "¿Estas seguro de realizar esta accion?",
@@ -34,7 +42,7 @@ function PedirConfirmacion(id,dato,event)
             {
                 //console.log(event);
                 //return true;
-                $('#FrmSupervisor').submit();
+                $('#'+frm).submit();
 
             } else {
                 swal("¡Cancelado!","No se registraron cambios...","error");

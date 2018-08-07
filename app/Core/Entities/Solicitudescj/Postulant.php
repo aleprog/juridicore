@@ -43,7 +43,7 @@ class Postulant extends Model
 
 			break;
 			case 'AUI':
-			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
+				return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
 
 			break;
 		
@@ -58,3 +58,4 @@ class Postulant extends Model
 		return $this->created_at->format('d-m-Y');
 	}
 }
+
