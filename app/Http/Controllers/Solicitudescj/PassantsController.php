@@ -8,9 +8,11 @@ use App\Core\Entities\Solicitudescj\Postulant;
 use App\Core\Entities\Solicitudescj\RequestPostulant;
 use App\Core\Entities\Solicitudescj\Schedule;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
+use App\Core\Entities\Solicitudescj\State;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Mail\CreateUserStudent as CreateUserStudent;
+use App\Mail\RejectionUserStudent as RejectionUserStudent;
 use Yajra\Datatables\Datatables;
 use Mail;
 use App\Http\Controllers\Ajax\SelectController;
@@ -165,6 +167,44 @@ class PassantsController extends Controller
         $teachers->save();
 
         return redirect()->route('passants.index');
+    }
+
+    public function statusRejection(Request $request)
+    {
+        //dd($request->all());
+
+        $rules = [
+            'motivo' => 'required|string|min:20|max:255',
+            //'horario_id' => 'required',
+        ];
+        $messages = [
+            'motivo.required' => 'El motivo del rechazo es requerido',
+            //'horario_id.required' => 'Elija el Horario',
+
+        ];
+        $this->validate($request, $rules);
+
+        $postulantRequest = RequestPostulant::where('postulant_id',$request->postulant_id)->first(); 
+
+        $status=State::where('abv','NE')->first();
+
+        $motivo= $request->motivo;
+        $postulant = Postulant::find($request->postulant_id); 
+        $postulant->motivo=$motivo;
+        $postulant->save();
+
+        $user = User::where('persona_id',$postulant->identificacion)->get();
+        
+
+        //dd($postulantRequest,$status,$postulant);
+        //dd($postulantRequest,$request->id);      
+        $postulantRequest->state_id=$status->id;
+        $postulantRequest->save();
+
+        Mail::to($user[0]->email)->send(new RejectionUserStudent($user[0], $postulant, $motivo));
+
+        return redirect()->route('passants.index');
+        //->with('message','El participante ha sido rechazado exitosamente');
     }
 
 

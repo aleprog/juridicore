@@ -271,6 +271,31 @@
 	                <a class="btn btn-primary" href="{{url('admin/gestion/pansantes/supervisor')}}/{{$student[0]->id}}/activar">Activar Supervisor</a>
 	             </div>
 
+
+	             <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+		        	<h4 style="padding-left: 10px;" >Cambio de estado</h4>
+		          </div>
+
+		          <div class="col-md-12" style="margin-top: 15px;">          
+
+		          </div>
+
+
+		          {!! Form::open(['method' => 'POST', 'route' => ['passants.statusRejection'],'id'=>'FrmRechazo']) !!}
+		          		<div class="col-xs-10 form-group">
+		          			{!! Form::label('motivo', 'Motivo de rechazo', ['class' => 'control-label']) !!}
+                            {!! Form::textarea('motivo', old('motivo') ? old('motivo') : $postulant->motivo, ['class' => 'form-control', 'placeholder' => '', 'required' => '','rows'=>'4','style'=>'height:auto !important']) !!}
+		          		</div>
+		          
+                        <div class="col-xs-2 form-group text-right">
+                        <input type="hidden" name="user_id" value="{{$student[0]->id}}" >
+                        <input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
+                        <br>
+                        <button id="btnRechazo" class="btn btn-danger" type="submit">Rechazar</button>
+                        </div>
+                  
+                  {!! Form::close() !!}
+
 		        
 		      
           </div>

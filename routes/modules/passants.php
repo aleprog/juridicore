@@ -16,4 +16,8 @@
 	Route::get('admin/gestion/pansantes/supervisor/{id}/activar', 'Solicitudescj\PassantsController@activarSupervisor')
 	->name('passants.activarSupervisor');
 
+
+	Route::post('admin/gestion/pasantes/rechazo', 'Solicitudescj\PassantsController@statusRejection')
+	->name('passants.statusRejection');
+
 	

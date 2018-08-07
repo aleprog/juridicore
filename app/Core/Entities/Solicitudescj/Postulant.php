@@ -20,15 +20,19 @@ class Postulant extends Model
 	}
 
 	public function getStatusLabelAttribute(){
-		if($this->request->state->descripcion=='INACTIVO'){
+		if($this->request->state->abv=='IN'){
 			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='AUTORIZADO'){
+		}elseif($this->request->state->abv=='AU'){
 			return '<p class="label label-info">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='APROBADO'){
+		}elseif($this->request->state->abv=='AP'){
 			return '<p class="label label-success">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='PENDIENTE'){
+		}elseif($this->request->state->abv=='PE'){
 			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='AUTORIZADO-DOCUMENTOS INCOMPLETO'){
+		}elseif($this->request->state->abv=='AUI'){
+			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
+		}elseif($this->request->state->abv=='NE'){
+			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
+		}elseif($this->request->state->abv=='AB'){
 			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
 		}else{
 			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';

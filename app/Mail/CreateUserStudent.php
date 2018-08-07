@@ -33,6 +33,7 @@ class CreateUserStudent extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.create.student');
+        return $this->subject('Creacion de Usuario Sistema Juridicore')
+        ->markdown('emails.create.student');
     }
 }
