@@ -60,8 +60,19 @@ class RegistroController extends Controller
 		  $correo_institucional=$objPostulant['correo_institucional'];
 		  $convencional=$objPostulant['convencional'];
 		  $celular=$objPostulant['celular'];
+		   $direccion=$objPostulant['direccion'];
 			$datos['message']=$message;
 			$datos['pp']="1";
+			
+		/*	$pdf= \PDF::loadView('frontend.datosimprimir',compact(
+				'identificacion',
+				'nombres',
+				'apellidos',
+				'nivel',
+				'carrera',
+				'correo_institucional',
+				'convencional',
+				'celular'));*/
 			return view('frontend.datosimprimir',compact(
 				'identificacion',
 				'nombres',
@@ -70,7 +81,8 @@ class RegistroController extends Controller
 				'carrera',
 				'correo_institucional',
 				'convencional',
-				'celular'));
+				'celular',
+				'direccion'));
 				//return $pdf->stream();
 
 	//	return redirect()->route('frontend.imprimir')->with($datos);

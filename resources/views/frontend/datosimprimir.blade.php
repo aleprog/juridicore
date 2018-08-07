@@ -20,7 +20,6 @@
 															</td>
 															<td>	 <center>
 																			<h5>UNIVERSIDAD DE GUAYAQUIL</h5>
-																			<h5>FACULDAD DE JURISPRUDENCIA Y CIENCIAS SOCIALES</h5>
 																		
 																</center></td>
 																
@@ -31,56 +30,75 @@
 																</td>
 																</tr>
 																</table>
-															<center><strong>	
-															<h3>
-																			FICHA DE INSCRIPCIÓN</h3>
-																			<h3>
-																			COORDINACIÓN DE VINCULACIÓN</h3>
-																			<h3>
-																			PRÁCTICAS PRE PROFESIONALES</h3>
-																			</strong>
-																			</center>
+															
 															</div>
 
 																<div class="modal-body" >
-
+																	<br/>
+																	<p align="right">
+																	Guayaquil,.............de 2018
+																	</p>
+																	<br/>
+																	<br/>
+																	<strong>
+																	<p>Señora Abogada</p>
+																	<p>M.Katherine Mata Echeverria</p>
+																	<p>Coordinadora General</p>
+																	<p>CONSULTORIOS JURIDICOS GRATUITOS</p>
+																	<p>Facultad de Jurisprudencia y Ciencias Sociales y Politicas</p>
+																	<p>Universidad de Guayaquil</p>
+																	<p>Ciudad.-</p>
+																	
+																	</strong>
+																															
 																	<div class="agileits-w3layouts-info">
 																	<div style="background: url('/images/fondo1.png') no-repeat center;background-size: 200px 300px;">
-																	<table width="100%"style="margin:25px">
+																	<br/>
+																	<br/>
+																	<p align="justify">
+																	Yo, {{$nombres}} {{$apellidos}} , con cédula de ciudadania Nº {{$identificacion}} ,
+																	estudiante matriculado en el {{$nivel}} de la carrera {{$carrera}} , solicito 
+																	a usted muy comedidamente se me asigneuna institucion , fecha de inicio y fin , 
+																	asi como un tutor académico para realizar las prácticas preprofesionales.
+																	</p>
+																	<br/>
+																	<p align="justify">
+																	El pedido es solicitado	a razón de que me encuentro habilitado para realizar dicho 
+																	proceso académico, el cual me comprometo  a cumplir con seriedad, discresión y 
+																	honestidad, las actividades que me asignen. 
+																	
+																	</p>
+																	<br/>
+																	<p> Seguro de contar con una pronta respuesta de antemano le quedo agradecido</p>
+																	<p>Atentamente,</p>
+																	<br/>
+																	<br/>
+																	<br/>
+																	<br/>
+																	<p>___________________</p>
+																	<p>{{$nombres}} {{$apellidos}}</p>
+																	<p>C.I.{{$identificacion}}</p>
+																	
+																	<table border="1" style="padding:25px">
 																	<tr>
-																	<td><h3><strong> Identificacion</strong></h3></td>
-																	<td>{{$identificacion}}</td>
+																	<td>Dirección: {{$direccion}}
+																	</td>
 																	</tr>
 																	<tr>
-																	<td><h3><strong> Nombres</strong></h3></td>
-																	<td>{{$nombres}}</td>
+																	<td>Nùmero Telefónico Movil :{{$celular}}
+																	</td>
 																	</tr>
 																	<tr>
-																	<td><h3><strong> Apellidos</strong></h3></td>
-																	<td>{{$apellidos}}</td>
-																	</tr>
-																	<tr>
-																	<td><h3><strong> Carrera</strong></h3></td>
-																	<td>{{$carrera}}</td>
-																	</tr>
-																	<tr>
-																	<td><h3><strong> Nivel</strong></h3></td>
-																	<td>{{$nivel}}</td>
-																	</tr>
-																
-																	<tr>
-																	<td><h3><strong> Correo Institucional</strong></h3></td>
-																	<td>{{$correo_institucional}}</td>
-																	</tr>
-																	<tr>
-																	<td><h3><strong> Convencional</strong></h3></td>
-																	<td>{{$convencional}}</td>
-																	</tr>
-																	<tr>
-																	<td><h3><strong> Celular</strong></h3></td>
-																	<td>{{$celular}}</td>
+																	<td>Correo Institucional :{{$correo_institucional}}
+																	</td>
 																	</tr>
 																	</table>
+																			
+																	
+																	
+															
+																
+																
 																	</div>					
 										 </div>
 					</div>
