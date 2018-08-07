@@ -97,7 +97,7 @@
 		            <dt class="text-center">CEDULA <br>
 
 		            	@if($postulant->cedula_archivo)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/cedula".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src',''); $('#carga_pdf').attr('src','{{url("storage/cedula".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif 
@@ -110,7 +110,7 @@
 		            <dt class="text-center">PAPELETA <br>
 
 		            	@if($postulant->papeleta_archivo)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/papeleta".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src',''); $('#carga_pdf').attr('src','{{url("storage/papeleta".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif 
@@ -123,7 +123,7 @@
 		            <dt class="text-center">FOTO <br>
 
 		            	@if($postulant->foto_archivo)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/foto".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_pdf').attr('src',''); $('#carga_image').attr('src','{{url("storage/foto".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif  
@@ -136,7 +136,7 @@
 		            <dt class="text-center">CURRICULUM <br>
 
 		            	@if($postulant->curriculum_archivo)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/curriculum".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src',''); $('#carga_pdf').attr('src','{{url("storage/curriculum".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif  
@@ -149,7 +149,7 @@
 		            <dt class="text-center">SOLICITUD <br>
 
 		            	@if($postulant->solicitud_sellada)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/solicitud_sellada".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src',''); $('#carga_pdf').attr('src','{{url("storage/solicitud_sellada".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif  
@@ -162,7 +162,7 @@
 		            <dt class="text-center">CERTIFICADO MATRICULA. <br>
 
 		            	@if($postulant->certificado_matricula)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/certificado_matricula".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src','');; $('#carga_pdf').attr('src','{{url("storage/certificado_matricula".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif  
@@ -175,7 +175,7 @@
 		            <dt class="text-center">CERTIFICADO NO ARRASTRE. <br>
 
 		            	@if($postulant->certificado_no_arrastre)
-		            		<span onclick="alert('Cargando PDF'); $('#carga_pdf').attr('src','{{url("storage/certificado_arrastre".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
+		            		<span onclick="$('#carga_image').attr('src',''); $('#carga_pdf').attr('src','{{url("storage/certificado_arrastre".$postulant->id.".pdf")}}')" class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span>
 		            	@else
 		            		<span class="fa fa-file-pdf" style="color: #5fa9d4;font-size:50px;"></span> 
 		            	@endif    
@@ -185,8 +185,9 @@
 		          </div>
 
 		          
-		          <div class="col-md-12" style="margin-top: 20px;">
+		          <div class="col-md-12 text-center" style="margin-top: 20px;">
 		          	<embed id="carga_pdf" style="width: 100%;" src="" height="800"></embed>
+		          	<img id="carga_image" style="width: 400px;" src="" height="auto"></img>
 		          </div>
 
 		        @endif
