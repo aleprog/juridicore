@@ -34,14 +34,18 @@ class StudentController extends Controller
 		//dd($lugares);
 		$supervisor=User::where('abv','SUP')->pluck('name','id');
 		$horario=Horario::all()->pluck('descripcion','id');
+		$horario_inicio='';
+		$horario_fin='';
 
 		$lugar_id=null;
 		$user_doc=null;
 		$horario_id=1;
-		$cc=0;
+		
+		
 		$message='';
 		$tipoM='';
 		$objSt=StudentTeacher::where('user_est_id',Auth::user()->id)->get();
+		$cc=0;
 		$objSt1=$objSt->where('estado','A');
 		
 		if(count($objSt)!=0)
@@ -53,6 +57,8 @@ class StudentController extends Controller
 			$user_doc=$objSt->user_doc_id;
 			$horario_id=$objSt->horario_id;
 			$lugar_id=$objSt->lugar_id;
+			$horario_inicio=$objSt->hora_inicio;
+			$horario_fin=$objSt->hora_fin;
 
 		}
 		if(count($objSt1)!=0)
@@ -71,7 +77,9 @@ class StudentController extends Controller
 		'horario_id',
 		'horario',
 		'message',
-		'tipoM'));
+		'tipoM',
+		'horario_fin',
+		'horario_inicio'));
 
 	}
 	public function getDatatablesemanas()
@@ -83,13 +91,19 @@ class StudentController extends Controller
 						'a.estado'=>'A']
 						)
                 ->groupBy('a.semana')
-                ->select(
+                ->select(DB::RAW('count(a.id) as cid'
 				DB::RAW('sum(a.horas) as horas'),
 				'a.semana as semana')
                 ->get()
 
         )->addColumn('Opciones', function ($select) {
+			if($select->cid==5)
+			{
 				return '<a href="'.route('student.semanaImprime',$select->semana).'" class="btn btn-info btn-xs" target="_blank">Imprimir</a>';
+
+			}else{
+				return '';
+			}
 
             })
            
@@ -116,11 +130,12 @@ class StudentController extends Controller
 		->select(
 		'fecha','horas','descripcion')
 		->get()->toArray();
-		//$pdf=\PDF::loadView();
-		//return $pdf->stream();
-
-			return view('frontend/datosImprimirSemana',compact(
+		$pdf=\PDF::loadView('frontend/datosImprimirSemana',compact(
 			'objPostulant','semana','supervisor','objAsistencia'));
+		return $pdf->stream();
+
+			/*return view('frontend/datosImprimirSemana',compact(
+			'objPostulant','semana','supervisor','objAsistencia'));*/
 
 	}
 	public function getDatatableAsistencia()
@@ -176,12 +191,13 @@ class StudentController extends Controller
 	}
 	public function estudianteasigna(Request $request){
 		
-		
 		$objSt=new StudentTeacher();
 		$objSt->user_est_id=Auth::user()->id;
 		$objSt->user_doc_id=$request->supervisor;
 		$objSt->horario_id=$request->horario;
 		$objSt->lugar_id=$request->lugar;
+		$objSt->hora_inicio=$request->horario_inicio;
+		$objSt->hora_fin=$request->horario_fin;
 
 		$objSt->tipo='SUP';
 		$objSt->estado='I';
@@ -191,16 +207,36 @@ class StudentController extends Controller
 	}
 	public function actividadSave(Request $request)
 	{
+		
 		$obj=Asistencia::Find($request->id);
 		$obj->descripcion=$request->descripcion;
 		$obj->estado='P';
 		$obj->save();
 		$message='Grabado Exitoso';
-			return view('modules.Solicitudescj.student.actividades')->with($message);
+		return redirect()->route('estudiante.actividadesEstudiante');
 	}
 	public function actividadesEstudiante()
 	{
-				return view('modules.Solicitudescj.student.actividades');
+		$message='Aun no ha elegido Horario';
+		$tipoM='warning';
+		$objSt=StudentTeacher::where('user_est_id',Auth::user()->id)->get();
+		$cc=0;
+		$objSt1=$objSt->where('estado','A');
+		if(count($objSt)!=0)
+		{
+			$message='Su seleccion de Horario está en proceso de revisiòn';
+			$tipoM='warning';
+			$cc=1;
+			
+
+		}
+		if(count($objSt1)!=0)
+		{
+			$message='Su proceso de pasantias ha iniciado ';
+			$tipoM='info';
+			$cc=2;
+		}
+				return view('modules.Solicitudescj.student.actividades',compact('cc','message','tipoM'));
 
 	}
 	public function supervisor(Request $request)

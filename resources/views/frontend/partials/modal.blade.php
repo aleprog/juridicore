@@ -33,6 +33,9 @@ Solicitud de Prácticas Pre Profesionales
 					  <div class="col-md-5">
 					  <input id="identificacion" name="identificacion" type="text" placeholder="Identificacion" class="form-control input-md" minlength="10" maxlength="10" onKeyPress="return soloNumeros(event)" required="">
 					  </div>
+						<div class="col-lg-2">
+						<span id="verif" class="btn btn-primary">Verificar</span> 
+						</div>
 					</div>
 <div id="dependencia">
 					<!-- Text input-->

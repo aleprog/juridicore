@@ -20,20 +20,34 @@ class Postulant extends Model
 	}
 
 	public function getStatusLabelAttribute(){
-		if($this->request->state->descripcion=='INACTIVO'){
-			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='AUTORIZADO'){
+		switch($this->request->state->abv)
+		{
+			case 'AU':
 			return '<p class="label label-info">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='APROBADO'){
-			return '<p class="label label-success">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='PENDIENTE'){
-			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->descripcion=='AUTORIZADO-DOCUMENTOS INCOMPLETO'){
-			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
-		}else{
-			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
-		}
 
+			break;
+			case 'AP':
+			return '<p class="label label-success">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'NE':
+			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'AB':
+			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'PE':
+			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'AUI':
+			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
+
+			break;
+		
+		}
 	}
 
 	public function getStatusRequestAttribute(){

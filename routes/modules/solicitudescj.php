@@ -16,8 +16,13 @@ Route::get('semanaImprime/{semana}', 'Solicitudescj\StudentController@semanaImpr
 Route::get('agregaActividad/{id}', 'Solicitudescj\StudentController@agregaActividad')->name('student.agregaActividad');
 Route::post('estudiante/actividadSave', 'Solicitudescj\StudentController@actividadSave')->name('estudiante.actividadSave');
 
+Route::get('supervisor/asistencia', 'Solicitudescj\DocenteController@index')
+->name('supervisor.asistencia');	
+Route::get('datatableAsistencia', 'Solicitudescj\DocenteController@datatableAsistencia');
 
-	
+Route::post('supervisor/asistenciaSave', 'Solicitudescj\DocenteController@asistenciaSave')
+->name('supervisor.asistenciaSave');
 
+Route::get('StateActividad/{id}', 'Solicitudescj\DocenteController@StateActividad')->name('docente.stateactividad');
 
 

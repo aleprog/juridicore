@@ -64,7 +64,7 @@ class RegistroController extends Controller
 			$datos['message']=$message;
 			$datos['pp']="1";
 			
-		/*	$pdf= \PDF::loadView('frontend.datosimprimir',compact(
+			$pdf= \PDF::loadView('frontend.datosimprimir',compact(
 				'identificacion',
 				'nombres',
 				'apellidos',
@@ -72,8 +72,9 @@ class RegistroController extends Controller
 				'carrera',
 				'correo_institucional',
 				'convencional',
-				'celular'));*/
-			return view('frontend.datosimprimir',compact(
+				'direccion',
+				'celular'));
+		/*	return view('frontend.datosimprimir',compact(
 				'identificacion',
 				'nombres',
 				'apellidos',
@@ -82,8 +83,8 @@ class RegistroController extends Controller
 				'correo_institucional',
 				'convencional',
 				'celular',
-				'direccion'));
-				//return $pdf->stream();
+				'direccion'));*/
+				return $pdf->stream();
 
 	//	return redirect()->route('frontend.imprimir')->with($datos);
 	}

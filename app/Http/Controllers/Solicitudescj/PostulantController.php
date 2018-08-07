@@ -87,7 +87,7 @@ class PostulantController extends Controller
 
             $user = new User();
             $user->name = $postulant->nombres.' '.$postulant->apellidos;
-            $user->email = $postulant->correo;
+            $user->email = $postulant->correo_institucional;
             $user->password = bcrypt($password); 
             $user->persona_id = $postulant->identificacion;
             $user->estado = 'A';

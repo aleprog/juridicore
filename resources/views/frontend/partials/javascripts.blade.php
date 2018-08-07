@@ -243,10 +243,73 @@ function valida(campo) {
     }
 
 return b;
-
 }
-$('input[name^="identificacion"]').on('keydown', function (e) {
-    if ((e.which === 9) || (e.which === 13)) {
+function disabledDisc(){
+  var discapacidad=  document.getElementById("discapacidad").value;
+    if(discapacidad=='NO')
+    {
+    var carnet=document.getElementById("carnet").disabled=true;
+   
+    }else{
+        var carnet=document.getElementById("carnet").disabled=false;
+
+    }
+}
+function disabledlabo(){
+   var labora= document.getElementById("labora").value;
+   
+
+    if(labora=='NO')
+    {
+    var ocupacion=document.getElementById("ocupacion").disabled=true;
+    var horario_t= document.getElementById("horario_t").disabled=true;
+    var direccion_t=document.getElementById("direccion_t").disabled=true;
+    var telefono_t=document.getElementById("telefono_t").disabled=true;
+    }
+    else{
+        var ocupacion=document.getElementById("ocupacion").disabled=false;
+    var horario_t= document.getElementById("horario_t").disabled=false;
+    var direccion_t=document.getElementById("direccion_t").disabled=false;
+    var telefono_t=document.getElementById("telefono_t").disabled=false;
+    }
+}
+
+  
+$('#btnverif').on('click', function (e) {
+
+var labora=$("#labora").val();
+var discapacidad=$("#discapacidad").val();
+var b=0;
+    if(labora=='SI')
+    {
+        var ocupacion=$("#ocupacion").val();
+        var horario_t= $("#horario_t").val();
+        var direccion_t=$("#direccion_t").val();
+        var telefono_t=$("#telefono_t").val();
+        if(ocupacion==''||ocupacion==null||horario_t==null||telefono_t==null||direccion_t==''||horario_t==''||telefono_t==''||direccion_t=='')
+        {
+            alert("Debe llenar los campos laborales de: ocupacion, horario, direccion y telefono")
+
+            b=1;
+        }
+    }
+    if(discapacidad=='SI')
+    {
+        var carnet=$("#carnet").val();
+        if(carnet==''||carnet==null)
+        {
+            alert("Debe llenar el campo de carnet si tiene una discapacidad");
+            b=1;
+        }
+    }
+    if(b==0)
+    {
+        document.getElementById("btnvg").click()
+
+    }
+
+});
+$('#verif').on('click', function (e) {
 		var dato = $('input[name^="identificacion"]').val();
 		if(dato.length<10)
 		{
@@ -257,7 +320,6 @@ $('input[name^="identificacion"]').on('keydown', function (e) {
 			verifica(dato); 
 		}
 
-    }
 });
 function validarEmail(dato) {
 	var valor=$('#'+dato+'').val();

@@ -166,7 +166,18 @@ function soloNumeros(e){
 </script>
 @endsection
 @section('content')
+
 <hr/>
+
+@if($cc!=2)
+
+<div class="alert alert-{{$tipoM}}" id="divmensaje">
+ 
+								  {{$message}}.
+</div>
+@endif
+@if($cc==2)
+
 <div class="row">
 			<div class="col-md-10 col-md-offset-1">
 				<div class="panel panel-default">
@@ -243,6 +254,6 @@ function soloNumeros(e){
 				</div>
 			</div>
 		</div>
-
+@endif
 @endsection
 
