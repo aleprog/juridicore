@@ -9,6 +9,8 @@ use App\Core\Entities\Solicitudescj\RequestPostulant;
 use App\Core\Entities\Solicitudescj\Schedule;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
 use App\Core\Entities\Solicitudescj\State;
+use App\Core\Entities\Solicitudescj\Place;
+use App\Core\Entities\Solicitudescj\Horario;
 use App\User;
 use Spatie\Permission\Models\Role;
 use App\Mail\CreateUserStudent as CreateUserStudent;
@@ -16,6 +18,7 @@ use App\Mail\RejectionUserStudent as RejectionUserStudent;
 use Yajra\Datatables\Datatables;
 use Mail;
 use App\Http\Controllers\Ajax\SelectController;
+use DB;
 
 class PassantsController extends Controller
 {
@@ -123,7 +126,7 @@ class PassantsController extends Controller
     }
 
 
-    public function assignSteacherSupervisor(Request $request)
+    public function assignSteacherTutor(Request $request)
     {
         //dd($request->all());
 
@@ -157,6 +160,52 @@ class PassantsController extends Controller
 
         return redirect()->route('passants.index');
 
+    }
+
+    public function assignSteacherSupervisor(Request $request)
+    {
+
+        $rules = [
+            'lugar' => 'integer|min:1',
+            'supervisor' => 'integer|min:1',
+            'horario' => 'integer|min:1',
+            'hora' => 'integer|min:1',
+            //'horario_id' => 'required',
+        ];
+        $messages = [
+            'lugar.min' => 'Selecione el lugar',
+            'supervisor.min' => 'Selecione el supervisor',
+            'horario.min' => 'Selecione la hora de inicio',
+            'hora.min' => 'Selecione el hora a trabajar',
+            //'horario_id.required' => 'Elija el Horario',
+        ];
+        $this->validate($request, $rules, $messages);
+        //dd($request->all());
+
+        $teachers = StudentsSteachers::where('user_est_id',$request->id)->where('tipo','SUP')->get();
+
+        if(count($teachers)>0){
+           $students_teachers= StudentsSteachers::find($teachers[0]->id);
+           //dd($students_teachers);
+        }else{
+           $students_teachers= new StudentsSteachers(); 
+        }
+
+        $hora_final=intval($request->horario)+intval($request->hora);
+
+        //dd(intval($request->horario)+intval($request->hora));
+
+        $students_teachers->user_est_id = $request->id;
+        $students_teachers->user_doc_id = $request->supervisor;
+        $students_teachers->tipo = 'SUP';
+        $students_teachers->lugar_id = $request->lugar;
+        $students_teachers->hora_inicio = $request->horario.':00';
+        $students_teachers->hora_fin = $hora_final.':00';
+        //$students_teachers->horario_id = $request->horario_id;
+        $students_teachers->estado = 'A';
+        $students_teachers->save();
+
+        return redirect()->route('passants.show',$request->postulant_id);
     }
 
     public function activarSupervisor($id){
@@ -205,6 +254,41 @@ class PassantsController extends Controller
 
         return redirect()->route('passants.index');
         //->with('message','El participante ha sido rechazado exitosamente');
+    }
+
+    public function consultaSupervisor(Request $request){
+
+        if($request->query('request')=='lugares'){
+            return $lugares=Place::all();
+        }elseif($request->query('request')=='supervidores'){
+            $lugar_id=$request->query('lugar_id');
+            /*$result = DB::connection('mysql')
+            ->table('users AS C')
+            ->where('C.lugarasignado_id', $lugar_id)
+            ->where('C.estado', 'A')
+            ->groupBy('C.name', 'C.id')
+            ->orderBy('C.name', 'DSC')
+            ->select('C.id as id', 'C.name as descripcion')->get();*/
+            $result= User::where('estado','A')
+            ->where('lugarasignado_id',$lugar_id)
+            ->select('id as id', 'name as descripcion')
+            ->orderBy('name', 'DESC')
+            ->get();
+
+            //dd($result);
+            return $result;
+        }elseif($request->query('request')=='horarios'){
+            return $horario=Horario::all();
+        }
+
+        //dd($request->query('request'),$request->query);
+
+    }
+
+    public function selectSupervisor($id){
+        $teachers = StudentsSteachers::with(['docente','horario','lugar'])->where('user_est_id',$id)->where('tipo','SUP')->first();
+
+        return $teachers;
     }
 
 

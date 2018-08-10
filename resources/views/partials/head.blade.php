@@ -190,7 +190,7 @@ table.dataTable tbody tr {
 </style>
 
 <style media="print">
-    @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+    /*@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");*/
     body{
         width:792px !important;
         margin: 0px;
