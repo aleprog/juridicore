@@ -30,6 +30,8 @@ $(document).ready(function(){
 
     });
 
+    
+
 
 
 function PedirConfirmacion(id,dato,event,frm)

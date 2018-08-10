@@ -389,7 +389,7 @@
                         <input type="hidden" name="user_id" value="{{$student[0]->id}}" >
                         <input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
                         <br>
-                        <button id="btnRechazo" class="btn btn-danger" type="submit">Rechazar</button>
+                        <button id="btnRechazo" class="btn btn-danger" type="submit">Deshabilitar</button>
                         </div>
                   
                   {!! Form::close() !!}

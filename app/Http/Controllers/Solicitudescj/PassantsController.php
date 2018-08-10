@@ -243,6 +243,9 @@ class PassantsController extends Controller
         $postulant->save();
 
         $user = User::where('persona_id',$postulant->identificacion)->get();
+
+        $user->estado = 'I';
+        $user->save();
         
 
         //dd($postulantRequest,$status,$postulant);

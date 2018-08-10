@@ -203,23 +203,44 @@
 
 			            <input type="hidden" name="id" value="{{$postulant->id}}" >
 
-			            @if($postulant->status_request=='PENDIENTE')
+			            @if($postulant->status_abv=='PE')
 				            <p class="text-right">
 				        		<button id="btnGuardar" class="btn btn-primary" type="submit">Autorizar</button>
 				        	</p>
 				        	<input type="hidden" name="status" value="6" >
 
-				        @elseif($postulant->status_request=='AUTORIZADO')
+				        @elseif($postulant->status_abv=='AU')
 
 				        	@if($postulant->cedula_archivo && $postulant->papeleta_archivo && $postulant->foto_archivo && $postulant->curriculum_archivo && $postulant->solicitud_sellada && $postulant->certificado_matricula && $postulant->certificado_no_arrastre && $postulant->solicitud_sellada)
 					          	<p class="text-right">
-					        		<button id="btnGuardar" class="btn btn-primary"  type="submit">Aprobar</button>
+					        		<button id="btnGuardar" class="btn btn-primary"  type="submit">Aprobar Postulante</button>
 					        	</p>
 					        	<input type="hidden" name="status" value="2" >
 					        @endif
 				        @endif
 
 				    {!! Form::close() !!}
+
+
+
+				    @if($postulant->status_abv=='AU')
+				        <hr>
+
+			          	{!! Form::open(['method' => 'POST', 'route' => ['postulants.statusIncompleto'],'id'=>'FrmIncompleto']) !!}
+			          		<div class="col-xs-9 form-group">
+			          			{!! Form::label('motivo', 'Motivo', ['class' => 'control-label']) !!}
+	                            {!! Form::textarea('motivo', old('motivo') ? old('motivo') : $postulant->motivo, ['class' => 'form-control', 'placeholder' => '', 'required' => '','rows'=>'4','style'=>'height:auto !important']) !!}
+			          		</div>
+			          
+	                        <div class="col-xs-3 form-group text-right">
+	                        
+	                        <input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
+	                        <br>
+	                        <button id="btnIncompleto" class="btn btn-danger" type="submit">Negar Solicitud</button>
+	                        </div>
+	                  
+	                  	{!! Form::close() !!}
+	                 @endif
 		        </div>
 
 		      
