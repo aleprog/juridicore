@@ -18,7 +18,7 @@
 									<label>Lugar:</label>
 									</div>
 									<div class="col-md-4">
-									{!! Form::select('lugar', $lugares, $lugar_id,['class' => 'form-control select2','placeholder'=>'Lugares',"style"=>"width:100%","id"=>"lugar","name"=>"lugar"]) !!}
+										{!! Form::select('lugar', $lugares, $lugar_id,['class' => 'form-control select2','placeholder'=>'Lugares',"style"=>"width:100%","id"=>"lugar","name"=>"lugar"]) !!}
 
 									</div>
 									</div>
@@ -39,7 +39,9 @@
 
 									</div>
 									<div class="col-md-4">
-									{!! Form::select('horario',$horario, $horario_id,['class' => 'form-control select2','placeholder'=>'Horario',"style"=>"width:100%","id"=>"horariosd","name"=>"horario"]) !!}
+								<!--	{!! Form::select('horario',$horario, $horario_id,['class' => 'form-control select2','placeholder'=>'Horario',"style"=>"width:100%","id"=>"horariosd","name"=>"horario"]) !!}-->
+								<input type="time" value="{{$horario_inicio}}" id="horario_inicio" name="horario_inicio"  min="9:00" max="18:00" required />
+								<input type="time" value="{{$horario_fin}}" id="horario_fin" name="horario_fin"  min="9:00" max="18:00" required />
 
 									</div>
 </div>							
@@ -48,7 +50,7 @@
 								</div>
 						
 						  
-				  <hr/>
+				 				 <hr/>
 							<div class="panel-body">
 								
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -72,10 +74,10 @@
 								</div>
 							  </form>
 							  <div id="btnvgverificadiv"> 
-								<button class="btn btn-primary" value="3" name="btnvgverifica" onclick="verificacc()">Grabar</button>
+								<span class="btn btn-primary" value="3" name="btnvgverifica" id="btnvgverifica">Grabar</span>
 								</div>
 							</div>
 							
-			</div>
+							</div>
 
 				 

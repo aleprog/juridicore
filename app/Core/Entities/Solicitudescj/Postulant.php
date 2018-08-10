@@ -20,24 +20,34 @@ class Postulant extends Model
 	}
 
 	public function getStatusLabelAttribute(){
-		if($this->request->state->abv=='IN'){
-			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='AU'){
+		switch($this->request->state->abv)
+		{
+			case 'AU':
 			return '<p class="label label-info">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='AP'){
-			return '<p class="label label-success">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='PE'){
-			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='AUI'){
-			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='NE'){
-			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
-		}elseif($this->request->state->abv=='AB'){
-			return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
-		}else{
-			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
-		}
 
+			break;
+			case 'AP':
+			return '<p class="label label-success">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'NE':
+			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'AB':
+			return '<p class="label label-default">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'PE':
+			return '<p class="label label-warning">'.$this->request->state->descripcion.'<p>';
+
+			break;
+			case 'AUI':
+				return '<p class="label label-danger">'.$this->request->state->descripcion.'<p>';
+
+			break;
+		
+		}
 	}
 
 	public function getStatusRequestAttribute(){
@@ -48,3 +58,4 @@ class Postulant extends Model
 		return $this->created_at->format('d-m-Y');
 	}
 }
+

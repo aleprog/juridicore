@@ -15,6 +15,52 @@ class StorageController extends Controller
    }
    public function save(Request $request)
 	{		
+		$civil=0;
+		$penal=0;
+		$laboral=0;
+		$familia=0;
+		$violenciaf=0;
+		$inquilinato=0;
+		$fiscalia=0;
+		$defensoria=0;
+		$constitucional=0;
+
+		if(isset($request->civil))
+		{
+			$civil=1;	
+		}
+		if(isset($request->penal))
+		{
+			$penal=1;	
+		}
+		if(isset($request->laboral))
+		{
+			$laboral=1;	
+		}
+		if(isset($request->familia))
+		{
+			$familia=1;	
+		}
+		if(isset($request->violenciaf))
+		{
+			$violenciaf=1;	
+		}
+		if(isset($request->inquilinato))
+		{
+			$inquilinato=1;	
+		}
+		if(isset($request->constitucional))
+		{
+			$constitucional=1;	
+		}
+		if(isset($request->fiscalia))
+		{
+			$fiscalia=1;	
+		}
+		if(isset($request->defensoria))
+		{
+			$defensoria=1;	
+		}
 	$id=$request->idusuario;
 	
 	$objPostulant=Postulant::where('id',$id)->where('estado','A')->update([
@@ -43,7 +89,15 @@ class StorageController extends Controller
       "telefono_t" => $request->telefono_t,
 	  "discapacidad" =>$request->discapacidad,
 	  "correo_institucional" =>$request->correo_institucional,
-
+	  "civil" => $civil,
+      "penal" => $penal,
+      "laboral" => $laboral,
+      "familia" => $familia,
+      "violenciaf" => $violenciaf,
+      "inquilinato" => $inquilinato,
+      "fiscalia" => $fiscalia,
+      "defensoria" => $defensoria,
+      "constitucional" => $constitucional,
       "carnet" => $request->carnet,
 	    "area" => $request->area
 	  ]);
@@ -99,7 +153,20 @@ $solicitud_sellada = $request->file('solicitud_sellada');
 		$objPostulant=Postulant::where('id',$id)->where('estado','A')->where('solicitud_sellada',0)->update(['solicitud_sellada'=>1]);
 }
 
-		$objPostulant=Postulant::where('id',$id)->where('estado','A')->where(
+		$objPostulant=Postulant::where('id',$id)
+		->where('estado','A')
+		->where('paralelo' ,'<>','')
+		->where('identificacion' ,'<>','')
+		->where('nombres' ,'<>', '')
+		->where('apellidos' ,'<>', '')
+		->where('provincia_id' ,'<>','')
+		->where('ciudad_id' ,'<>', '')
+		->where('direccion' ,'<>','')
+		->where('edad' ,'<>','')
+		->where('fecha_nacimiento' ,'<>','')
+		->where('celular' ,'<>', '')
+		->where('correo_institucional' ,'<>','')
+		->where(
 		['cedula_archivo'=>1,
 		'papeleta_archivo'=>1,
 		'foto_archivo'=>1,
@@ -142,14 +209,18 @@ $solicitud_sellada = $request->file('solicitud_sellada');
 				{
 					$objRequestPostulant=RequestPostulant::where(['postulant_id'=>$id,'estado'=>'A'])->update(['state_id'=>1]);
 				}
-				
-				
-				
+					
 			}
 		$message="Archivos Guardados Correctamente";
 		$datos['message']=$message;
 		$datos['printarchivo']="1";
+		if($request->btnvg!=3)
+		{
+			return redirect()->route('frontend.home')->with($datos);	
+		}else
+		{
+			return redirect()->route('admin.estudianteperfil')->with($datos);	
 
-		return redirect()->route('frontend.home')->with($datos);	
+		}
 	}
 }

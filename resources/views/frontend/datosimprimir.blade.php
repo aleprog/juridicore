@@ -16,7 +16,7 @@
 															<table width="100%" >
 															<tr>
 															<td>
-															<img src="{{url('/images/ug.png')}}"  width="100px" height="120px">
+															<img src="{{url('/images/ug.png')}}"  width="90px" height="110px">
 															</td>
 															<td>	 <center>
 																			<h5>UNIVERSIDAD DE GUAYAQUIL</h5>
@@ -25,7 +25,7 @@
 																
 																<td>
 																
-																<img src="{{url('/images/juris.png')}}"style="float:right" width="80px" height="120px">
+																<img src="{{url('/images/juris.png')}}"style="float:right" width="80px" height="120px">	
 
 																</td>
 																</tr>
@@ -39,7 +39,7 @@
 																	Guayaquil,.............de 2018
 																	</p>
 																	<br/>
-																	<br/>
+																	
 																	<strong>
 																	<p>Señora Abogada</p>
 																	<p>M.Katherine Mata Echeverria</p>

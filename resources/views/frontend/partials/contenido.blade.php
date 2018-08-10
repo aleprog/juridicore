@@ -34,12 +34,12 @@
 							  <label class="col-md-2 control-label" for="Escuela">Escuela</label>  
 								<div class="col-md-4">
 
-								{!! Form::select('carrera', ['Derecho'=>'Derecho','Sociologia'=>'Sociologia'], session('data')["carrera"],['class' => 'form-control select2','placeholder'=>'Carrera',"style"=>"width:100%","id"=>"carrera","name"=>"carrera"]) !!}
+								{!! Form::select('carrera', ['Derecho'=>'Derecho','Sociologia'=>'Sociologia'], session('data')["carrera"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"carrera","name"=>"carrera"]) !!}
 								</div>
 								<label class="col-md-2 control-label" for="modalidad">Modalidad</label>  
 								<div class="col-md-4">
 
-								{!! Form::select('modalidad', ['SEMESTRAL'=>'SEMESTRAL','ANUAL'=>'ANUAL','MODULAR'=>'MODULAR'], session('data')["modalidad"],['class' => 'form-control select2','placeholder'=>'Modalidad',"style"=>"width:100%","id"=>"modalidad","name"=>"modalidad"]) !!}
+								{!! Form::select('modalidad', ['SEMESTRAL'=>'SEMESTRAL','ANUAL'=>'ANUAL','MODULAR'=>'MODULAR'], session('data')["modalidad"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"modalidad","name"=>"modalidad"]) !!}
 								</div>
 								<br/>
 								<hr/>
@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<div class="col-md-4">
 							  <label class="col-md-2 control-label" for="Escuela">Nivel</label>  
-								{!! Form::select('nivel', ['7'=>'7','8'=>'8','9'=>'9','EGRESADO'=>'EGRESADO'], session('data')["semestre"],['class' => 'form-control select2','placeholder'=>'nivel',"style"=>"width:100%","id"=>"nivel","name"=>"nivel"]) !!}
+								{!! Form::select('nivel', ['7'=>'7','8'=>'8','9'=>'9','EGRESADO'=>'EGRESADO'], session('data')["semestre"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"nivel","name"=>"nivel"]) !!}
 								</div>
 								<div class="col-md-4">
 								<label class="col-md-2 control-label" for="modalidad">Paralelo</label>  
@@ -57,7 +57,7 @@
 								<div class="col-md-4">
 								<label class="col-md-2 control-label" for="modalidad">Horario</label>  
 
-								{!! Form::select('horario', ['MATUTINO'=>'MATUTINO','VESPERTINO'=>'VESPERTINO','NOCTURNO'=>'NOCTURNO'], session('data')["horario"],['class' => 'form-control select2','placeholder'=>'horario',"style"=>"width:100%","id"=>"horario","name"=>"horario"]) !!}
+								{!! Form::select('horario', ['MATUTINO'=>'MATUTINO','VESPERTINO'=>'VESPERTINO','NOCTURNO'=>'NOCTURNO'], session('data')["horario"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"horario","name"=>"horario"]) !!}
 								</div>
 								<br/>
 								<hr/>
@@ -104,7 +104,7 @@
 							 <div class="col-md-4">
 							  	<label class="col-md-12 control-label" for="convencional">Estado Civil</label>  
 
-								{!! Form::select('estado_civil', ['SOLTERO'=>'SOLTERO','CASADO'=>'CASADO','VIUDO'=>'VIUDO','DIVORCIADO'=>'DIVORCIADO','UNION LIBRE'=>'UNION LIBRE'],  session('data')["estado_civil"],['class' => 'form-control select2','placeholder'=>'Estado civil',"style"=>"width:100%","id"=>"estado_civil","name"=>"estado_civil"]) !!}
+								{!! Form::select('estado_civil', ['SOLTERO'=>'SOLTERO','CASADO'=>'CASADO','VIUDO'=>'VIUDO','DIVORCIADO'=>'DIVORCIADO','UNION LIBRE'=>'UNION LIBRE'],  session('data')["estado_civil"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"estado_civil","name"=>"estado_civil"]) !!}
 							  </div>
 							  <div class="col-md-4">
 							  	<label class="col-md-4 control-label" for="convencional">Edad</label>  
@@ -147,7 +147,7 @@
 							 <div class="col-md-4">
 							  	<label class="col-md-12 control-label" for="convencional">labora</label>  
 
-								{!! Form::select('labora', ['SI'=>'SI','NO'=>'NO'], session('data')["labora"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"labora","name"=>"labora"]) !!}
+								{!! Form::select('labora', ['SI'=>'SI','NO'=>'NO'], session('data')["labora"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"labora","name"=>"labora","onchange"=>"disabledlabo()"]) !!}
 							  </div>
 							  <div class="col-md-4">
 							  	<label class="col-md-12 control-label" for="convencional">Profesión  y Ocupación</label>  
@@ -177,7 +177,7 @@
 							 <div class="col-md-4">
 							  	<label class="col-md-12 control-label" for="convencional">discapacidad</label>  
 
-								{!! Form::select('discapacidad', ['SI'=>'SI','NO'=>'NO'], session('data')["discapacidad"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"discapacidad","name"=>"discapacidad"]) !!}
+								{!! Form::select('discapacidad', ['SI'=>'SI','NO'=>'NO'], session('data')["discapacidad"],['class' => 'form-control select2',"style"=>"width:100%","id"=>"discapacidad","name"=>"discapacidad","onchange"=>"disabledDisc()"]) !!}
 							  </div>
 							  <div class="col-md-4">
 							  	<label class="col-md-12 control-label" for="convencional">Carnet de CONADIS</label>  
@@ -290,7 +290,12 @@
 								<div class="form-group">
 								
 								  <div class="col-md-6 col-md-offset-4">
-									<button type="submit" class="btn btn-primary" value="1" name="btnvg">Enviar</button>
+									<div style="display:none" >
+									<button type="submit" class="btn btn-primary" value="1" name="btnvg" id="btnvg">Enviar</button>
+									</div>
+									<span class="btn btn-primary" id="btnverif">
+									Enviar
+									</span>
 								  </div>
 								</div>
 							  </form>

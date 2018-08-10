@@ -12,8 +12,8 @@
 @endsection
 @section('javascript')
 <script>
-function verificacc()
-{
+
+$("#btnvgverifica").on('click', function () {
 	var b=0;
 	var lugar=$("#lugar").val();
 	var sup=$("#supervisor").val();
@@ -21,31 +21,25 @@ function verificacc()
 
 	if(lugar=='')
 	{
-		alert("Debe Completar el campo lugar!")
-
+		alert("Debe Completar el campo lugar!");
 		b=1;
 	}
 	if(sup==''||sup==0)
 	{
-		
-		alert("Debe Completar el campo Supervisor!")
-
+		alert("Debe Completar el campo Supervisor!");
 		b=1;
-
 	}
 	if(hor=='')
 	{
-		alert("Debe Completar el campo horario!")
-
+		alert("Debe Completar el campo horario!");
 		b=1;
-
 	}
 	if(b==0)
 	{
 		document.getElementById("btnvgenv").click()
-		alert('De click en aceptar para enviar su solicitud de asignacion de tutor');
+		
 	}
-}
+});
 $("#lugar").on('change', function () {
 
     $("#supervisor").html('');
@@ -278,14 +272,16 @@ $(document).ready(function () {
 				$("#divmensaje").hide();
 				document.getElementById('lugar').disabled=false;
 				document.getElementById('supervisor').disabled=false;
-				document.getElementById('horariosd').disabled=false;
-				
+                document.getElementById('horario_inicio').disabled=false;
+				document.getElementById('horario_fin').disabled=false;
+
 		break;
 	
 		default:
 				document.getElementById('lugar').disabled=true;
 				document.getElementById('supervisor').disabled=true;
-				document.getElementById('horariosd').setAttribute("disabled","disabled");
+                document.getElementById('horario_inicio').disabled=true;
+				document.getElementById('horario_fin').disabled=true;
 				$("#btnvgverificadiv").hide();
 				$("#divmensaje").show();
 		break;
@@ -320,20 +316,21 @@ function soloNumeros(e){
 									<div class="tabbable" id="tabs-999753">
 										<ul class="nav nav-tabs">
 											<li class="nav-item active">
-												<a class="nav-link active" href="#panel-778868" data-toggle="tab">Datos Personales</a>
+												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Registro de Horario</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="#panel-717633" data-toggle="tab">													Asignacion de tutor
-</a>
+												<a class="nav-link" href="#panel-778868" data-toggle="tab">
+                                                Perfil
+                                                </a>
 											</li>
 										</ul>
 										<div class="tab-content">
-											<div class="tab-pane active" id="panel-778868">
+											<div class="tab-pane" id="panel-778868">
 												<p>
 												@include('frontend.partials.contenidov')
 												</p>
 											</div>
-											<div class="tab-pane" id="panel-717633">
+											<div class="tab-pane active" id="panel-717633">
 												<p>
 												@include('frontend.partials.contenidoasigna')
 												</p>
