@@ -12,3 +12,7 @@
 	Route::post('admin/postulante/estatus', 'Solicitudescj\PostulantController@statusRequest')
 	->name('porstulants.statusRequest');
 
+	Route::post('admin/gestion/postulante/rechazo', 'Solicitudescj\PostulantController@statusIncompleto')
+	->name('postulants.statusIncompleto');
+
+

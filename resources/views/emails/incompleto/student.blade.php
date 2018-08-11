@@ -1,5 +1,5 @@
 @component('mail::message')
-Hola, {{$user->name}}
+Hola, {{$postulant->nombres}} {{$postulant->apellidos}} 
 
 # Su solicitud ha sido negada:
 

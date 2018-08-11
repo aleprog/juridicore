@@ -7,7 +7,16 @@ $(document).ready(function(){
 
         event.preventDefault();
         var save="save";
-        PedirConfirmacion('0',save,event,'FrmSupervisor');     
+        PedirConfirmacion('0',save,event,'FrmTutor');     
+
+
+    });
+
+    $("#btnAsignarHorario").on('click', function (event) {
+
+        event.preventDefault();
+        var save="save";
+        PedirConfirmacion('0',save,event,'FrmAsignarSupervisor');     
 
 
     });
@@ -20,6 +29,8 @@ $(document).ready(function(){
 
 
     });
+
+    
 
 
 

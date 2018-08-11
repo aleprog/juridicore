@@ -9,10 +9,10 @@
 @endsection
 @section('css')
     <link href="{{ url('adminlte/plugins/notifications/sweetalert.css') }}" rel="stylesheet">
+    <script src="{{asset('js/axios.js')}}"></script>
+    <script src="{{asset('js/vue.js')}}"></script>
 @endsection
-@section('javascript')
-    <script src="{{ url('js/modules/solicitudescj/passants.js') }}"></script>
-@endsection
+
 @section('content')
       <div class="col-lg-2 text-right" style="float:right">
 
@@ -202,7 +202,7 @@
 
 		          </div>
 
-		          {!! Form::open(['method' => 'POST', 'route' => ['passants.assignSteacherSupervisor'],'id'=>'FrmSupervisor']) !!}
+		          {!! Form::open(['method' => 'POST', 'route' => ['passants.assignSteacherTutor'],'id'=>'FrmTutor']) !!}
 		          		<div class="col-xs-4 form-group">
 		          		 @if($supervisor)
 		          		 	<b>Tutor:</b> <br><span class="label label-success">{{$supervisor->name}}</span>
@@ -216,7 +216,7 @@
 		          		</div>
 		          
                         <div class="col-xs-4 form-group">
-                            {!! Form::label('user_doc_id', 'Supervisor Asignado', ['class' => 'control-label']) !!}
+                            {!! Form::label('user_doc_id', 'Tutor Asignado', ['class' => 'control-label']) !!}
                             {!! Form::select('user_doc_id', $supervisors, old('user_doc_id') , ['class' => 'form-control select2', 'required' => '']) !!}
                         </div>
 
@@ -242,20 +242,85 @@
 
 		          </div>
 
-		          <div class="col-xs-4 form-group">
-		          		 @if($supervisor1)
-		          		 	<b>Supervisor:</b> <br><span class="label label-success">{{$supervisor1->name}}</span>
-		          		 	{{--<br>
-		          		 	<b>Horario:</b> <br><span class="label label-info">{{$horario1->descripcion}}</span>--}}
-		          		 @else
-		          		 	Supervisor: 
-		          		 	<br>
-		          		 	<span class="label label-default">No Elegido</span>
-		          		 @endif
-		          		</div>
+		          <section id="mySelect">
 
-		         <div class="col-xs-4 form-group">
-		            @if($supervisor1)
+		          {!! Form::open(['method' => 'POST', 'route' => ['passants.assignSteacherSupervisor'],'id'=>'FrmAsignarSupervisor']) !!}
+
+		          <div class="col-xs-4 form-group" >
+
+
+		          		 <div class="form-group">
+
+							<label>Lugar:</label>
+
+							<select class='form-control' v-model='lugar' name="lugar" @change='getSupervisores()'>
+
+					          <option value='0' >Selecione el Lugar</option>
+
+					          <option v-for='data in lugares' :value='data.id'>@{{ data.descripcion }}</option>
+
+					        </select>
+
+						</div>
+
+					 
+
+						<div class="form-group">
+
+							<label>Supervisor:</label>
+
+							<select class='form-control' v-model='supervisor' name="supervisor" >
+
+					          <option value='0' >Selecione el Supervisor</option>
+
+					          <option v-for='data in supervisores' :value='data.id'>@{{ data.descripcion }}</option>
+
+					        </select>
+
+						</div>
+
+					 
+
+						<div class="form-group">
+
+							<label>Hora de Inicio:</label>
+
+							<select class='form-control' v-model='horario' name="horario" >
+
+					          <option value='0' >Selecione la Hora</option>
+
+					          <option v-for='data in horarios' :value='data.id'>@{{ data.descripcion }}</option>
+
+					        </select>
+
+						</div>
+
+						<div class="form-group">
+
+							<label>Hora a trabajar:</label>
+
+							<select class='form-control' v-model='hora' name="hora" >
+
+					          <option value='0' >Selecione las Horas a trabajar</option>
+
+					          <option v-for='data in horas' :value='data.id'>@{{ data.descripcion }}</option>
+
+					        </select>
+
+						</div>
+
+						<div class="form-group text-right">
+                        	<input type="hidden" name="id" value="{{$student[0]->id}}" >
+                        	<input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
+                        	<br>
+                        	<button id="btnAsignarHorario" class="btn btn-primary" type="submit">Asignar Horario</button>
+                        </div>
+
+		          </div>
+		         {!! Form::close() !!}
+
+		         <div class="col-xs-4 form-group mySelect">
+		            {{--@if($supervisor1)
 		            	@if($students_teachers1[0]->estado=='I')
 	          		 		<b>Estado:</b> <br><span class="label label-warning">Inactivo</span>
 	          		 	@else
@@ -263,13 +328,46 @@
 	          		 	@endif
 	          		 @else
 	          		 	
-	          		 @endif
+	          		 @endif--}}
 		         	
 		         </div>
 
-		         <div class="col-xs-4 form-group text-right">
-	                <a class="btn btn-primary" href="{{url('admin/gestion/pansantes/supervisor')}}/{{$student[0]->id}}/activar">Activar Supervisor</a>
+		         <div class="col-xs-4 form-group ">
+	                <!--<a class="btn btn-primary" href="{{url('admin/gestion/pansantes/supervisor')}}/{{$student[0]->id}}/activar">Activar Supervisor</a>-->
+
+	                <div v-if="supervisorSelect">
+	                	<div class="form-group text-left">
+
+							
+							<label>Supervisor:</label>
+							<p v-text="supervisorSelect.docente.name"></p>
+
+							<label>Lugar:</label>
+							<p v-text="supervisorSelect.lugar.descripcion"></p>
+
+							<label>Hora de inicio:</label>
+							<p v-text="supervisorSelect.hora_inicio"></p>
+
+							<label>Hora a Laborar:</label>
+							<p v-text="getCantHoras"></p>
+
+							
+
+							<div v-if="supervisorSelect.estado=='I'" >
+								<a class="btn btn-primary" href="{{url('admin/gestion/pansantes/supervisor')}}/{{$student[0]->id}}/activar">Aprobar Horario</a>
+							</div>
+							<div v-else >
+								<label class="label label-success">Supervidor Aprobado</label>
+							</div>
+
+						</div>
+	                </div>
+	                <div v-else>
+	                  <label class="label label-default">El Practicante no a elegido ningun supervisor</label>
+	                </div>
 	             </div>
+
+	             </section>
 
 
 	             <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
@@ -291,7 +389,7 @@
                         <input type="hidden" name="user_id" value="{{$student[0]->id}}" >
                         <input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
                         <br>
-                        <button id="btnRechazo" class="btn btn-danger" type="submit">Rechazar</button>
+                        <button id="btnRechazo" class="btn btn-danger" type="submit">Deshabilitar</button>
                         </div>
                   
                   {!! Form::close() !!}
@@ -301,4 +399,123 @@
           </div>
       </div>
 
+@endsection
+
+@section('javascript')
+    <script src="{{ url('js/modules/solicitudescj/passants.js') }}"></script>
+    
+
+    <script type="text/javascript">
+    	var app = new Vue({
+
+		  el: '#mySelect',
+		  data: {
+		    lugar: '0',
+		    lugares: '',
+		    supervisor: '0',
+		    supervisores: '',
+		    horario: '0',
+		    horarios:[
+		    			{id:'9', descripcion:'9:00'},
+		    			{id:'10', descripcion:'10:00'},
+		    			{id:'11', descripcion:'11:00'},
+		    			{id:'12', descripcion:'12:00'},
+		    			{id:'13', descripcion:'13:00'},
+		    			{id:'14', descripcion:'14:00'},
+		    			{id:'15', descripcion:'15:00'}
+		    		 ],
+		    hora: '0',
+		    horas: [
+		    	{id:'2', descripcion:'2'},
+		    	{id:'4', descripcion:'4'},
+		    	{id:'6', descripcion:'6'},
+		    ],
+		    supervisorSelect: {}
+		  },
+
+		  methods: {
+		    getLugares: function(){
+		      console.log('Lugar');
+		      axios.get('{{url("admin/gestion/pasantes/consulta/supervisor")}}', {
+		        params: {
+		          request: 'lugares'
+		        }
+		      })
+		      .then(function (response) {
+		         app.lugares = response.data;
+		         app.supervisores = '';
+		         //app.horarios = '';
+		         app.supervisor = '0';
+		         app.horario = '0';
+		      });
+		    },
+
+		    getSupervisores: function(){
+		      console.log('Supervisor');
+		      axios.get('{{url("admin/gestion/pasantes/consulta/supervisor")}}', {
+		         params: {
+		           request: 'supervidores',
+		           lugar_id: this.lugar
+		         }
+		      })
+		      .then(function (response) {
+		         app.supervisores = response.data;
+		         app.supervisor = '0';
+		         //app.horarios = '';
+		         //app.horario = '0';
+		      }); 
+		    }, 
+
+		    /*getHorarios: function(){
+		    	console.log('Horario');
+		        axios.get('{{url("admin/gestion/pasantes/consulta/supervisor")}}', {
+		        params: {
+		          request: 'horarios',
+		        }
+		      }) 
+		      .then(function (response) {
+		        app.horarios = response.data;
+		        app.horario = 0;
+		      }); 
+		    },*/
+
+		    getSupervisorSelect: function(){
+		      console.log('SelectSupervisor','{{url("admin/gestion/pasantes/consulta/supervisor/elegido/".$student[0]->id)}}');
+
+		      axios.get('{{url("admin/gestion/pasantes/consulta/supervisor/elegido/".$student[0]->id)}}', ) 
+		      .then(function (response) {
+		        app.supervisorSelect = response.data;
+		      }); 
+		    }
+
+
+		  },
+
+		  computed: {
+		  	getCantHoras:function() {
+		  		if(this.supervisorSelect){
+		  			var totalCantHoras = '';
+		  		    var extHoraFin = this.supervisorSelect.hora_fin.split(':');
+		  		    var extHoraInicio = this.supervisorSelect.hora_inicio.split(':');
+
+		  		    totalCantHoras=(parseInt(extHoraFin)-parseInt(extHoraInicio))
+
+		  		    return totalCantHoras;
+		  		}
+		  		return '' 
+		  	}
+		  },
+
+		  created: function(){
+		    this.getLugares();
+		    /*this.getHorarios();*/
+		    this.getSupervisorSelect();
+		    
+		    //this.lugares=[{name:'Alejandro Garcia',id:'1'}];
+		  },
+
+		  
+
+		});
+    </script>
 @endsection

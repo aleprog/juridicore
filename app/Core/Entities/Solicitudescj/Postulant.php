@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Postulant extends Model
 {
     protected $connection = 'mysql_solicitudescj';
-    protected $append = ['status_label', 'created_at_es', 'status_request'];
+    protected $append = ['status_label', 'created_at_es', 'status_request', 'status_abv'];
 	
 	public function career()
 	{
@@ -52,6 +52,10 @@ class Postulant extends Model
 
 	public function getStatusRequestAttribute(){
 		return $this->request->state->descripcion;
+	}
+
+	public function getStatusAbvAttribute(){
+		return $this->request->state->abv;
 	}
 
 	public function getCreatedAtEsAttribute(){

@@ -12,6 +12,8 @@ use App\Mail\CreateUserStudent as CreateUserStudent;
 use Yajra\Datatables\Datatables;
 use Mail;
 use App\Http\Controllers\Ajax\SelectController;
+use App\Mail\NegadaPostulant as NegadaPostulant;
+use App\Core\Entities\Solicitudescj\State as State;
 
 class PostulantController extends Controller
 {
@@ -104,6 +106,41 @@ class PostulantController extends Controller
                 ->route('porstulants.index')
                 ->with('success', 'Se ha Modificado el Estatus de la Solucitud Satifactoramente');
 
+    }
+
+    public function statusIncompleto(Request $request)
+    {
+        //dd($request->all());
+
+        $rules = [
+            'motivo' => 'required|string|min:20|max:255',
+            //'horario_id' => 'required',
+        ];
+        $messages = [
+            'motivo.required' => 'El motivo del rechazo es requerido',
+            //'horario_id.required' => 'Elija el Horario',
+
+        ];
+        $this->validate($request, $rules);
+
+        $postulantRequest = RequestPostulant::where('postulant_id',$request->postulant_id)->first(); 
+
+        $status=State::where('abv','AUI')->first();
+
+        $motivo= $request->motivo;
+        $postulant = Postulant::find($request->postulant_id); 
+        $postulant->motivo=$motivo;
+        $postulant->save();        
+
+        //dd($postulantRequest,$status,$postulant);
+        //dd($postulantRequest,$request->id);      
+        $postulantRequest->state_id=$status->id;
+        $postulantRequest->save();
+
+        Mail::to($postulant->correo_institucional)->send(new NegadaPostulant($postulant, $motivo));
+
+        return redirect()->route('porstulants.index');
+        //->with('message','El participante ha sido rechazado exitosamente');
     }
 
 }

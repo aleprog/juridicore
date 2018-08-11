@@ -23,6 +23,8 @@ class User extends Authenticatable
     protected $fillable = ['name', 'email', 'password', 'remember_token','persona_id','estado'];
 
     protected $append = ['roles_label','estado_label','roles_type'];    
+
+    protected $connection = 'mysql';
     
     /**
      * Hash password

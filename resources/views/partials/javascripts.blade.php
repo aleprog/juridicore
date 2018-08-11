@@ -4,7 +4,7 @@
 <script src="{{ url('js/jquery/') }}/jqueryuitouch.js"></script>
 
 
-<script src="{{ url('adminlte/plugins/select2/') }}/select21.full.min.js"></script>
+
 
 
 <script src="{{ url('adminlte/plugins/respond/') }}/html5shiv.min.js"></script>
@@ -93,3 +93,5 @@
 </script>
 
 @yield('javascript')
+
+<script src="{{ url('adminlte/plugins/select2/') }}/select21.full.min.js"></script>
