@@ -91,20 +91,16 @@ class StudentController extends Controller
 						'a.estado'=>'A']
 						)
                 ->groupBy('a.semana')
-                ->select(DB::RAW('count(a.id) as cid'
+                ->select(
 				DB::RAW('sum(a.horas) as horas'),
 				'a.semana as semana')
                 ->get()
 
         )->addColumn('Opciones', function ($select) {
-			if($select->cid==5)
-			{
+			
 				return '<a href="'.route('student.semanaImprime',$select->semana).'" class="btn btn-info btn-xs" target="_blank">Imprimir</a>';
 
-			}else{
-				return '';
-			}
-
+			
             })
            
             ->make(true);
