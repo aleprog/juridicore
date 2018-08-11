@@ -33,16 +33,46 @@
 
 									</div>
 									<div class="col-md-12">
-
 									<div class="col-md-2">
-									<label>Horario:</label>
+									<label>Horario/entrada:</label>
 
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-2">
+									
 								<!--	{!! Form::select('horario',$horario, $horario_id,['class' => 'form-control select2','placeholder'=>'Horario',"style"=>"width:100%","id"=>"horariosd","name"=>"horario"]) !!}-->
-								<input type="time" value="{{$horario_inicio}}" id="horario_inicio" name="horario_inicio"  min="9:00" max="18:00" required />
-								<input type="time" value="{{$horario_fin}}" id="horario_fin" name="horario_fin"  min="9:00" max="18:00" required />
+									<input type="time" value="{{$horario_inicio}}" step="3600" id="horario_inicio" name="horario_inicio"  min="9:00" max="15:00" required onclick="agregahora()" onkeyup="agregahora()" />
+									</div>
+									</div>
+									<div class="col-md-12">
 
+									<div class="col-md-2">
+									<label>Horas/trabajo:</label>
+
+									</div>
+									<div class="col-md-3">
+								<!--	{!! Form::select('horario',$horario, $horario_id,['class' => 'form-control select2','placeholder'=>'Horario',"style"=>"width:100%","id"=>"horariosd","name"=>"horario"]) !!}-->
+									<input type="text" value="{{$cant_horas}}" id="cant_horas"  name="cant_horas" onkeyup="agregahora()" onKeypress="return soloNumeros6(event)" maxlength="1" required />
+									
+									</div>
+									<div class="col-md-2">
+								<!--	{!! Form::select('horario',$horario, $horario_id,['class' => 'form-control select2','placeholder'=>'Horario',"style"=>"width:100%","id"=>"horariosd","name"=>"horario"]) !!}-->
+										<h6><strong>Solo rango de 2 - 6</strong></h6>									
+									</div>
+									</div>
+									<div class="col-md-12">
+
+									<div class="col-md-2">
+									<label>Horario/salida:</label>
+
+									</div>
+									<div class="col-md-2">
+									<div style="display:none"> 
+									<input type="time" value="{{$horario_fin}}" name="idhf"  id="idhf">
+										</div>
+									<input type="time" value="{{$horario_fin}}" id="horario_fin" name="horario_fin"  min="9:00" max="18:00"/>
+
+									</div>
+									</div>
 									</div>
 </div>							
 							</div>
@@ -56,7 +86,7 @@
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<input type="hidden" value="{{$datos['data']['id']}}" name="idusuario">
 
-								
+
 								<div class="col-md-12">
 								
 								<hr/>
@@ -74,7 +104,10 @@
 								</div>
 							  </form>
 							  <div id="btnvgverificadiv"> 
+							  <div class="col-md-4">
 								<span class="btn btn-primary" value="3" name="btnvgverifica" id="btnvgverifica">Grabar</span>
+								<a href="".route('/admin/estudianteperfil')."" class="btn btn-danger" name="btncancelar">Cancelar</a>
+								</div>
 								</div>
 							</div>
 							

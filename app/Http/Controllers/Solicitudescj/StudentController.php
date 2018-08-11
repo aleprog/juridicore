@@ -36,7 +36,7 @@ class StudentController extends Controller
 		$horario=Horario::all()->pluck('descripcion','id');
 		$horario_inicio='';
 		$horario_fin='';
-
+		$cant_horas=2;
 		$lugar_id=null;
 		$user_doc=null;
 		$horario_id=1;
@@ -59,6 +59,7 @@ class StudentController extends Controller
 			$lugar_id=$objSt->lugar_id;
 			$horario_inicio=$objSt->hora_inicio;
 			$horario_fin=$objSt->hora_fin;
+			$cant_horas=$objSt->cant_horas;
 
 		}
 		if(count($objSt1)!=0)
@@ -79,7 +80,8 @@ class StudentController extends Controller
 		'message',
 		'tipoM',
 		'horario_fin',
-		'horario_inicio'));
+		'horario_inicio',
+		'cant_horas'));
 
 	}
 	public function getDatatablesemanas()
@@ -91,15 +93,19 @@ class StudentController extends Controller
 						'a.estado'=>'A']
 						)
                 ->groupBy('a.semana')
-                ->select(
+                ->select(DB::RAW('count(a.id) as cc'),
 				DB::RAW('sum(a.horas) as horas'),
 				'a.semana as semana')
                 ->get()
 
         )->addColumn('Opciones', function ($select) {
-			
+			if($select->cc==5)
+			{
 				return '<a href="'.route('student.semanaImprime',$select->semana).'" class="btn btn-info btn-xs" target="_blank">Imprimir</a>';
-
+			}else
+			{
+				return '<span><strong>--</strong></span>';
+			}
 			
             })
            
@@ -168,7 +174,8 @@ class StudentController extends Controller
 					return '<span class="label label-danger">Pendiente</span>&nbsp;'.$link;
 					break;
 					case 'P':
-					return '<span class="label label-warning">Enviado-Pendiente de Aprobar</span>';
+					$link='<a href="'.route('student.agregaActividad',$select->id).'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>';
+					return '<span class="label label-warning">Pendiente de Aprobar</span>&nbsp;'.$link;
 
 					break;
 				}
@@ -186,15 +193,18 @@ class StudentController extends Controller
 
 	}
 	public function estudianteasigna(Request $request){
-		
+		if($request->cant_horas==null || $request->cant_horas=='')
+		{
+			$request->cant_horas=2;
+		}
 		$objSt=new StudentTeacher();
 		$objSt->user_est_id=Auth::user()->id;
 		$objSt->user_doc_id=$request->supervisor;
 		$objSt->horario_id=$request->horario;
 		$objSt->lugar_id=$request->lugar;
 		$objSt->hora_inicio=$request->horario_inicio;
-		$objSt->hora_fin=$request->horario_fin;
-
+		$objSt->hora_fin=$request->idhf;
+		$objSt->cant_horas=$request->cant_horas;
 		$objSt->tipo='SUP';
 		$objSt->estado='I';
 		$objSt->save();

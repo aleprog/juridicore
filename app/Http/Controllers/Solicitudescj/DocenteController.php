@@ -37,24 +37,57 @@ class DocenteController extends Controller
     }
     public function asistenciaSave(request $request)   
     {
-        $horaInicio = new DateTime($request->hora_inicio);
-        $horaTermino = new DateTime($request->hora_fin);
+        $objAsistencia=Asistencia::where(['user_id'=>$request->estudiante,
+        'fecha'=>$request->fecha_registro])->count();
+        $objD=DB::connection('mysql_solicitudescj')
+        ->table('students_teachers as et')
+        ->where('et.user_doc_id',Auth::user()->id)
+        ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('et.estado','A')
+   
+        ->select('u.id as id','p.apellidos as apellidos')
+        ->pluck('apellidos','id');
 
-        $interval = $horaInicio->diff($horaTermino);
-        $hora=$interval->format('%H');
-        $docent_id=Auth::user()->id;
-        $objAsistencia=new Asistencia();
-        $objAsistencia->user_id=$request->estudiante;
-        $objAsistencia->docente_id=$docent_id;
-        $objAsistencia->fecha=$request->fecha_registro;
-        $objAsistencia->hora_inicio=$request->hora_inicio;
-        $objAsistencia->hora_fin=$request->hora_fin;
-        $objAsistencia->horas=$hora;
-        $objAsistencia->semana='Semana'.$request->semana;
+        $semana='Semana '.$request->semana;
+        $objAsistencia2=Asistencia::where(['user_id'=>$request->estudiante,
+        'semana'=>$semana])->count();
+
+        if($objAsistencia<1 && $objAsistencia2<5)
+        {
+            $docent_id=Auth::user()->id;
+            $objAsistencia=new Asistencia();
+            $objAsistencia->user_id=$request->estudiante;
+            $objAsistencia->docente_id=$docent_id;
+            $objAsistencia->fecha=$request->fecha_registro;
+            $objAsistencia->hora_inicio=$request->hora_inicio;
+            $objAsistencia->hora_fin=$request->hf;
+            if($request->cant_horas==0)
+            {
+                $objAsistencia->estado='A';
+    
+            }
+            $objAsistencia->horas=$request->cant_horas;
+            $objAsistencia->semana='Semana '.$request->semana;
+           
+            $objAsistencia->save();
+          
+                $m="Registro Grabado Exitosamente";
+                return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
+    
+        }else
+        {
+            if($objAsistencia2>4)
+            {
+                $m="Ya tiene la asistencia completa de la semana";
+                return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
+    
+            }
+            $m="Ya existe este registro";
+            return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
+        }
        
-        $objAsistencia->save();
-
-        return redirect()->route('supervisor.asistencia');
+            
          
 
     }
@@ -82,24 +115,30 @@ class DocenteController extends Controller
         )->addColumn('Estado', function ($select) {
 				switch($select->estado)
 				{
-					case 'A':
+                    case 'A':
+                    if(!$select->horas)
+					{
+						return '<span class="label label-success" >No hay Asistencia</span>';
+						break;
+					}
 					return '<span class="label label-primary">Actividad Aprobada</span>';
 					break;
 					case 'I':
-					if(!$select->horas)
-					{
-						return '<span class="label label-success" >No hay Asistencia</span>';
-							break;
-					}
 					
-					return '<span class="label label-info">Solo Asistencia</span>&nbsp;';
+					
+					return '<span class="label label-info">Asistencia</span>&nbsp;';
 					break;
-                    case 'P':
                     
-                    return '<a href="'.route('docente.stateactividad',$select->id).'" class="label label-warning tooltips" title="aaa">
-                    <i class="fa fa-check"></i>&nbsp;Actividad Pendiente de Aprobar
-                    <span>'.$select->descripcion.'</span>
+                    case 'P':
+                   // 
+                    return '
+                    <a href="'.route('docente.stateactividad',$select->id).'" id="envio'.$select->id.'"></a>
+
+                    <a onclick="confirma(\''.$select->descripcion.'\','.$select->id.')" class="label label-warning">
+                    <i class="fa fa-check"></i>&nbsp; Pendiente de Aprobar Actividad
                     </a>';
+
+                   
 
 					break;
 				}

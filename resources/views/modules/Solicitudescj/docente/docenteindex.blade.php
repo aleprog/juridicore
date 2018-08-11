@@ -61,14 +61,51 @@ a:hover.tooltips span {
 
 @endsection
 @section('javascript')
+<script>
+	@if(isset($m))
+	alert('{{$m}}');
 
+	@endif
+
+</script>
 <script type="text/javascript">
-function soloNumeros(e){
-	var key = window.Event ? e.which : e.keyCode
-	return (key >= 48 && key <= 57)
+
+function confirma(e,v){
+	var bool=confirm("Actividad:"+e);
+	if(bool)
+	{
+		document.getElementById("envio"+v).click();
+	}
+	
+}	
+		
+function validarform(){
+
+var b=0;
+var fecha_registro=$("#fecha_registro").val();
+var hora_inicio=$("#horario_inicio").val().split(":")[0];
+
+	if(fecha_registro=='')
+	{
+		alert("Debe llenar la fecha de la asistencia");
+		b=1;
+	}
+	if(hora_inicio==''||parseInt(hora_inicio)<9)
+	{
+		alert("Debe llenar una hora de entrada desde las 9:00 am");
+		b=1;
+	}
+	
+	if(b==0)
+	{
+		document.getElementById("enviarform").click();
+
+	}
+
 }
-			
-    </script>
+
+</script>
+	
 <script>
 
 $("body").addClass("sidebar-collapse");
