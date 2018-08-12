@@ -69,32 +69,7 @@ a:hover.tooltips span {
 
 </script>
 <script type="text/javascript">
-$("#estudianteo").on('change', function () {
 
-$("#se").html('');
-
-if (this.value != '') {
-
-	var objApiRest = new AJAXRest('/semanaEstudiaante', {
-		valor: this.value,
-	}, 'post');
-	objApiRest.extractDataAjax(function (_resultContent) {
-		if (_resultContent.status == 200) {
-
-			$("#se").append("<option value='0' selected='selected'>* SEMANAS *</option>");
-
-			$.each(_resultContent.message, function (_key, _value) {
-				$("#se").append("<option value='" + _value.id + "'>" + _value.descripcion + "</option>")
-			});
-
-		} else {
-			alertToast("No hay semanas pendientes", 3500);
-			$("#se").val('').change();
-		}
-	});
-
-}
-});
 function confirma(e,v){
 	var bool=confirm("Actividad:"+e);
 	if(bool)
@@ -135,62 +110,6 @@ var hora_inicio=$("#horario_inicio").val().split(":")[0];
 
 $("body").addClass("sidebar-collapse");
 
-$('#dtmenu').DataTable().destroy();
-$('#tbobymenu').html('');
-
-$('#dtmenu').show();
-$.fn.dataTable.ext.errMode = 'throw';
-	var table=$('#dtmenu').DataTable(
-	{
-
-		dom: 'lfrtip',
-
-		responsive: true, "oLanguage":
-			{
-				"sUrl": "/js/config/datatablespanish.json"
-			},
-	  
-	  
-		"lengthMenu": [[10, -1], [10, "All"]],
-		"order": [[1, 'desc']],
-		"searching": true,
-		"info": true,
-		"ordering": true,
-		"bPaginate": true,
-		"processing": true,
-		"serverSide": true,
-		"deferRender": true,
-		"destroy": true,
-		"ajax": "/datatableAsistencia/" ,
-
-		"columns": [
-	 
-			{data: 'fecha', "width": "10%"},
-			{data: 'estudiante', "width": "10%"},
-
-			{data: 'semana', "width": "10%"},
-			{data: 'hora_inicio', "width": "10%"},
-			{data: 'hora_fin', "width": "10%"},
-			{data: 'horas', "width": "10%"},
-
-
-			{
-				data: 'Estado',
-				"width": "20%",
-				"bSortable": true,
-				"searchable": true,
-				"targets": 0,
-				"render": function (data, type, row) {
-					return $('<div />').html(row.Estado).text();
-				}
-			},
-			
-		]
-	}).ajax.reload();
-
-
-$("body").addClass("sidebar-collapse");
-
 $('#dtmenuo').DataTable().destroy();
 $('#tbobymenuo').html('');
 
@@ -217,15 +136,24 @@ $.fn.dataTable.ext.errMode = 'throw';
 		"serverSide": true,
 		"deferRender": true,
 		"destroy": true,
-		"ajax": "/datatableObservaciones/" ,
+		"ajax": "/datatableEvaluacionesTutor/" ,
 
 		"columns": [
 	 
 			{data: 'fecha_registro', "width": "10%"},
 			{data: 'estudiante', "width": "10%"},
 
-			{data: 'semana', "width": "10%"},
-			{data: 'observacion', "width": "10%"},
+			{data: 'visita', "width": "10%"},
+			{
+                    data: 'Opciones',
+                    "width": "20%",
+                    "bSortable": true,
+                    "searchable": true,
+                    "targets": 0,
+                    "render": function (data, type, row) {
+                        return $('<div />').html(row.Opciones).text();
+                    }
+             },
 	
 			
 		]
@@ -248,33 +176,30 @@ $.fn.dataTable.ext.errMode = 'throw';
 								<div class="col-md-12">
 									<div class="tabbable" id="tabs-999753">
 										<ul class="nav nav-tabs">
-											<li class="nav-item active">
+										<!--	<li class="nav-item active">
 												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Asistencia</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="#panel-778868" data-toggle="tab">
-													Observaciones Semanales
+											</li>-->
+											<li class="nav-item active">
+												<a class="nav-link active" href="#panel-778868" data-toggle="tab">
+													Evaluaciones
                                                 </a>
 											</li>
 										</ul>
 										<div class="tab-content">
-											<div class="tab-pane" id="panel-778868">
+											<div class="tab-pane active" id="panel-778868">
 												<p>
-												<form method="POST" action="{{ route ('supervisor.observacionSave')}}" accept-charset="UTF-8">
+												<form method="POST" action="{{ route ('tutor.evaluacionSave')}}" accept-charset="UTF-8">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 												<table width="100%">
 													<tr>
 													<td>Estudiante</td>
-													<td>Semana</td>
-													<td>Observacion</td>
+												
 													<td>Opciones</td>
 													</tr>
 													<tr>
 													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo"]) !!}</td>
-													<td>{!! Form::select('se', [], null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"se","name"=>"se"]) !!}</td>
-													<td>{!! Form::textarea('observacion', null,['class' => 'form-control-t',"style"=>"width:100%","id"=>"observacion","name"=>"observacion"]) !!}</td>
-													<td><button type="submit"class="btn btn-primary" id="enviarform">Enviar</button></td>
+													<td><button type="submit"class="btn btn-primary" id="enviarform">Generar</button></td>
 													</tr>
 													</table>
 													</form>
@@ -287,8 +212,8 @@ $.fn.dataTable.ext.errMode = 'throw';
 
 																<th>Fecha de Registro</th>
 																<th>Estudiante</th>
-																<th>Semana</th>
-																<th>Observacion</th>
+																<th>Visita</th>
+																<th>Opciones</th>
 															
 
 																</thead>
@@ -298,11 +223,11 @@ $.fn.dataTable.ext.errMode = 'throw';
 															</table>
 												</div>
 												</div>
-											<div class="tab-pane active" id="panel-717633">
+											<!--<div class="tab-pane active" id="panel-717633">
 												<p>
 												@include('modules.Solicitudescj.docente.asistencia')
 												</p>
-											</div>
+											</div>-->
 										</div>
 									</div>
 								</div>

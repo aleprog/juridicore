@@ -8,10 +8,14 @@ use App\Core\Entities\Solicitudescj\Postulant;
 use App\Core\Entities\Solicitudescj\RequestPostulant;
 use App\Core\Entities\Solicitudescj\Place;
 use App\Core\Entities\Solicitudescj\StudentTeacher;
+use App\Core\Entities\Solicitudescj\StudentsSteachers;
+
 use App\Core\Entities\Solicitudescj\Horario;
 use App\Core\Entities\Solicitudescj\Asistencia;
+use App\Core\Entities\Solicitudescj\semanaObservaciones;
 
 use Yajra\Datatables\Datatables;
+use App\Core\Entities\Solicitudescj\ProductsPhoto;
 
 
 use App\User;
@@ -44,10 +48,12 @@ class StudentController extends Controller
 		
 		$message='';
 		$tipoM='';
-		$objSt=StudentTeacher::where('user_est_id',Auth::user()->id)->get();
+		$objSt=StudentTeacher::where('user_est_id',Auth::user()->id)
+		->where('tipo','SUP')
+		->get();
 		$cc=0;
 		$objSt1=$objSt->where('estado','A');
-		
+	
 		if(count($objSt)!=0)
 		{
 			$message='Su seleccion de Horario está en proceso de revisiòn';
@@ -84,6 +90,38 @@ class StudentController extends Controller
 		'cant_horas'));
 
 	}
+	public function Clinica()
+	{
+		$images=ProductsPhoto::where('user_id',Auth::user()->id)->get();
+		
+		return view('modules.Solicitudescj.student.clinica')
+		->with(['images'=>$images]);
+	}
+
+	public function evaluacion()
+	{
+		$objHoras=Asistencia::where('user_id',Auth::user()->id)
+		->where('estado','A')
+		->select(DB::RAW('sum(horas) as horas'))->get()->first();
+		$cc=0;
+	//	if($objHoras->horas>"159")
+	//	{
+			$teachers = StudentsSteachers::with(['docente','horario','lugar'])
+			->where('user_est_id',Auth::user()->id)
+			->where('tipo','SUP')->first();
+			$usuario=Auth::user()->persona_id;
+			$objPostulant=Postulant::where('identificacion',$usuario)->get()->first();
+	
+			$pdf=\PDF::loadView('modules.Solicitudescj.student.evaluacion',compact(
+				'objPostulant','teachers'));
+			return $pdf->stream();
+	//	}
+			$m="Aun no ha completado las 160 horas para realizar la evaluacion, Porfavor revise la cantidad de sus horas";
+			$cc=2;
+		
+		
+		return view('modules.Solicitudescj.student.actividades')->with(['m'=>$m,'cc'=>$cc]);
+	}
 	public function getDatatablesemanas()
 	{
 		return DataTables::of(
@@ -113,7 +151,20 @@ class StudentController extends Controller
 	}
 	public function semanaImprime($semana)
 	{
-		//dd($semana);
+		
+		$observaciones=semanaObservaciones::where([
+			'user_id'=>Auth::user()->id,
+			'semana'=>$semana
+		])->get()->toArray();
+		
+		if(count($observaciones)>0)
+		{
+			$observaciones=$observaciones[0]['observacion'];
+
+		}else{
+			$observaciones='';
+		}
+	
 		$usuario=Auth::user()->persona_id;
 		
 		$idsupervisor=StudentTeacher::where(
@@ -129,16 +180,19 @@ class StudentController extends Controller
 		$objAsistencia=Asistencia::
 		where('user_id',Auth::user()->id)
 		->where('estado','A')
+		->where('semana',$semana)
 		->select(
 		'fecha','horas','descripcion')
 		->get()->toArray();
-		$pdf=\PDF::loadView('frontend/datosImprimirSemana',compact(
-			'objPostulant','semana','supervisor','objAsistencia'));
+
+		$pdf=\PDF::setOptions(['isRemoteEnabled' => true])
+		->loadView('frontend/datosImprimirSemana',compact(
+			'objPostulant','semana','supervisor','objAsistencia','observaciones'));
 		return $pdf->stream();
 
-			/*return view('frontend/datosImprimirSemana',compact(
-			'objPostulant','semana','supervisor','objAsistencia'));*/
-
+		/*	return view('frontend/datosImprimirSemana',compact(
+			'objPostulant','semana','supervisor','objAsistencia','observaciones'));
+*/
 	}
 	public function getDatatableAsistencia()
 	{
@@ -226,6 +280,7 @@ class StudentController extends Controller
 		$message='Aun no ha elegido Horario';
 		$tipoM='warning';
 		$objSt=StudentTeacher::where('user_est_id',Auth::user()->id)->get();
+		
 		$cc=0;
 		$objSt1=$objSt->where('estado','A');
 		if(count($objSt)!=0)
@@ -245,6 +300,7 @@ class StudentController extends Controller
 				return view('modules.Solicitudescj.student.actividades',compact('cc','message','tipoM'));
 
 	}
+
 	public function supervisor(Request $request)
 	{
 		$result = DB::connection('mysql')

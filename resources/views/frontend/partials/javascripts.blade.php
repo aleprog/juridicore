@@ -311,14 +311,14 @@ var b=0;
 });
 $('#verif').on('click', function (e) {
 		var dato = $('input[name^="identificacion"]').val();
-		if(dato.length<10)
-		{
-			alert("Formato incorrecto de cedula , verifique el numero sea igual a 10 digitos")
-			$("#dependencia").hide();	
+	//	if(dato.length<10)
+	//	{
+	//		alert("Formato incorrecto de cedula , verifique el numero sea igual a 10 digitos")
+			$("#dependencia").show();	
 
-		}else{
-			verifica(dato); 
-		}
+	//	}else{
+//			verifica(dato); 
+//}
 
 });
 function validarEmail(dato) {
@@ -358,7 +358,6 @@ function validar_emailtoc( email )
 function verifica(dato) {
 
 		var verifica = valida($('[name^="identificacion"]').val());
-		console.log(verifica);
 		if(verifica==5)
 		{
 			$("#dependencia").show();				

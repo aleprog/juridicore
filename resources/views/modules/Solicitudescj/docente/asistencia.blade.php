@@ -19,7 +19,7 @@
 {!! Form::date('fecha_registro', null,['class' => 'form-control','placeholder'=>'fecha_registro',"style"=>"width:100%","id"=>"fecha_registro","name"=>"fecha_registro"]) !!}
 
 </td>
-<td>{!! Form::select('estudiante', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudiante","name"=>"estudiante"]) !!}
+<td>{!! Form::select('estudiante', $objD, null,['placeholder'=>'ESTUDIANTES','class' => 'form-control select2',"style"=>"width:100%","id"=>"estudiante","name"=>"estudiante"]) !!}
 </td>							
 <td>{!! Form::text('semana','1',['class' => 'form-control',"style"=>"width:100%","id"=>"semana","name"=>"semana","maxlength"=>"2","onKeypress"=>"return soloNumeros1_99(event)"]) !!}
 </td>	

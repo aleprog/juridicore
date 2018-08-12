@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Core\Entities\Solicitudescj\Postulant;
+use App\Core\Entities\Solicitudescj\ProductsPhoto;
+
 use App\Core\Entities\Solicitudescj\RequestPostulant;
 use Illuminate\Http\Request;
+use Auth;
 
 class StorageController extends Controller
 {
@@ -13,6 +16,35 @@ class StorageController extends Controller
       return \View::make('frontend.datos');
 	  
    }
+   public function fotosClinica(request $request)
+   {
+	
+	foreach ($request->photos as $photo) {
+		$filename = $photo->store('photos');
+		ProductsPhoto::create([
+			'user_id' => Auth::user()->id,
+			'filename' => $filename
+		]);
+	}
+	$images=ProductsPhoto::where('user_id',Auth::user()->id)->get();
+	
+	$m="Subida Exitosa";
+	return view('modules.Solicitudescj.student.clinica')->with(['m'=>$m,'images'=>$images]);
+
+   }
+   public function DeleteFoto(request $request)
+   {
+
+	\Storage::delete('photos/'.$request->filename);
+	ProductsPhoto::where(['user_id'=>Auth::user()->id,'filename'=>$request->filename])->delete();
+	$images=ProductsPhoto::where('user_id',Auth::user()->id)->get();
+	$m="Eliminacion Exitosa";
+
+		return view('modules.Solicitudescj.student.clinica')
+		->with(['m'=>$m,'images'=>$images]);
+
+   }
+   
    public function save(Request $request)
 	{		
 		$civil=0;
