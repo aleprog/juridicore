@@ -40,6 +40,10 @@
 <div style="display:none">
 <button type="submit"class="btn btn-primary" id="enviarform">Enviar</button>
 </div>
+
+
+
+
 </form>
 <span class="btn btn-primary" onclick="validarform()">Enviar</span>
 </td>

@@ -157,39 +157,80 @@
   <td class=xl6530233 width=452 style='border-top:none;border-left:none;
   width:339pt'>Realizo de manera satisfactoria sus PPP, en la institución
   receptora.</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->e1)
+  {{$obj->e1}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->e1)
+  {{"1"}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  </td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
   border-left:none;width:339pt'>Cumplió con la planificación de PPP</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->e2)
+  {{$obj->e2}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->e2)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
   border-left:none;width:339pt'>Se encuentra conforme con las actividades
   realizadas en las PPP</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->e3)
+  {{$obj->e3}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->e3)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=40 style='height:30.0pt'>
   <td height=40 class=xl6530233 width=452 style='height:30.0pt;border-top:none;
   border-left:none;width:339pt'>Considera que las PPP, realizadas en la
   insitución , contribuyen a la formación profesional del estudiante</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->e4)
+  {{$obj->e4}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->e4)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
   border-left:none;width:339pt'>El ambiente laboral es adecuado para el
   desarrollo de las PPP</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->e5)
+  {{$obj->e5}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->e5)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=20 style='mso-height-source:userset;height:15.0pt'>
@@ -198,40 +239,85 @@
   INSTITUCIONAL</td>
   <td class=xl6530233 width=600 style='border-top:none;border-left:none;
   width:339pt'>El estudiante cumplió con el horario establecido para las PPP</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  
+  @if($obj->ec1)
+  {{$obj->ec1}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  
+  @if(!$obj->ec1)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=40 style='height:30.0pt'>
   <td height=40 class=xl6530233 width=600 style='height:30.0pt;border-top:none;
   border-left:none;width:339pt'>El comportamiento del estudiante estuvo acorde
   con las políticas de la empresa</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  
+  @if($obj->ec2)
+  {{$obj->ec2}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  
+  @if(!$obj->ec2)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl6530233 width=600 style='height:15.0pt;border-top:none;
   border-left:none;width:339pt'>El estudiante se acopló al equipo de trabajo
   del departamento</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  
+  @if($obj->ec3)
+  {{$obj->ec3}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->ec3)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td height=20 class=xl6530233 width=600 style='height:15.0pt;border-top:none;
   border-left:none;width:339pt'>El estudiante cumplió con las actividades
   asignadas</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->ec4)
+  {{$obj->ec4}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->ec4)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  <tr height=40 style='height:30.0pt'>
   <td height=40 class=xl6530233 width=600 style='height:30.0pt;border-top:none;
   border-left:none;width:339pt'>Considera que el estudiante tiene los
   conocimientos necesarios , de acuerdo a su nivel académico</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if($obj->ec5)
+  {{$obj->ec5}}
+  @endif
+  </td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;
+  @if(!$obj->ec5)
+  {{"1"}}
+  @endif
+  </td>
   <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;</td>
  </tr>
  </table>
@@ -240,16 +326,16 @@
  <tr height=40 style='height:30.0pt'>
   <td height=40 class=xl6730233 width=151 style='height:30.0pt;width:113pt'>VALORACION
   FINAL APROBADO</td>
-  <td class=xl6630233><input type="checkbox"></td>
+  <td class=xl6630233>{{$obj->vfa}}</td>
   <td class=xl6830233 colspan=4>(Si el número de valoraciones &quot;SI&quot;
   son minimo 7 y la evaluación del supervisor de la empresa es minimo de 7</td>
  </tr>
  <tr height=51 style='mso-height-source:userset;height:38.25pt'>
   <td height=51 class=xl6730233 width=151 style='height:38.25pt;width:113pt'>REPROBADO</td>
-  <td class=xl6630233><input type="checkbox"></td>
+  <td class=xl6630233>{{$obj->vfr}}</td>
   <td class=xl6830233 colspan=4>(Si el número de valoraciones &quot;SI&quot; es
   menos de 7 y la evaluación del supervisor de la empresa es menos de 7</td>
- </tr>
+ </tr>	
 
 </table>
 

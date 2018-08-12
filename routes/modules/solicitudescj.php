@@ -35,12 +35,19 @@ Route::get('estudiante/clinica', 'Solicitudescj\StudentController@Clinica')->nam
 Route::post('/upload', 'StorageController@fotosClinica');
 Route::post('/DeleteFoto', 'StorageController@DeleteFoto')->name('student.deleteFoto');;
 
-Route::get('estudiante/evaluacion', 'Solicitudescj\StudentController@evaluacion')->name('student.evaluacion');
+Route::get('estudiante/evaluacion', 'Solicitudescj\StudentController@indexEvaluacion')->name('student.indexEvaluacion');
+Route::get('estudiante/evaluacionI', 'Solicitudescj\StudentController@evaluacion')->name('student.evaluacion');
+Route::get('datatableEvaluacionesEstudiante', 'Solicitudescj\StudentController@datatableEvaluacionesEstudiante');
 
 Route::get('tutor/evaluacionSupervision', 'Solicitudescj\DocenteController@evaluacionSupervision')->name('tutor.evaluacionSupervision');
 Route::get('datatableEvaluacionesTutor', 'Solicitudescj\DocenteController@datatableEvaluacionesTutor');
 Route::post('tutor/evaluacionSave', 'Solicitudescj\DocenteController@evaluacionSave')
 ->name('tutor.evaluacionSave');
+Route::post('student/evaluacionSave', 'Solicitudescj\StudentController@evaluacionSave')
+->name('student.evaluacionSave');
 Route::get('imprimirEvaluacion/{id}', 'Solicitudescj\DocenteController@imprimirEvaluacion')->name('tutor.imprimirEvaluacion');
 
+Route::get('imprimirEvaluacionStudent/{id}', 'Solicitudescj\StudentController@imprimirEvaluacion')->name('student.imprimirEvaluacion');
+Route::get('student/evaluacionSupervisor', 'Solicitudescj\StudentController@evaluacionSupervisor')->name('student.evaluacionSupervisor');
+Route::get('datatableEvaluacionesTutorEst', 'Solicitudescj\StudentController@datatableEvaluacionesTutorEst');
 

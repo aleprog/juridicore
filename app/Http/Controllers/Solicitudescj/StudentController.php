@@ -13,6 +13,8 @@ use App\Core\Entities\Solicitudescj\StudentsSteachers;
 use App\Core\Entities\Solicitudescj\Horario;
 use App\Core\Entities\Solicitudescj\Asistencia;
 use App\Core\Entities\Solicitudescj\semanaObservaciones;
+use App\Core\Entities\Solicitudescj\evaluacionest;
+
 
 use Yajra\Datatables\Datatables;
 use App\Core\Entities\Solicitudescj\ProductsPhoto;
@@ -24,6 +26,100 @@ use Auth;
 
 class StudentController extends Controller
 {
+	public function datatableEvaluacionesTutorEst()
+	{
+       return DataTables::of(
+            DB::connection('mysql_solicitudescj')
+                ->table('evaluaciontutor AS a')
+                ->where('a.user_id',Auth::user()->id)
+                ->orderby('a.created_at', 'ASC')
+                ->select(
+                    'a.id as id',
+                'a.visita as visita',
+				'a.created_at as fecha_registro'
+               )
+                ->get()
+
+        )->addColumn('Opciones', function ($select) {
+		        return '<a href="'.route('tutor.imprimirEvaluacion',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
+            })
+           
+          
+            ->make(true);
+    }
+    
+	public function evaluacionSupervisor()
+	{
+		return view('modules.solicitudescj.student.evaluacionDocente');
+	}
+	public function indexEvaluacion()
+	{
+		$obj=evaluacionest::where('user_id',Auth::user()->id)->get()->count();
+		return view('modules.solicitudescj.student.ficha')->with(['obj'=>$obj]);
+	}
+	public function evaluacionSave(request $request)
+	{
+			$objEe=new evaluacionest();
+			$objEe->e1=$request->e1;
+			$objEe->e2=$request->e2;
+			$objEe->e3=$request->e3;
+			$objEe->e4=$request->e4;
+			$objEe->e5=$request->e5;
+			$objEe->e6=$request->e6;
+			$objEe->e7=$request->e7;
+			$objEe->e8=$request->e8;
+			$objEe->e9=$request->e9;
+			$objEe->e10=$request->e10;
+			$objEe->e11=$request->e11;
+			$objEe->user_id=Auth::user()->id;
+			$objEe->ob1=$request->conocimiento;
+			$objEe->ob2=$request->asistencia;
+			$objEe->ob3=$request->apoyo;
+			$objEe->ob4=$request->espacio;
+			$objEe->sugerencias=$request->sugerencias;
+			$objEe->s1=$request->s1;
+			$objEe->save();
+			$m="grabado exitoso";
+			$obj=1;
+			return view('modules.solicitudescj.student.ficha')
+			->with(['m'=>$m,'obj'=>$obj]);
+
+	}
+	public function datatableEvaluacionesEstudiante()
+	{
+		return DataTables::of(
+            DB::connection('mysql_solicitudescj')
+                ->table('evaluacionestudiante AS a')
+                ->where('a.user_id',Auth::user()->id)
+                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
+                ->join('postulants as p','p.identificacion','u.persona_id')
+                ->orderby('a.created_at', 'ASC')
+                ->select(
+                    'a.id as id',
+                	'a.created_at as fecha_registro'
+               )
+                ->get()
+
+        )->addColumn('Opciones', function ($select) {
+		        return '<a href="'.route('student.imprimirEvaluacion',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
+            })
+           
+          
+            ->make(true);
+	}
+	public function imprimirEvaluacion($id){
+		$objEv=evaluacionest::Find($id);
+	
+		$teachers = StudentsSteachers::with(['docente','horario','lugar'])
+			->where('user_est_id',Auth::user()->id)
+			->where('tipo','SUP')->first();
+			$usuario=Auth::user()->persona_id;
+			$objPostulant=Postulant::where('identificacion',$usuario)->get()->first();
+	
+			$pdf=\PDF::loadView('modules.Solicitudescj.student.evaluacion',compact(
+				'objPostulant','teachers','objEv'));
+			return $pdf->stream();
+	}
     public function estudianteperfil()
 	{
 		$identificacion=Auth::user()->persona_id;

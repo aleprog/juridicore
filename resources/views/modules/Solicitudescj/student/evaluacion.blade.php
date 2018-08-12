@@ -155,11 +155,32 @@ style='border-collapse:
   width:122pt'>NADA SATISFECHO</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
-  <td height=20 class=xl6331300 style='height:15.0pt;border-top:none'>&nbsp;</td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td height=20 class=xl6331300 style='height:15.0pt;border-top:none'>&nbsp;
+  @if($objEv->s1=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->s1=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->s1=="3")
+  {{"x"}}
+  @endif
+ 
+  </td>
+  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->s1=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->s1=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  
  <tr height=0 style='display:none'>
@@ -203,119 +224,339 @@ style='border-collapse:
   height:75.0pt;border-top:none;width:98pt'>CONOCIMIENTOS Y HABILIDADES</td>
   <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Aplicación
   de los conocimientos practivos y teoricos de la carrera</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e1=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e1=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e1=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e1=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e1=="1")
+  {{"x"}}
+  @endif
+  </td>
   <td rowspan=4 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;</td>
+  border-top:none'>&nbsp;{{$objEv->ob1}}</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Capacidad de resolver problemas</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e2=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e2=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e2=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e2=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e2=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Utilización adecuada de procedimientos
   metodológicos</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e3=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e3=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e3=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e3=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e3=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Integracion y trabajo en equipo</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e4=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e4=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e4=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e4=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e4=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td rowspan=2 height=40 class=xl662406 width=130 style='border-bottom:.5pt solid black;
   height:30.0pt;border-top:none;width:98pt'>ASISTENCIA</td>
   <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Puntualidad
   del estudiante</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e5=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e5=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e5=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e5=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e5=="1")
+  {{"x"}}
+  @endif
+  </td>
   <td rowspan=2 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;</td>
+  border-top:none'>&nbsp;{{$objEv->ob2}}</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Responsabilidad, disposicion y cumplimiento en
   la ejecucion de las tareas</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e6=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e6=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e6=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e6=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e6=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=40 style='mso-height-source:userset;height:30.0pt'>
   <td rowspan=3 height=80 class=xl662406 width=130 style='border-bottom:.5pt solid black;
   height:60.0pt;border-top:none;width:98pt'>APOYO Y ACTIVIDADES</td>
   <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Integracion
   al equipo de trabajo</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e7=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e7=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e7=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e7=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e7=="1")
+  {{"x"}}
+  @endif
+  </td>
   <td rowspan=3 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;</td>
+  border-top:none'>&nbsp;{{$objEv->ob3}}</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Guia de la insitucion para el desarrollo de
   actividades</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e8=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e8=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e8=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e8=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e8=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Asesoria del tutor academico</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e9=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e9=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e9=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e9=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e9=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=40 style='mso-height-source:userset;height:30.0pt'>
   <td rowspan=2 height=60 class=xl662406 width=130 style='border-bottom:.5pt solid black;
   height:45.0pt;border-top:none;width:98pt'>ESPACIO Y RECURSOS</td>
   <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Facilidad
   del espacio fisico</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e10=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e10=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e10=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e10=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e10=="1")
+  {{"x"}}
+  @endif
+  </td>
   <td rowspan=2 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;</td>
+  border-top:none'>&nbsp;{{$objEv->ob4}}</td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Facilidad en la utilizacion y movilidad de los
   recursoso</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
-  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;</td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e11=="5")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e11=="4")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e11=="3")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e11=="2")
+  {{"x"}}
+  @endif
+  </td>
+  <td class=xl632406 style='border-top:none;border-left:none'>&nbsp;
+  @if($objEv->e11=="1")
+  {{"x"}}
+  @endif
+  </td>
  </tr>
  <tr height=0 style='display:none'>
   <td width=130 style='width:98pt'></td>
@@ -330,12 +571,13 @@ style='border-collapse:
   <td></td>
  </tr>
 
-</table>
+</table> 
 
 </div>
 
 <p align="justify"><strong>Sugerencias:</strong>
-<table width="100%" border="1"><tr><td style="height:40px">
+<table width="100%" border="1"><tr><td>
+{{$objEv->sugerencias}}
 </td></tr>
 </table>
 </p>

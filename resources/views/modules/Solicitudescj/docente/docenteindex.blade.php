@@ -274,7 +274,7 @@ $.fn.dataTable.ext.errMode = 'throw';
 													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo"]) !!}</td>
 													<td>{!! Form::select('se', [], null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"se","name"=>"se"]) !!}</td>
 													<td>{!! Form::textarea('observacion', null,['class' => 'form-control-t',"style"=>"width:100%","id"=>"observacion","name"=>"observacion"]) !!}</td>
-													<td><button type="submit"class="btn btn-primary" id="enviarform">Enviar</button></td>
+													<td><button type="submit"class="btn btn-primary" id="enviarform2">Enviar</button></td>
 													</tr>
 													</table>
 													</form>

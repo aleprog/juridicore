@@ -176,17 +176,17 @@ $.fn.dataTable.ext.errMode = 'throw';
 								<div class="col-md-12">
 									<div class="tabbable" id="tabs-999753">
 										<ul class="nav nav-tabs">
-										<!--	<li class="nav-item active">
-												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Asistencia</a>
-											</li>-->
 											<li class="nav-item active">
-												<a class="nav-link active" href="#panel-778868" data-toggle="tab">
-													Evaluaciones
+												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Consulta Evaluaciones</a>
+											</li>
+											<li class="nav-item ">
+												<a class="nav-link " href="#panel-778868" data-toggle="tab">
+													 Evaluaciones
                                                 </a>
 											</li>
 										</ul>
 										<div class="tab-content">
-											<div class="tab-pane active" id="panel-778868">
+											<div class="tab-pane " id="panel-778868">
 												<p>
 												<form method="POST" action="{{ route ('tutor.evaluacionSave')}}" accept-charset="UTF-8">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -198,15 +198,110 @@ $.fn.dataTable.ext.errMode = 'throw';
 													<td>Opciones</td>
 													</tr>
 													<tr>
-													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo"]) !!}</td>
+													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo","required"=>""]) !!}</td>
 													<td><button type="submit"class="btn btn-primary" id="enviarform">Generar</button></td>
 													</tr>
-													</table>
+												</table>
+
+												<table border=1 cellpadding=0 cellspacing=0 width="100%" style='border-collapse:
+ collapse;table-layout:fixed;width:100%' class="letrap">
+ <col width=151 style='mso-width-source:userset;mso-width-alt:5522;width:113pt'>
+ <col width=217 style='mso-width-source:userset;mso-width-alt:7936;width:163pt'>
+ <col width=452 style='mso-width-source:userset;mso-width-alt:16530;width:339pt'>
+ <col width=80 span=2 style='width:60pt'>
+ <col width=111 style='mso-width-source:userset;mso-width-alt:4059;width:83pt'>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=3 height=20 class=xl6330233 width=820 style='height:15.0pt;
+  width:615pt'>VALORACIÓN</td>
+  <td class=xl6330233 width=80 style='border-left:none;width:60pt'>SI/NO</td>
+  
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=2 rowspan=5 height=120 class=xl6430233 width=300
+  style='height:90.0pt;width:200pt'>VALORACIÓN AL ESTUDIANTE</td>
+  <td class=xl6530233 width=452 style='border-top:none;border-left:none;
+  width:339pt'>Realizo de manera satisfactoria sus PPP, en la institución
+  receptora.</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
+  border-left:none;width:339pt'>Cumplió con la planificación de PPP</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
+  border-left:none;width:339pt'>Se encuentra conforme con las actividades
+  realizadas en las PPP</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=40 style='height:30.0pt'>
+  <td height=40 class=xl6530233 width=452 style='height:30.0pt;border-top:none;
+  border-left:none;width:339pt'>Considera que las PPP, realizadas en la
+  insitución , contribuyen a la formación profesional del estudiante</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl6530233 width=452 style='height:15.0pt;border-top:none;
+  border-left:none;width:339pt'>El ambiente laboral es adecuado para el
+  desarrollo de las PPP</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','9'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+ 
+ </tr>
+ <tr height=20 style='mso-height-source:userset;height:15.0pt'>
+  <td colspan=2 rowspan=5 height=140 class=xl6430233 width=300
+  style='height:105.0pt;width:200pt'>VALORACIÓN CONJUNTA CON EL SUPERVISOR
+  INSTITUCIONAL</td>
+  <td class=xl6530233 width=600 style='border-top:none;border-left:none;
+  width:339pt'>El estudiante cumplió con el horario establecido para las PPP</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=40 style='height:30.0pt'>
+  <td height=40 class=xl6530233 width=600 style='height:30.0pt;border-top:none;
+  border-left:none;width:339pt'>El comportamiento del estudiante estuvo acorde
+  con las políticas de la empresa</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl6530233 width=600 style='height:15.0pt;border-top:none;
+  border-left:none;width:339pt'>El estudiante se acopló al equipo de trabajo
+  del departamento</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+  
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 class=xl6530233 width=600 style='height:15.0pt;border-top:none;
+  border-left:none;width:339pt'>El estudiante cumplió con las actividades
+  asignadas</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ <tr height=40 style='height:30.0pt'>
+  <td height=40 class=xl6530233 width=600 style='height:30.0pt;border-top:none;
+  border-left:none;width:339pt'>Considera que el estudiante tiene los
+  conocimientos necesarios , de acuerdo a su nivel académico</td>
+  <td class=xl6330233 style='border-top:none;border-left:none'>&nbsp;{!! Form::select('opcion[]', ['1'=>'SI','0'=>'NO'], null,['class' => 'form-control select2',"style"=>"width:100%","name"=>"opcion[]"]) !!}</td>
+
+ </tr>
+ </table>
+
+
+
 													</form>
 												</p>
 											
 											<hr/>
-											<div class="panel-body">
+									
+												</div>
+											<div class="tab-pane active" id="panel-717633">
+												<p>
+												<div class="panel-body">
 															<table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
 																<thead>
 
@@ -222,12 +317,8 @@ $.fn.dataTable.ext.errMode = 'throw';
 																</tbody>
 															</table>
 												</div>
-												</div>
-											<!--<div class="tab-pane active" id="panel-717633">
-												<p>
-												@include('modules.Solicitudescj.docente.asistencia')
 												</p>
-											</div>-->
+											</div>
 										</div>
 									</div>
 								</div>

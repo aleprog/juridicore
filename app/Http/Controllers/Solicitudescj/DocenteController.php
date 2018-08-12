@@ -21,6 +21,8 @@ class DocenteController extends Controller
 {
     public function evaluacionSupervision()
     {
+       
+
         $objD=DB::connection('mysql_solicitudescj')
         ->table('students_teachers as et')
         ->where('et.user_doc_id',Auth::user()->id)
@@ -30,6 +32,8 @@ class DocenteController extends Controller
    
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
+
+        
         return view('modules.Solicitudescj.docente.tutorindex',compact('objD'));
     }
     public function index(){
@@ -93,10 +97,34 @@ class DocenteController extends Controller
         $obc=evaluaciontutor::where('docente_id',Auth::user()->id)
         ->where('user_id',$request->estudianteo)->get()->count();
         $obc=$obc+1;
+        $vfa=0;
+        $vfr=0;
+        $vf=array_sum($request->opcion);
+        if($vf<7)
+        {
+            $vfr=$vf;
+        }else{
+            $vfa=$vf; 
+        }
+        
+
         $objEv=new evaluaciontutor();
         $objEv->user_id=$request->estudianteo;
         $objEv->docente_id=Auth::user()->id;
         $objEv->visita=$obc;
+
+        $objEv->e1=$request->opcion[0];
+        $objEv->e2=$request->opcion[1];
+        $objEv->e3=$request->opcion[2];
+        $objEv->e4=$request->opcion[3];
+        $objEv->e5=$request->opcion[4];
+        $objEv->ec1=$request->opcion[5];
+        $objEv->ec2=$request->opcion[6];
+        $objEv->ec3=$request->opcion[7];
+        $objEv->ec4=$request->opcion[8];
+        $objEv->ec5=$request->opcion[9];
+        $objEv->vfa=$vfa;
+        $objEv->vfr=$vfr;
         $objEv->save();
 
         $objD=DB::connection('mysql_solicitudescj')
@@ -144,6 +172,7 @@ class DocenteController extends Controller
 
     public function asistenciaSave(request $request)   
     {
+       
         $objAsistencia=Asistencia::where(['user_id'=>$request->estudiante,
         'fecha'=>$request->fecha_registro])->count();
         $objD=DB::connection('mysql_solicitudescj')
@@ -159,6 +188,7 @@ class DocenteController extends Controller
         $semana='Semana '.$request->semana;
         $objAsistencia2=Asistencia::where(['user_id'=>$request->estudiante,
         'semana'=>$semana])->count();
+       
 
         if($objAsistencia<1 && $objAsistencia2<5)
         {
@@ -193,9 +223,6 @@ class DocenteController extends Controller
             $m="Ya existe este registro";
             return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
         }
-       
-            
-         
 
     }
     
@@ -239,7 +266,7 @@ class DocenteController extends Controller
                 ->get()
 
         )->addColumn('Opciones', function ($select) {
-		        return '<a href="'.route('tutor.imprimirEvaluacion',$select->id).'" class="btn btn-primary btn-sm">Imprimir</a>';
+		        return '<a href="'.route('tutor.imprimirEvaluacion',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
             })
            
           

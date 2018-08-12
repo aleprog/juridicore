@@ -18,17 +18,25 @@ class StorageController extends Controller
    }
    public function fotosClinica(request $request)
    {
-	
-	foreach ($request->photos as $photo) {
-		$filename = $photo->store('photos');
-		ProductsPhoto::create([
-			'user_id' => Auth::user()->id,
-			'filename' => $filename
-		]);
-	}
-	$images=ProductsPhoto::where('user_id',Auth::user()->id)->get();
-	
-	$m="Subida Exitosa";
+	$obj=ProductsPhoto::where([
+		'user_id' => Auth::user()->id
+		])->get()->count();
+		$m="El limite de fotos es 6";
+		if($obj<6)
+		{
+			foreach ($request->photos as $photo) {
+				$filename = $photo->store('photos');
+				ProductsPhoto::create([
+					'user_id' => Auth::user()->id,
+					'filename' => $filename
+				]);
+			}
+			
+			$m="Subida Exitosa";
+
+		}
+		$images=ProductsPhoto::where('user_id',Auth::user()->id)->get();
+		
 	return view('modules.Solicitudescj.student.clinica')->with(['m'=>$m,'images'=>$images]);
 
    }
