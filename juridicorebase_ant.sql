@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-07 11:27:55
+Date: 2018-08-12 13:49:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `menus_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of menus
@@ -42,7 +42,7 @@ INSERT INTO `menus` VALUES ('10', 'Administrador', '#', '0', '1', '1', null, nul
 INSERT INTO `menus` VALUES ('13', 'Venta', 'venta/index', '0', '2', '1', '2018-04-09 09:51:14', '2018-04-09 09:51:14');
 INSERT INTO `menus` VALUES ('14', 'Parametros', 'admin/ParametroIndex', '10', '4', '1', '2018-04-10 05:48:29', '2018-04-10 05:49:04');
 INSERT INTO `menus` VALUES ('40', 'Sin Nivel', 'Sin Nivel', '0', '0', '1', null, null);
-INSERT INTO `menus` VALUES ('41', 'Solicitudes', 'solicitudes', '0', '0', '1', '2018-07-29 08:33:00', '2018-07-29 08:35:32');
+INSERT INTO `menus` VALUES ('41', 'General', 'solicitudes', '0', '0', '1', '2018-07-29 08:33:00', '2018-08-12 06:04:26');
 INSERT INTO `menus` VALUES ('42', 'Postulante', 'admin/postulantes', '41', '1', '1', '2018-07-29 08:37:16', '2018-07-29 08:37:16');
 INSERT INTO `menus` VALUES ('43', 'Estudiante', 'admin/estudiante', '0', '2', '1', '2018-07-29 09:31:54', '2018-07-29 09:31:54');
 INSERT INTO `menus` VALUES ('44', 'Perfil Estudiante', 'admin/estudianteperfil', '43', '1', '1', '2018-08-04 07:08:10', '2018-08-04 07:08:10');
@@ -52,7 +52,11 @@ INSERT INTO `menus` VALUES ('47', 'Empleados', 'admin/gestion/empleados', '46', 
 INSERT INTO `menus` VALUES ('48', 'Practicantes', 'admin/gestion/pasantes', '46', '2', '1', '2018-08-05 08:42:58', '2018-08-05 08:42:58');
 INSERT INTO `menus` VALUES ('50', 'Supervisor', 'supervisor/indexadmin', '0', '0', '1', '2018-08-07 08:55:45', '2018-08-07 08:56:19');
 INSERT INTO `menus` VALUES ('51', 'Gestión Estudiantil', 'supervisor/asistencia', '50', '0', '1', '2018-08-07 08:56:43', '2018-08-07 09:06:25');
-INSERT INTO `menus` VALUES ('53', 'Periodos', 'admin/gestión/periodos', '46', '4', '1', '2018-08-07 10:42:46', '2018-08-07 10:42:46');
+INSERT INTO `menus` VALUES ('53', 'Periodos', 'admin/gestion/periodos', '46', '4', '1', '2018-08-07 10:42:46', '2018-08-07 13:36:20');
+INSERT INTO `menus` VALUES ('54', 'Clinica', 'estudiante/clinica', '43', '3', '1', '2018-08-11 23:11:32', '2018-08-11 23:12:27');
+INSERT INTO `menus` VALUES ('55', 'Evaluacion Estudiantil', 'estudiante/evaluacion', '43', '4', '1', '2018-08-12 00:45:34', '2018-08-12 13:11:01');
+INSERT INTO `menus` VALUES ('57', 'Evaluacion de Supervision', 'tutor/evaluacionSupervision', '50', '2', '1', '2018-08-12 06:03:50', '2018-08-12 12:41:56');
+INSERT INTO `menus` VALUES ('59', 'Evaluación del Docente', 'student/evaluacionSupervisor', '43', '5', '1', '2018-08-12 13:08:47', '2018-08-12 13:13:02');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -112,18 +116,10 @@ INSERT INTO `model_has_roles` VALUES ('2', '1', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('6', '1', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('7', '1', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('3', '21', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '22', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '23', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '24', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('6', '25', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '26', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '28', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('5', '30', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '31', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('4', '32', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('4', '33', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '34', 'App\\User');
-INSERT INTO `model_has_roles` VALUES ('4', '36', 'App\\User');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -262,6 +258,11 @@ INSERT INTO `role_has_permission` VALUES ('48', '7');
 INSERT INTO `role_has_permission` VALUES ('50', '6');
 INSERT INTO `role_has_permission` VALUES ('51', '6');
 INSERT INTO `role_has_permission` VALUES ('53', '7');
+INSERT INTO `role_has_permission` VALUES ('54', '4');
+INSERT INTO `role_has_permission` VALUES ('55', '4');
+INSERT INTO `role_has_permission` VALUES ('57', '5');
+INSERT INTO `role_has_permission` VALUES ('57', '6');
+INSERT INTO `role_has_permission` VALUES ('59', '4');
 
 -- ----------------------------
 -- Table structure for role_has_permissions
@@ -594,13 +595,14 @@ CREATE TABLE `users` (
   `abv` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lugarasignado_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', 't99kbFmfojRoOQaOvpk4LZZjO6vb4WGyd5cZbrLumN9qB5xjMGEdng47eeFe', '2018-04-04 14:20:51', '2018-08-07 10:59:41', '0926339731', '2018-08-07 10:59:41', 'A', 'EI6kINnSDt2gAlfd2AZNOR1x0qGx2v60Si93iX8h', '202', null);
-INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', '6QVcNfSSx3ACdYcO4mJvTlsK1yCcCs9YQMBzJM27Ncg5Me8p2otOkOyJ8pdd', '2018-07-23 02:06:11', '2018-08-07 07:43:30', '0000000000', '2018-08-07 07:43:30', 'A', 'a6RZDh36cImnVz7xgnFC3dmiFh7IIVuUV4tis0c3', 'SEC', null);
-INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', 'LKcMkNDpNotY4k6LQYOfZQNRPMUbyhXRYie672vyDk1wgIq2UfhRRGtvQT5F', '2018-07-29 09:55:43', '2018-08-07 10:45:04', '0972725625', '2018-08-07 10:45:04', 'A', 'ZT24VnQdVyrR1f3vkzrlFwsrDhjwufGeuiqqFoRH', 'SUP', '1');
-INSERT INTO `users` VALUES ('28', 'Anthony Espinoza', 'a@ug.edu.ec', '$2y$10$cjaLZbHdKAwZpnJ4V.2V2.IjxdpVqTHu1XA4K9BL5AieY1bU320C6', 'ljaZyQsZYMPmytEIldZAGVGwrxG7NuZ8HpzH9VHQhn6tsrxZyqFc6SvTfYAH', '2018-08-04 20:46:47', '2018-08-07 10:41:21', '0926339730', '2018-08-07 10:41:21', 'A', '0oDYNus6iaRHex3VspdK7j9hKiULcFKpac2zujXg', null, null);
-INSERT INTO `users` VALUES ('30', 'Tutor1', 'supervisor1@gmail.com', '$2y$10$z4qluWlU0/XlYEguHMIT0.sfyivI9LThFUHAuiIOd8K3xjx6nI/PC', null, '2018-08-05 08:57:46', '2018-08-05 09:02:11', '0926339732', null, 'A', null, 'TUT', null);
+INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', 'TeMbBM1wuoQdUhTS2Y0XY1D7BETn0aGVpS2whTDn0YuJd951DfJzVmT1tY2r', '2018-04-04 14:20:51', '2018-08-12 13:12:11', '0926339731', '2018-08-12 13:12:11', 'A', 'Vcit6PlDRDN0MHnilAakpEP6nZrueTetTp2taNJy', '202', null);
+INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', 'gsVbB2DmW6w5aJm4sbsrmQQgkeSp65sNFadFlLTjsvLyyA9X8NHJbr0Bcuws', '2018-07-23 02:06:11', '2018-08-12 01:58:34', '0000000000', '2018-08-12 01:58:34', 'A', '0HGPadrJeYNZzRW2hJ7uEOAUbFEIwc58r9hsJPvY', 'SEC', null);
+INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', 'tzjXujwYUztS2t16JiIYztUAASqiUkTYwPe81RjL33izzXH614yikNUmHV6B', '2018-07-29 09:55:43', '2018-08-12 13:06:18', '0972725625', '2018-08-12 13:06:18', 'A', 'x0CoczMCc3iVkesQgFbCRPV6HlFE1kG7WGUPWfC2', 'SUP', '1');
+INSERT INTO `users` VALUES ('30', 'Tutor1', 'supervisor1@gmail.com', '$2y$10$RajG.vdY5oYJI8fWpNS8w.HEjdQ3.g4dYYqQ3LOQJ/nqFaZuNKC5.', 'tRV3KBj7DiAySPq0A8tSd1FsbgOeMuuuXZGLnUpACFzO4FDiE0Gv6d4WXoDg', '2018-08-05 08:57:46', '2018-08-12 06:05:59', '0926339732', '2018-08-12 06:05:59', 'A', 'yHekX25SWuGGAGWpCPnsN3E6v4qDLPaH7j1gSHKR', 'TUT', null);
+INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'DyxzhmQkwTB7MMu9ALqoCU9p0bhnrEVqpwq2IAJi2eXQFFLOflT0u9rmpwHR', '2018-08-11 14:29:42', '2018-08-12 13:30:18', '0922606223', '2018-08-12 13:30:18', 'A', '0LasbvNQfD9R34qvKbUmKMUPAh4FCxxDpf43xjoQ', null, null);
+INSERT INTO `users` VALUES ('33', 'an ton', 'ad@ug.edu.ec', '$2y$10$5DLvpROz5/jZ1gZQ4n/sweYvmDaMgIN7HSqJLj8QCvOmpVi.Lps3W', 'ZWiMrvotiTzF97xonBztcuK7Zs0YPefDz7HvwhYuZPa5uuH3vmy2HGVzGThn', '2018-08-12 02:01:01', '2018-08-12 02:03:29', '0926339730', '2018-08-12 02:03:29', 'A', 'YzWAN6ERZctxkOxPdtZV3Ug0smiXq1rXHGHbpfCR', null, null);
