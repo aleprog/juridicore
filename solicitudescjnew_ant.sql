@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-12 13:49:49
+Date: 2018-08-13 11:38:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,6 +46,46 @@ INSERT INTO `asistencias` VALUES ('17', '32', '25', '2018-08-11', 'A', 'Semana 1
 INSERT INTO `asistencias` VALUES ('18', '32', '25', '2018-08-12', 'A', 'Semana 2', 'asdsd', '2', '2018-08-12 12:50:13', '2018-08-12 13:22:00', '10:00:00', '12:00:00');
 
 -- ----------------------------
+-- Table structure for clientes
+-- ----------------------------
+DROP TABLE IF EXISTS `clientes`;
+CREATE TABLE `clientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `apellidos` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `cedula` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `nacionalidad` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `etnia` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `celular` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `convencional` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sexo` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_sexo` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `instruccion` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `domicilio` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `estado_civil` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `sector` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `ocupacion` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `iess` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `ingresos` double(8,2) NOT NULL,
+  `bono` double(8,2) NOT NULL,
+  `discapacidad` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_discapacidad` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enfermedad` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_enfermedad` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
+  `monitor_id` int(11) DEFAULT NULL,
+  `supervidor_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of clientes
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for evaluacionestudiante
 -- ----------------------------
 DROP TABLE IF EXISTS `evaluacionestudiante`;
@@ -72,7 +112,7 @@ CREATE TABLE `evaluacionestudiante` (
   `ob4` varchar(255) DEFAULT NULL,
   `sugerencias` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of evaluacionestudiante

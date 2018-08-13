@@ -77,7 +77,7 @@ class StudentController extends Controller
 			$objEe->ob3=$request->apoyo;
 			$objEe->ob4=$request->espacio;
 			$objEe->sugerencias=$request->sugerencias;
-			$objEe->s1=$request->s1;
+			
 			$objEe->save();
 			$m="grabado exitoso";
 			$obj=1;
@@ -422,5 +422,28 @@ class StudentController extends Controller
 
 		return response()->json($array_response, 200);
 	}
-	
+	public function datatableEvaluacionesSup()
+	{
+       return DataTables::of(
+            DB::connection('mysql_solicitudescj')
+                ->table('evaluacionsupervisor AS a')
+                ->where('a.user_id',Auth::user()->id)
+                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
+                ->join('postulants as p','p.identificacion','u.persona_id')
+                ->orderby('a.created_at', 'ASC')
+                ->select(
+                    'a.id as id',
+                'a.total as total',
+                DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
+				'a.created_at as fecha_registro'
+               )
+                ->get()
+
+        )->addColumn('Opciones', function ($select) {
+		        return '<a href="'.route('supervisor.imprimirEvaluacionSup',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
+            })
+           
+          
+            ->make(true);
+    }
 }

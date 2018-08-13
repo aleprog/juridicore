@@ -167,6 +167,61 @@ $.fn.dataTable.ext.errMode = 'throw';
 
 
 </script>
+
+<script>
+
+$('#dtmenue').DataTable().destroy();
+$('#tbobymenue').html('');
+
+$('#dtmenue').show();
+$.fn.dataTable.ext.errMode = 'throw';
+	var table=$('#dtmenue').DataTable(
+	{
+
+		dom: 'lfrtip',
+
+		responsive: true, "oLanguage":
+			{
+				"sUrl": "/js/config/datatablespanish.json"
+			},
+	  
+	  
+		"lengthMenu": [[10, -1], [10, "All"]],
+		"order": [[1, 'desc']],
+		"searching": true,
+		"info": true,
+		"ordering": true,
+		"bPaginate": true,
+		"processing": true,
+		"serverSide": true,
+		"deferRender": true,
+		"destroy": true,
+		"ajax": "/datatableEvaluacionesSupEst/" ,
+
+		"columns": [
+	 
+			{data: 'fecha_registro', "width": "10%"},
+			{data: 'estudiante', "width": "10%"},
+
+			{data: 'total', "width": "10%"},
+			{
+                    data: 'Opciones',
+                    "width": "20%",
+                    "bSortable": true,
+                    "searchable": true,
+                    "targets": 0,
+                    "render": function (data, type, row) {
+                        return $('<div />').html(row.Opciones).text();
+                    }
+             },
+	
+			
+		]
+	}).ajax.reload();
+
+
+
+</script>
 @endsection
 @section('content')
 <hr/>
@@ -195,7 +250,20 @@ $.fn.dataTable.ext.errMode = 'throw';
 										<div class="tab-content">
 											<div class="tab-pane " id="panel-778868">
 												<p>
-								
+												<table class="table table-bordered table-striped " id="dtmenue" style="width:100%!important" >
+																<thead>
+
+																<th>Fecha de Registro</th>
+																<th>Estudiante</th>
+																<th>Total</th>
+																<th>Opciones</th>
+															
+
+																</thead>
+																<tbody id="tbobymenue">
+
+																</tbody>
+															</table>
 
 												</p>
 											

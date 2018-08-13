@@ -10,6 +10,8 @@ use Yajra\Datatables\Datatables;
 use App\Core\Entities\Solicitudescj\StudentTeacher;
 use App\Core\Entities\Solicitudescj\semanaObservaciones;
 use App\Core\Entities\Solicitudescj\evaluaciontutor;
+use App\Core\Entities\Solicitudescj\evaluacionSup;
+
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
 use App\User;
 use App\Core\Entities\Solicitudescj\Postulant;
@@ -154,6 +156,21 @@ class DocenteController extends Controller
         return redirect()->route('supervisor.asistencia');
 
     }
+    public function imprimirEvaluacionSup($id)
+    {
+        $obj=evaluacionSup::Find($id);
+        $teachers = StudentsSteachers::with(['docente','horario','lugar'])
+        ->where('user_est_id',$obj->user_id)
+        ->where('tipo','SUP')->first();
+        
+        $objU=User::Find($obj->user_id);
+       
+        $objPostulant=Postulant::where('identificacion',$objU->persona_id)->get()->first();
+        $pdf=\PDF::loadView('modules.Solicitudescj.docente.evaluaciondoc',compact(
+            'objPostulant','teachers','obj'));
+        return $pdf->stream();
+
+    }
     public function imprimirEvaluacion($id)
     {
         $obj=evaluaciontutor::Find($id);
@@ -248,6 +265,31 @@ class DocenteController extends Controller
           
             ->make(true);
     }
+    public function datatableEvaluacionesSup()
+	{
+       return DataTables::of(
+            DB::connection('mysql_solicitudescj')
+                ->table('evaluacionsupervisor AS a')
+                ->where('a.docente_id',Auth::user()->id)
+                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
+                ->join('postulants as p','p.identificacion','u.persona_id')
+                ->orderby('a.created_at', 'ASC')
+                ->select(
+                    'a.id as id',
+                'a.total as total',
+                DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
+				'a.created_at as fecha_registro'
+               )
+                ->get()
+
+        )->addColumn('Opciones', function ($select) {
+		        return '<a href="'.route('supervisor.imprimirEvaluacionSup',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
+            })
+           
+          
+            ->make(true);
+    }
+    
     public function datatableEvaluacionesTutor()
 	{
        return DataTables::of(
@@ -330,5 +372,353 @@ class DocenteController extends Controller
            
             ->make(true);
     }
+    public function evaluacionDesempeño()
+    {
+       
+
+        $objD=DB::connection('mysql_solicitudescj')
+        ->table('students_teachers as et')
+        ->where('et.user_doc_id',Auth::user()->id)
+        ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('et.estado','A')
+   
+        ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
+        ->pluck('apellidos','id');
+
+        
+        return view('modules.Solicitudescj.docente.supervisorindex',compact('objD'));
+    }
+    public function evaluacionSupSave(request $request)
+    {
+        $countEs=evaluacionSup::where('user_id',$request->estudianteo)->get()->count();
+        if($countEs<1)
+        {
+            $e1=$request->e1;
+            $e2= $request->e2;
+            $e3= $request->e3;
+            $e4= $request->e4;
+            $e5= $request->e5;
+            $e6= $request->e6;
+            $e7= $request->e7;
+            $e8= $request->e8;
+            $e9= $request->e9;
+            $e10= $request->e10;
+            $e11= $request->e11;
+            //dd($e1);
+          
+             $i=0;
+             $c1=0;
+             $c2=0;
+             $c3=0;
+             $c4=0;
+             $c5=0;
+             switch($e1)
+             {
+                 case "1":
+                 $c1=$c1+1;
+     
+                 break;
+                 case "2":
+                 $c2=$c2+1;
+     
+                 break;
+                 case "3":
+                 $c3=$c3+1;
+     
+                 break;
+                 case "4":
+                 $c4=$c4+1;
+     
+                 break;
+                 case "5":
+                 $c5=$c5+1;
+                 break;
+     
+             }
+             switch($e2)
+             {
+                 case "1":
+                 $c1=$c1+1;
+     
+                 break;
+                 case "2":
+                 $c2=$c2+1;
+     
+                 break;
+                 case "3":
+                 $c3=$c3+1;
+     
+                 break;
+                 case "4":
+                 $c4=$c4+1;
+     
+                 break;
+                 case "5":
+                 $c5=$c5+1;
+                 break;
+     
+             }
+             
+                 switch($e3)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 
+                 switch($e4)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e5)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e6)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e7)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e8)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e9)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e10)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                 switch($e11)
+                 {
+                     case "1":
+                     $c1=$c1+1;
+     
+                     break;
+                     case "2":
+                     $c2=$c2+1;
+     
+                     break;
+                     case "3":
+                     $c3=$c3+1;
+     
+                     break;
+                     case "4":
+                     $c4=$c4+1;
+     
+                     break;
+                     case "5":
+                     $c5=$c5+1;
+                     break;
+     
+                 }
+                
+             $obj=new evaluacionSup();
+             $obj->user_id=$request->estudianteo;
+             $obj->docente_id=Auth::user()->id;
+             $obj->e1=$request->e1;
+             $obj->e2=$request->e2;
+             $obj->e3=$request->e3;
+             $obj->e4=$request->e4;
+             $obj->e5=$request->e5;
+             $obj->e6=$request->e6;
+             $obj->e7=$request->e7;
+             $obj->e8=$request->e8;
+             $obj->e9=$request->e9;
+             $obj->e10=$request->e10;
+             $obj->e11=$request->e11;
+             $obj->ob1=$request->ob1;
+             $obj->ob2=$request->ob2;
+             $obj->ob3=$request->ob3;
+     
+             $obj->fr1=$c1;
+             $obj->fr2=$c2;
+             $obj->fr3=$c3;
+             $obj->fr4=$c4;
+             $obj->fr5=$c5;
+     
+             $obj->sum1=$c1*1;
+             $obj->sum2=$c2*2;
+             $obj->sum3=$c3*3;
+             $obj->sum4=$c4*4;
+             $obj->sum5=$c5*5;
+              
+             $obj->total=($c5*5)+($c4*4)+($c3*3)+($c2*2)+($c1*1);
+            
+             $obj->save();
+    
+             $m='Grabado Correctamente';
+        }
+        $objD=DB::connection('mysql_solicitudescj')
+        ->table('students_teachers as et')
+        ->where('et.user_doc_id',Auth::user()->id)
+        ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('et.estado','A')
+   
+        ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
+        ->pluck('apellidos','id');
+
+        $m="El estudiante ya tiene un registro";
+      
+        return view('modules.Solicitudescj.docente.supervisorindex',compact('objD','m'));
+    }
+    
 
 }

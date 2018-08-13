@@ -154,34 +154,7 @@ style='border-collapse:
   <td class=xl6831300 width=163 style='border-top:none;border-left:none;
   width:122pt'>NADA SATISFECHO</td>
  </tr>
- <tr height=20 style='height:15.0pt'>
-  <td height=20 class=xl6331300 style='height:15.0pt;border-top:none'>&nbsp;
-  @if($objEv->s1=="5")
-  {{"x"}}
-  @endif
-  </td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
-  @if($objEv->s1=="4")
-  {{"x"}}
-  @endif
-  </td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
-  @if($objEv->s1=="3")
-  {{"x"}}
-  @endif
- 
-  </td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
-  @if($objEv->s1=="2")
-  {{"x"}}
-  @endif
-  </td>
-  <td class=xl6331300 style='border-top:none;border-left:none'>&nbsp;
-  @if($objEv->s1=="1")
-  {{"x"}}
-  @endif
-  </td>
- </tr>
+
  
  <tr height=0 style='display:none'>
   <td width=130 style='width:98pt'></td>

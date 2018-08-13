@@ -10,13 +10,6 @@
 @section('css')
     <link href="{{ url('adminlte/plugins/notifications/sweetalert.css') }}" rel="stylesheet">
 	<style>
-	}
-.letrap{
-		font-size:12px;
-}
-.letrapp{
-		font-size:11px;
-}
 	a.tooltips {
   position: relative;
   display: inline;
@@ -143,12 +136,14 @@ $.fn.dataTable.ext.errMode = 'throw';
 		"serverSide": true,
 		"deferRender": true,
 		"destroy": true,
-		"ajax": "/datatableEvaluacionesEstudiante/" ,
+		"ajax": "/datatableEvaluacionesSup/" ,
 
 		"columns": [
 	 
 			{data: 'fecha_registro', "width": "10%"},
-		
+			{data: 'estudiante', "width": "10%"},
+
+			{data: 'total', "width": "10%"},
 			{
                     data: 'Opciones',
                     "width": "20%",
@@ -184,24 +179,30 @@ $.fn.dataTable.ext.errMode = 'throw';
 											<li class="nav-item active">
 												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Consulta Evaluaciones</a>
 											</li>
-										@if($obj<1)
-                    	<li class="nav-item ">
+											<li class="nav-item ">
 												<a class="nav-link " href="#panel-778868" data-toggle="tab">
 													 Evaluaciones
                                                 </a>
 											</li>
-                  @endif
 										</ul>
 										<div class="tab-content">
 											<div class="tab-pane " id="panel-778868">
 												<p>
-												<form method="POST" action="{{ route ('student.evaluacionSave')}}" accept-charset="UTF-8">
+												<form method="POST" action="{{ route ('supervisor.evaluacionSupSave')}}" accept-charset="UTF-8">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-												<table width="100%">
+												<table width="100%" border="1">
+                   
 													<tr>
+													<td>Estudiante</td>
+												
+													<td>Opciones</td>
+													</tr>
+													<tr>
+													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo","required"=>""]) !!}</td>
 													<td><button type="submit"class="btn btn-primary" id="enviarform">Generar</button></td>
 													</tr>
+						
 												</table>
 
 												<div id="pantallas tesis_31300" align=center x:publishsource="Excel">
@@ -277,22 +278,23 @@ style='border-collapse:
   <td class=xl702406 width=17 style='border-left:none;width:13pt'>1</td>
   <td class=xl642406 style='border-left:none'>OBSERVACIONES</td>
  </tr>
+
  <tr height=40 style='mso-height-source:userset;height:30.0pt'>
   <td rowspan=4 height=100 class=xl662406 width=130 style='border-bottom:.5pt solid black;
-  height:75.0pt;border-top:none;width:98pt'>CONOCIMIENTOS Y HABILIDADES</td>
-  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Aplicación
-  de los conocimientos practivos y teoricos de la carrera</td>
+  height:75.0pt;border-top:none;width:98pt'>ASPECTO TÉCNICOS / OPERATIVOS</td>
+  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>
+ Los conocimientos del practicante aseguran una exitosa realizacion de los trabajos</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e1" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e1" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e1" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e1" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e1" value="1"></td>
   <td rowspan=4 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="conocimiento"></td>
+  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="ob1"></td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Capacidad de resolver problemas</td>
+  border-left:none;width:279pt'>Posee iniciativa, constantemente pregunta por nuevos trabajos</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e2" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e2" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e2" value="3"></td>
@@ -301,8 +303,7 @@ style='border-collapse:
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Utilización adecuada de procedimientos
-  metodológicos</td>
+  border-left:none;width:279pt'>Demuestra capacidad y  compromiso en la realización de sus trabajos</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e3" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e3" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e3" value="3"></td>
@@ -312,7 +313,7 @@ style='border-collapse:
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Integracion y trabajo en equipo</td>
+  border-left:none;width:279pt'>Cumple con exactitud , esmero y orden de trabajos</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e4" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e4" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e4" value="3"></td>
@@ -320,84 +321,74 @@ style='border-collapse:
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e4" value="1"></td>
 
  </tr>
- <tr height=20 style='height:15.0pt'>
-  <td rowspan=2 height=40 class=xl662406 width=130 style='border-bottom:.5pt solid black;
-  height:30.0pt;border-top:none;width:98pt'>ASISTENCIA</td>
-  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Puntualidad
-  del estudiante</td>
+ <tr height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td rowspan=4 height=100 class=xl662406 width=130 style='border-bottom:.5pt solid black;
+  height:75.0pt;border-top:none;width:98pt'>ASPECTO SOCIAL</td>
+  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>
+  Su actitud es proactiva y facilita la tarea en equipo
+  </td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e5" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e5" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e5" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e5" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e5" value="1"></td>
-
-  <td rowspan=2 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="asistencia"></td>
+  <td rowspan=4 class=xl712406 style='border-bottom:.5pt solid black;
+  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="ob2"></td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Responsabilidad, disposicion y cumplimiento en
-  la ejecucion de las tareas</td>
+  border-left:none;width:279pt'>Coopera de manera permanente y espontánea</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e6" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e6" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e6" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e6" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e6" value="1"></td>
-
  </tr>
- <tr height=40 style='mso-height-source:userset;height:30.0pt'>
-  <td rowspan=3 height=80 class=xl662406 width=130 style='border-bottom:.5pt solid black;
-  height:60.0pt;border-top:none;width:98pt'>APOYO Y ACTIVIDADES</td>
-  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Integracion
-  al equipo de trabajo</td>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
+  border-left:none;width:279pt'>Es repetuoso con todo el personal</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e7" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e7" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e7" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e7" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e7" value="1"></td>
 
-  <td rowspan=3 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="apoyo"></td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Guia de la insitucion para el desarrollo de
-  actividades</td>
-  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e8" value="5"></td>
+  border-left:none;width:279pt'>Demuestra ser cuidadoso en su presentación personal</td>
+  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e7" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="1"></td>
 
  </tr>
- <tr height=20 style='height:15.0pt'>
-  <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Asesoria del tutor academico</td>
-  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e9" value="5"></td>
+ <tr height=40 style='mso-height-source:userset;height:30.0pt'>
+  <td rowspan=4 height=100 class=xl662406 width=130 style='border-bottom:.5pt solid black;
+  height:75.0pt;border-top:none;width:98pt'>ASPECTO ESTRATÉGICO</td>
+  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>
+ Planifica y organiza de manera adecuada los trabjos diarios</td>
+  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e9" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e9" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e9" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e9" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e9" value="1"></td>
-
+  <td rowspan=4 class=xl712406 style='border-bottom:.5pt solid black;
+  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="ob3"></td>
  </tr>
- <tr height=40 style='mso-height-source:userset;height:30.0pt'>
-  <td rowspan=2 height=60 class=xl662406 width=130 style='border-bottom:.5pt solid black;
-  height:45.0pt;border-top:none;width:98pt'>ESPACIO Y RECURSOS</td>
-  <td colspan=3 class=xl672406 width=371 style='border-left:none;width:279pt'>Facilidad
-  del espacio fisico</td>
+ <tr height=20 style='height:15.0pt'>
+  <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
+  border-left:none;width:279pt'>Propone soluciones y/o alternativas para mejorar situaciones del trabajo</td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e10" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e10" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e10" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e10" value="2"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e10" value="1"></td>
-
-  <td rowspan=2 class=xl712406 style='border-bottom:.5pt solid black;
-  border-top:none'>&nbsp;<input type="textarea" maxlength="255" class="form-control-t" name="espacio"></td>
  </tr>
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
-  border-left:none;width:279pt'>Facilidad en la utilizacion y movilidad de los
-  recursoso</td>
+  border-left:none;width:279pt'>Es puntual en trabajo </td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e11" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e11" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e11" value="3"></td>
@@ -405,28 +396,12 @@ style='border-collapse:
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e11" value="1"></td>
 
  </tr>
- <tr height=0 style='display:none'>
-  <td width=130 style='width:98pt'></td>
-  <td width=129 style='width:97pt'></td>
-  <td width=120 style='width:90pt'></td>
-  <td width=122 style='width:92pt'></td>
-  <td width=24 style='width:18pt'></td>
-  <td width=19 style='width:14pt'></td>
-  <td width=17 style='width:13pt'></td>
-  <td width=20 style='width:15pt'></td>
-  <td width=17 style='width:13pt'></td>
-  <td></td>
- </tr>
+ 
 
 </table>
 
 </div>
 
-<p align="justify"><strong>Sugerencias:</strong>
-<table width="100%" border="1"><tr><td style="height:40px">
-<input type="textarea" name="sugerencias" class="form-control-t" maxlength="255">
-</td></tr>
-</table>
 </p>
 
 
@@ -444,7 +419,8 @@ style='border-collapse:
 																<thead>
 
 																<th>Fecha de Registro</th>
-															
+																<th>Estudiante</th>
+																<th>Total</th>
 																<th>Opciones</th>
 															
 
@@ -454,7 +430,7 @@ style='border-collapse:
 																</tbody>
 															</table>
 												</div>
-												</p>	
+												</p>
 											</div>
 										</div>
 									</div>
