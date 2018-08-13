@@ -10,6 +10,7 @@ require __DIR__ . '/modules/postulants.php';
 require __DIR__ . '/modules/employees.php';
 require __DIR__ . '/modules/periods.php';
 require __DIR__ . '/modules/passants.php';
+require __DIR__ . '/modules/clients.php';
 
 
 
