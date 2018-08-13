@@ -61,14 +61,76 @@ a:hover.tooltips span {
 
 @endsection
 @section('javascript')
+<script>
+	@if(isset($m))
+	alert('{{$m}}');
 
+	@endif
+
+</script>
 <script type="text/javascript">
-function soloNumeros(e){
-	var key = window.Event ? e.which : e.keyCode
-	return (key >= 48 && key <= 57)
+$("#estudianteo").on('change', function () {
+
+$("#se").html('');
+
+if (this.value != '') {
+
+	var objApiRest = new AJAXRest('/semanaEstudiaante', {
+		valor: this.value,
+	}, 'post');
+	objApiRest.extractDataAjax(function (_resultContent) {
+		if (_resultContent.status == 200) {
+
+			$("#se").append("<option value='0' selected='selected'>* SEMANAS *</option>");
+
+			$.each(_resultContent.message, function (_key, _value) {
+				$("#se").append("<option value='" + _value.id + "'>" + _value.descripcion + "</option>")
+			});
+
+		} else {
+			alertToast("No hay semanas pendientes", 3500);
+			$("#se").val('').change();
+		}
+	});
+
 }
-			
-    </script>
+});
+function confirma(e,v){
+	var bool=confirm("Actividad:"+e);
+	if(bool)
+	{
+		document.getElementById("envio"+v).click();
+	}
+	
+}	
+		
+function validarform(){
+
+var b=0;
+var fecha_registro=$("#fecha_registro").val();
+var hora_inicio=$("#horario_inicio").val().split(":")[0];
+
+	if(fecha_registro=='')
+	{
+		alert("Debe llenar la fecha de la asistencia");
+		b=1;
+	}
+	if(hora_inicio==''||parseInt(hora_inicio)<9)
+	{
+		alert("Debe llenar una hora de entrada desde las 9:00 am");
+		b=1;
+	}
+	
+	if(b==0)
+	{
+		document.getElementById("enviarform").click();
+
+	}
+
+}
+
+</script>
+	
 <script>
 
 $("body").addClass("sidebar-collapse");
@@ -126,6 +188,51 @@ $.fn.dataTable.ext.errMode = 'throw';
 		]
 	}).ajax.reload();
 
+
+$("body").addClass("sidebar-collapse");
+
+$('#dtmenuo').DataTable().destroy();
+$('#tbobymenuo').html('');
+
+$('#dtmenuo').show();
+$.fn.dataTable.ext.errMode = 'throw';
+	var table=$('#dtmenuo').DataTable(
+	{
+
+		dom: 'lfrtip',
+
+		responsive: true, "oLanguage":
+			{
+				"sUrl": "/js/config/datatablespanish.json"
+			},
+	  
+	  
+		"lengthMenu": [[10, -1], [10, "All"]],
+		"order": [[1, 'desc']],
+		"searching": true,
+		"info": true,
+		"ordering": true,
+		"bPaginate": true,
+		"processing": true,
+		"serverSide": true,
+		"deferRender": true,
+		"destroy": true,
+		"ajax": "/datatableObservaciones/" ,
+
+		"columns": [
+	 
+			{data: 'fecha_registro', "width": "10%"},
+			{data: 'estudiante', "width": "10%"},
+
+			{data: 'semana', "width": "10%"},
+			{data: 'observacion', "width": "10%"},
+	
+			
+		]
+	}).ajax.reload();
+
+
+
 </script>
 @endsection
 @section('content')
@@ -144,19 +251,53 @@ $.fn.dataTable.ext.errMode = 'throw';
 											<li class="nav-item active">
 												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Asistencia</a>
 											</li>
-											<!--<li class="nav-item">
+											<li class="nav-item">
 												<a class="nav-link" href="#panel-778868" data-toggle="tab">
-                                                Actividades Estudiantiles
+													Observaciones Semanales
                                                 </a>
-											</li>-->
+											</li>
 										</ul>
 										<div class="tab-content">
-											<!--<div class="tab-pane" id="panel-778868">
+											<div class="tab-pane" id="panel-778868">
 												<p>
-												@include('modules.Solicitudescj.docente.actividad')
-	
+												<form method="POST" action="{{ route ('supervisor.observacionSave')}}" accept-charset="UTF-8">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+												<table width="100%">
+													<tr>
+													<td>Estudiante</td>
+													<td>Semana</td>
+													<td>Observacion</td>
+													<td>Opciones</td>
+													</tr>
+													<tr>
+													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo"]) !!}</td>
+													<td>{!! Form::select('se', [], null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"se","name"=>"se"]) !!}</td>
+													<td>{!! Form::textarea('observacion', null,['class' => 'form-control-t',"style"=>"width:100%","id"=>"observacion","name"=>"observacion"]) !!}</td>
+													<td><button type="submit"class="btn btn-primary" id="enviarform2">Enviar</button></td>
+													</tr>
+													</table>
+													</form>
 												</p>
-											</div>-->
+											
+											<hr/>
+											<div class="panel-body">
+															<table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
+																<thead>
+
+																<th>Fecha de Registro</th>
+																<th>Estudiante</th>
+																<th>Semana</th>
+																<th>Observacion</th>
+															
+
+																</thead>
+																<tbody id="tbobymenuo">
+
+																</tbody>
+															</table>
+												</div>
+												</div>
 											<div class="tab-pane active" id="panel-717633">
 												<p>
 												@include('modules.Solicitudescj.docente.asistencia')

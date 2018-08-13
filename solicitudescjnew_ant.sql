@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-07 11:28:16
+Date: 2018-08-12 13:49:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,18 +26,89 @@ CREATE TABLE `asistencias` (
   `fecha` date DEFAULT NULL,
   `estado` varchar(1) DEFAULT 'I',
   `semana` varchar(8) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   `horas` int(11) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `hora_inicio` time DEFAULT NULL,
   `hora_fin` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of asistencias
 -- ----------------------------
+INSERT INTO `asistencias` VALUES ('1', '32', '25', '2018-08-16', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '2', '2018-08-11 16:38:56', '2018-08-11 17:37:43', '08:00:00', '10:00:00');
+INSERT INTO `asistencias` VALUES ('3', '32', '25', '2018-08-02', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '3', '2018-08-11 17:46:50', '2018-08-11 18:24:45', '06:00:00', '09:00:00');
+INSERT INTO `asistencias` VALUES ('15', '32', '25', '2018-08-03', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '0', '2018-08-11 18:08:01', '2018-08-11 18:08:01', '09:00:00', '09:00:00');
+INSERT INTO `asistencias` VALUES ('16', '32', '25', '2018-08-10', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '0', '2018-08-11 18:45:39', '2018-08-11 18:45:39', '09:00:00', '09:00:00');
+INSERT INTO `asistencias` VALUES ('17', '32', '25', '2018-08-11', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '0', '2018-08-11 18:46:31', '2018-08-11 18:46:31', '11:00:00', '11:00:00');
+INSERT INTO `asistencias` VALUES ('18', '32', '25', '2018-08-12', 'A', 'Semana 2', 'asdsd', '2', '2018-08-12 12:50:13', '2018-08-12 13:22:00', '10:00:00', '12:00:00');
+
+-- ----------------------------
+-- Table structure for evaluacionestudiante
+-- ----------------------------
+DROP TABLE IF EXISTS `evaluacionestudiante`;
+CREATE TABLE `evaluacionestudiante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` varchar(255) DEFAULT NULL,
+  `updated_at` varchar(255) DEFAULT NULL,
+  `e1` varchar(2) DEFAULT NULL,
+  `e2` varchar(2) DEFAULT NULL,
+  `e3` varchar(2) DEFAULT NULL,
+  `e4` varchar(2) DEFAULT NULL,
+  `e5` varchar(2) DEFAULT NULL,
+  `e6` varchar(2) DEFAULT NULL,
+  `e7` varchar(2) DEFAULT NULL,
+  `e8` varchar(2) DEFAULT NULL,
+  `e9` varchar(2) DEFAULT NULL,
+  `e10` varchar(2) DEFAULT NULL,
+  `e11` varchar(2) DEFAULT NULL,
+  `s1` varchar(2) DEFAULT NULL,
+  `ob1` varchar(255) DEFAULT NULL,
+  `ob2` varchar(255) DEFAULT NULL,
+  `ob3` varchar(255) DEFAULT NULL,
+  `ob4` varchar(255) DEFAULT NULL,
+  `sugerencias` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of evaluacionestudiante
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for evaluaciontutor
+-- ----------------------------
+DROP TABLE IF EXISTS `evaluaciontutor`;
+CREATE TABLE `evaluaciontutor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `docente_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` varchar(255) DEFAULT NULL,
+  `updated_at` varchar(255) DEFAULT NULL,
+  `visita` int(11) DEFAULT NULL,
+  `e1` varchar(2) DEFAULT NULL,
+  `e2` varchar(2) DEFAULT NULL,
+  `e3` varchar(2) DEFAULT NULL,
+  `e4` varchar(2) DEFAULT NULL,
+  `e5` varchar(2) DEFAULT NULL,
+  `ec1` varchar(2) DEFAULT NULL,
+  `ec2` varchar(2) DEFAULT NULL,
+  `ec3` varchar(2) DEFAULT NULL,
+  `ec4` varchar(2) DEFAULT NULL,
+  `ec5` varchar(2) DEFAULT NULL,
+  `vfa` int(2) DEFAULT NULL,
+  `vfr` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of evaluaciontutor
+-- ----------------------------
+INSERT INTO `evaluaciontutor` VALUES ('8', '25', '32', '2018-08-12 16:51:11', '2018-08-12 16:51:11', '1', '1', '0', '1', '1', '1', '0', '1', '1', '1', '1', '8', '0');
+INSERT INTO `evaluaciontutor` VALUES ('9', '25', '32', '2018-08-12 17:25:12', '2018-08-12 17:25:12', '2', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '8', '0');
 
 -- ----------------------------
 -- Table structure for horarios
@@ -99,7 +170,7 @@ CREATE TABLE `postulants` (
   `horario_t` varchar(50) DEFAULT NULL,
   `cedula_archivo` int(1) DEFAULT '0',
   `papeleta_archivo` int(1) DEFAULT '0',
-  `paralelo` varchar(50) DEFAULT '0',
+  `paralelo` varchar(50) DEFAULT NULL,
   `foto_archivo` int(1) DEFAULT '0',
   `curriculum_archivo` int(1) DEFAULT '0',
   `certificado_matricula` int(1) DEFAULT '0',
@@ -133,12 +204,35 @@ CREATE TABLE `postulants` (
   `constitucional` int(11) DEFAULT '0',
   `motivo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of postulants
 -- ----------------------------
-INSERT INTO `postulants` VALUES ('24', 'Anthony', 'Espinoza', '0926339730', 'EGRESADO', 'Derecho', 'asd', '0982364756', 'a@ug.edu.ec', '22', '2018-08-03', null, '1', '1', '123', '1', '1', '1', '1', '1', '2018-08-05 12:47:31', '2018-08-05 07:47:31', 'A', '2801544', 'ANUAL', 'VESPERTINO', 'aaa', 'v vv', 'SI', null, null, null, 'SI', null, 'CASADO', null, 'a@ug.edu.ec', '1', '1', '1', '0', '1', '0', '0', '0', '0', null);
+INSERT INTO `postulants` VALUES ('39', 'asd', 'ddd', '0922606223', '7', 'Derecho', 'asd', '0999999999', null, '22', '2018-08-03', null, '1', '1', 'aaa', '1', '1', '1', '1', '1', '2018-08-11 14:27:15', '2018-08-11 14:27:15', 'A', null, 'SEMESTRAL', 'MATUTINO', 'guayas', 'guayaquil', 'NO', null, null, null, 'NO', null, 'SOLTERO', null, 'ab@ug.edu.ec', '0', '1', '0', '0', '0', '0', '0', '0', '0', null);
+INSERT INTO `postulants` VALUES ('40', 'an', 'ton', '0926339730', '7', 'Sociologia', 'asd', '0999999999', null, '22', '2018-08-17', null, '1', '1', 'd', '1', '1', '1', '1', '1', '2018-08-12 02:00:18', '2018-08-12 02:00:18', 'A', null, 'SEMESTRAL', 'MATUTINO', 'a', 'f', 'NO', null, null, null, 'NO', null, 'SOLTERO', null, 'ab@ug.edu.ec', '0', '0', '0', '0', '0', '1', '0', '0', '1', null);
+INSERT INTO `postulants` VALUES ('54', 'a', 'v', '0999999999', '7', 'Derecho', 's', '0999999999', null, null, null, null, '0', '0', null, '0', '0', '0', '0', '0', '2018-08-12 05:46:31', '2018-08-12 05:46:31', 'A', null, null, null, null, null, null, null, null, null, null, null, null, null, 'aaab@ug.edu.ec', '0', '0', '0', '0', '0', '0', '0', '0', '0', null);
+
+-- ----------------------------
+-- Table structure for products_photos
+-- ----------------------------
+DROP TABLE IF EXISTS `products_photos`;
+CREATE TABLE `products_photos` (
+  `user_id` int(11) NOT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of products_photos
+-- ----------------------------
+INSERT INTO `products_photos` VALUES ('32', 'photos/UYoY7L4Hou0VPYlyKjTnbfxu1TRHd1CbB1zWjr7Z.png', '2018-08-12 00:21:27', '2018-08-12 00:21:27');
+INSERT INTO `products_photos` VALUES ('32', 'photos/4lupY43JvS4ZJ6REtS8P85sfY6D2iXy6phfLPozH.jpeg', '2018-08-12 00:22:06', '2018-08-12 00:22:06');
+INSERT INTO `products_photos` VALUES ('32', 'photos/mo3QuCHPQuB0EjkNzjrvUNvR4tJlFUnC0OvdHQeI.jpeg', '2018-08-12 00:23:07', '2018-08-12 00:23:07');
+INSERT INTO `products_photos` VALUES ('32', 'photos/hVPKVcphAf8es3he7ma3eiiA2MFaUwioxHDnPTsX.jpeg', '2018-08-12 11:09:08', '2018-08-12 11:09:08');
+INSERT INTO `products_photos` VALUES ('32', 'photos/BaGg9rBwancNVcqA3lsjPwnLUMO8n0QT5w7lv8gA.jpeg', '2018-08-12 13:17:30', '2018-08-12 13:17:30');
+INSERT INTO `products_photos` VALUES ('32', 'photos/OdPtTaavHhg4IVf5klThCN5SGaqZKS7sEEo9a2HD.jpeg', '2018-08-12 13:18:58', '2018-08-12 13:18:58');
 
 -- ----------------------------
 -- Table structure for requests
@@ -152,7 +246,7 @@ CREATE TABLE `requests` (
   `estado` varchar(1) DEFAULT 'A',
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of requests
@@ -169,6 +263,50 @@ INSERT INTO `requests` VALUES ('29', '2', '33', '2018-08-05 16:33:25', 'A', '201
 INSERT INTO `requests` VALUES ('30', '5', '34', '2018-08-07 05:26:24', 'A', '2018-08-07 05:26:24');
 INSERT INTO `requests` VALUES ('31', '2', '35', '2018-08-07 07:44:23', 'A', '2018-08-07 07:44:23');
 INSERT INTO `requests` VALUES ('32', '5', '36', '2018-08-07 11:22:19', 'A', '2018-08-07 11:22:19');
+INSERT INTO `requests` VALUES ('33', '5', '37', '2018-08-07 11:28:56', 'A', '2018-08-07 11:28:56');
+INSERT INTO `requests` VALUES ('34', '5', '38', '2018-08-07 11:29:47', 'A', '2018-08-07 11:29:47');
+INSERT INTO `requests` VALUES ('35', '2', '39', '2018-08-11 14:28:05', 'A', '2018-08-11 14:28:05');
+INSERT INTO `requests` VALUES ('36', '2', '40', '2018-08-12 02:01:01', 'A', '2018-08-12 02:01:01');
+INSERT INTO `requests` VALUES ('37', '5', '41', '2018-08-12 03:20:08', 'A', '2018-08-12 03:20:08');
+INSERT INTO `requests` VALUES ('38', '5', '42', '2018-08-12 03:23:26', 'A', '2018-08-12 03:23:26');
+INSERT INTO `requests` VALUES ('39', '5', '43', '2018-08-12 03:24:44', 'A', '2018-08-12 03:24:44');
+INSERT INTO `requests` VALUES ('40', '5', '44', '2018-08-12 03:25:21', 'A', '2018-08-12 03:25:21');
+INSERT INTO `requests` VALUES ('41', '5', '45', '2018-08-12 03:27:17', 'A', '2018-08-12 03:27:17');
+INSERT INTO `requests` VALUES ('42', '5', '46', '2018-08-12 05:35:25', 'A', '2018-08-12 05:35:25');
+INSERT INTO `requests` VALUES ('43', '5', '47', '2018-08-12 05:38:24', 'A', '2018-08-12 05:38:24');
+INSERT INTO `requests` VALUES ('44', '5', '48', '2018-08-12 05:40:16', 'A', '2018-08-12 05:40:16');
+INSERT INTO `requests` VALUES ('45', '5', '49', '2018-08-12 05:41:27', 'A', '2018-08-12 05:41:27');
+INSERT INTO `requests` VALUES ('46', '5', '50', '2018-08-12 05:42:02', 'A', '2018-08-12 05:42:02');
+INSERT INTO `requests` VALUES ('47', '5', '51', '2018-08-12 05:43:47', 'A', '2018-08-12 05:43:47');
+INSERT INTO `requests` VALUES ('48', '5', '52', '2018-08-12 05:45:18', 'A', '2018-08-12 05:45:18');
+INSERT INTO `requests` VALUES ('49', '5', '53', '2018-08-12 05:45:55', 'A', '2018-08-12 05:45:55');
+INSERT INTO `requests` VALUES ('50', '5', '54', '2018-08-12 05:46:31', 'A', '2018-08-12 05:46:31');
+
+-- ----------------------------
+-- Table structure for semanaobservaciones
+-- ----------------------------
+DROP TABLE IF EXISTS `semanaobservaciones`;
+CREATE TABLE `semanaobservaciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `semana` varchar(11) DEFAULT NULL,
+  `observacion` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `docente_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of semanaobservaciones
+-- ----------------------------
+INSERT INTO `semanaobservaciones` VALUES ('2', 'Semana 1', 'asd', '32', '2018-08-12 03:01:18', '2018-08-12 03:01:18', '25');
+INSERT INTO `semanaobservaciones` VALUES ('3', null, null, null, '2018-08-12 10:41:35', '2018-08-12 10:41:35', '25');
+INSERT INTO `semanaobservaciones` VALUES ('4', null, null, null, '2018-08-12 10:44:29', '2018-08-12 10:44:29', '25');
+INSERT INTO `semanaobservaciones` VALUES ('5', null, null, null, '2018-08-12 10:44:47', '2018-08-12 10:44:47', '25');
+INSERT INTO `semanaobservaciones` VALUES ('6', null, null, null, '2018-08-12 10:57:35', '2018-08-12 10:57:35', '25');
+INSERT INTO `semanaobservaciones` VALUES ('7', null, null, null, '2018-08-12 10:58:06', '2018-08-12 10:58:06', '25');
+INSERT INTO `semanaobservaciones` VALUES ('8', null, null, null, '2018-08-12 11:00:19', '2018-08-12 11:00:19', '25');
 
 -- ----------------------------
 -- Table structure for states
@@ -212,14 +350,10 @@ CREATE TABLE `students_teachers` (
   `hora_fin` time DEFAULT NULL,
   `cant_horas` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of students_teachers
 -- ----------------------------
-INSERT INTO `students_teachers` VALUES ('7', '28', '27', 'I', '2018-08-05 14:48:36', '2018-08-05 14:48:36', 'SUP', '3', '1', null, null, null);
-INSERT INTO `students_teachers` VALUES ('9', '28', '30', 'A', '2018-08-05 14:22:45', '2018-08-05 14:22:45', 'TUT', null, null, null, null, null);
-INSERT INTO `students_teachers` VALUES ('14', '35', '27', 'A', '2018-08-05 16:57:49', '2018-08-05 16:57:49', 'SUP', '1', '1', null, null, null);
-INSERT INTO `students_teachers` VALUES ('15', '35', '30', 'A', '2018-08-05 11:51:23', '2018-08-05 11:51:23', 'TUT', null, null, null, null, null);
-INSERT INTO `students_teachers` VALUES ('19', '36', '25', 'A', '2018-08-07 08:52:21', '2018-08-07 08:52:21', 'SUP', null, '1', '01:01:00', '01:23:00', null);
-INSERT INTO `students_teachers` VALUES ('20', '36', '30', 'A', '2018-08-07 08:51:48', '2018-08-07 08:51:48', 'TUT', null, null, null, null, null);
+INSERT INTO `students_teachers` VALUES ('23', '32', '30', 'A', '2018-08-11 16:23:33', '2018-08-11 16:23:33', 'TUT', null, null, null, null, null);
+INSERT INTO `students_teachers` VALUES ('24', '32', '25', 'A', '2018-08-12 05:01:39', '2018-08-12 05:01:39', 'SUP', null, '1', '10:00:00', '12:00:00', '2');

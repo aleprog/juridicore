@@ -44,13 +44,13 @@ function soloNumeros(e){
 					<form method="POST" action="{{ route ('estudiante.actividadSave')}}" accept-charset="UTF-8">
 
 									<div class="col-md-12">
-									<label>Descripcion:</label>
+									<label>Descripcion (255 caracteres):</label>
 
 									</div>
 									<div class="col-md-12">
 										  {!! Form::textarea('descripcion',null,[
 										  
-										  'class'=>'form-control-t','id'=>'descripcion']) !!}
+										  'class'=>'form-control-t','id'=>'descripcion',"maxlength"=>"255"]) !!}
 
 									</div>
 						

@@ -91,6 +91,46 @@
     $('.modal').removeAttr('tabindex');
     
 </script>
+<script type="text/javascript">
+function soloNumeros(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 48 && key <= 57)
+}
+function soloNumeros6(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 50 && key <= 54)
+}
+function soloNumeros0_6(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 48 && key <= 54)
+}
+function soloNumeros1_99(e){
+	var key = window.Event ? e.which : e.keyCode
+	return (key >= 49 && key <= 54)
+}
+
+function agregahora()
+{
+    var horario_inicio=$("#horario_inicio").val();
+    var cant_horas=$("#cant_horas").val();
+    if(cant_horas==null || cant_horas=='')
+    {
+        cant_horas=2;
+
+    }
+
+
+var fin=(parseInt(horario_inicio.split(":")[0])+parseInt(cant_horas));
+if(fin<10)
+{
+    fin="0"+fin;
+}
+   // var h=horario_inicio.add(cant_horas*3600,"hours").format('HH:mm');
+    var horario_fin=$("#horario_fin").val(fin+":00").change();
+    var idhf=$("#idhf").val(fin+":00").change();
+
+}			
+    </script>
 
 @yield('javascript')
 

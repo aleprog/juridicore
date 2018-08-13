@@ -246,42 +246,63 @@
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="cedula" accept="application/pdf" >
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
-								  <label class="col-md-4 control-label">Papeleta</label>
+								  <label class="col-md-4 control-label">Papeleta de Votación</label>
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="papeleta" accept="application/pdf">
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Foto</label>
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="foto" accept="image/jpeg">
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en jpeg</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Curriculum</label>
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="curriculum" accept="application/pdf">
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Certificado de Matricula</label>
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="certificado_matricula" accept="application/pdf" >
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Certificado de No Arrastre</label>
 								  <div class="col-md-6">
 									<input type="file" class="form-control" name="certificado_arrastre" accept="application/pdf" >
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="form-group">
 								  <label class="col-md-4 control-label">Solicitud Sellada</label>
-								  <div class="col-md-6">
+								  <div class="col-md-6">	
 									<input type="file" class="form-control" name="solicitud_sellada" accept="application/pdf" >
 								  </div>
+									<div class="col-md-2">
+									<h6><strong>Archivo en PDF</strong></h6>
+									</div>
 								</div>
 								<div class="col-md-12">
 								
@@ -296,6 +317,8 @@
 									<span class="btn btn-primary" id="btnverif">
 									Enviar
 									</span>
+									<a href="".route('/')."" class="btn btn-danger" name="btncancelar">Cancelar</a>
+
 								  </div>
 								</div>
 							  </form>

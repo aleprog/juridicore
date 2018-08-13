@@ -152,14 +152,12 @@
         }).ajax.reload();
 
 </script>
-<script type="text/javascript">
-function soloNumeros(e){
-	var key = window.Event ? e.which : e.keyCode
-	return (key >= 48 && key <= 57)
-}
-			
-    </script>
+
 <script>
+
+@if(isset($m))
+	alert('{{$m}}');
+@endif
 	@if(session('message'))
 			alert('{{session("message")}}');
 	@endif
@@ -192,8 +190,8 @@ function soloNumeros(e){
 		<div class="col-md-12">
 			<div class="tabbable" id="tabs-345026">
 				<ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link active" href="#panel-559352" data-toggle="tab">Consulta</a>
+					<li class="nav-item active">
+						<a class="nav-link " href="#panel-559352" data-toggle="tab">Consulta</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#panel-321203" data-toggle="tab">Formularios</a>

@@ -247,7 +247,6 @@ function validar_emailtoc( email )
 function verifica(dato) {
 
 		var verifica = valida($('[name^="identificacion"]').val());
-		console.log(verifica);
 		if(verifica==5)
 		{
 			$("#dependencia").show();				
@@ -263,7 +262,8 @@ $(document).ready(function () {
 	var sup=$("#supervisor").val();
 	var hor=$("#horario").val();
 	var cc=$("#cc").val();
-	
+    document.getElementById('horario_fin').disabled=true;
+
 			
 	switch(cc)
 	{
@@ -273,7 +273,8 @@ $(document).ready(function () {
 				document.getElementById('lugar').disabled=false;
 				document.getElementById('supervisor').disabled=false;
                 document.getElementById('horario_inicio').disabled=false;
-				document.getElementById('horario_fin').disabled=false;
+                document.getElementById('cant_horas').disabled=false;
+
 
 		break;
 	
@@ -281,7 +282,8 @@ $(document).ready(function () {
 				document.getElementById('lugar').disabled=true;
 				document.getElementById('supervisor').disabled=true;
                 document.getElementById('horario_inicio').disabled=true;
-				document.getElementById('horario_fin').disabled=true;
+                document.getElementById('cant_horas').disabled=true;
+
 				$("#btnvgverificadiv").hide();
 				$("#divmensaje").show();
 		break;
@@ -293,13 +295,6 @@ $(document).ready(function () {
 });
 
 </script>
-<script type="text/javascript">
-function soloNumeros(e){
-	var key = window.Event ? e.which : e.keyCode
-	return (key >= 48 && key <= 57)
-}
-			
-    </script>
 
 @endsection
 @section('content')
