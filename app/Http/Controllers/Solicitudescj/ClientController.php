@@ -21,9 +21,8 @@ class ClientController extends Controller
 
 	public function getDatatable()
     {
-
-
-	    $clients=Client::get();
+       
+            $clients=Client::get();
 
     	//dd($clients);
 
