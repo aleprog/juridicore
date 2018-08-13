@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-13 10:59:40
+Date: 2018-08-13 17:38:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `menus_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of menus
@@ -59,6 +59,8 @@ INSERT INTO `menus` VALUES ('57', 'Evaluacion de Supervision', 'tutor/evaluacion
 INSERT INTO `menus` VALUES ('59', 'Evaluación del Docente', 'student/evaluacionSupervisor', '43', '5', '1', '2018-08-12 13:08:47', '2018-08-12 13:13:02');
 INSERT INTO `menus` VALUES ('60', 'Monitor', 'admin/monitoreo', '0', '6', '1', '2018-08-13 10:40:11', '2018-08-13 10:41:47');
 INSERT INTO `menus` VALUES ('62', 'Atenciones', 'admin/clientes', '41', '7', '1', '2018-08-13 10:41:09', '2018-08-13 10:53:26');
+INSERT INTO `menus` VALUES ('63', 'Desempeño Practicante', 'supervisor/evaluacionDesempeño', '50', '4', '1', '2018-08-13 14:03:46', '2018-08-13 14:03:46');
+INSERT INTO `menus` VALUES ('64', 'Casos', 'supervisor/casos', '50', '6', '1', '2018-08-13 17:08:30', '2018-08-13 17:08:30');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -270,6 +272,9 @@ INSERT INTO `role_has_permission` VALUES ('62', '8');
 INSERT INTO `role_has_permission` VALUES ('62', '4');
 INSERT INTO `role_has_permission` VALUES ('41', '8');
 INSERT INTO `role_has_permission` VALUES ('41', '4');
+INSERT INTO `role_has_permission` VALUES ('63', '5');
+INSERT INTO `role_has_permission` VALUES ('63', '6');
+INSERT INTO `role_has_permission` VALUES ('64', '6');
 
 -- ----------------------------
 -- Table structure for role_has_permissions
@@ -608,10 +613,10 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', 'RNu2q04FIP67hl4KIzjqDoj9yfOwPn4EO11W2zsZZWvQzFtsnImwFedyYmsw', '2018-04-04 14:20:51', '2018-08-13 10:51:54', '0926339731', '2018-08-13 10:51:54', 'A', 'GldUSG8DbsXeiBH44rKQFsOxRWfNmhLIfOrcOaxs', '202', null);
+INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', '0IOThCekiSAnn8mXR4kMpOFRmOXwPMmYj79vBKAlLayDTbyiwDvHJMmc4dBn', '2018-04-04 14:20:51', '2018-08-13 17:09:09', '0926339731', '2018-08-13 17:09:09', 'A', 'MYe7ZfqLIs0AybxhW9FIT0lSO1Jpx7U4CaCsKih3', '202', null);
 INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', 'gsVbB2DmW6w5aJm4sbsrmQQgkeSp65sNFadFlLTjsvLyyA9X8NHJbr0Bcuws', '2018-07-23 02:06:11', '2018-08-12 01:58:34', '0000000000', '2018-08-12 01:58:34', 'A', '0HGPadrJeYNZzRW2hJ7uEOAUbFEIwc58r9hsJPvY', 'SEC', null);
-INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', 'tzjXujwYUztS2t16JiIYztUAASqiUkTYwPe81RjL33izzXH614yikNUmHV6B', '2018-07-29 09:55:43', '2018-08-12 13:06:18', '0972725625', '2018-08-12 13:06:18', 'A', 'x0CoczMCc3iVkesQgFbCRPV6HlFE1kG7WGUPWfC2', 'SUP', '1');
+INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', '6oIDAq2mIPzZvF7G5p3OIrChn4S5uZCDLn0EHhoFqPn9M7f60S0xYcMPuCy5', '2018-07-29 09:55:43', '2018-08-13 17:09:38', '0972725625', '2018-08-13 17:09:38', 'A', 'vyz6I9SqGUE0J1nvyY3mL5csyszXRiaDIRScv43p', 'SUP', '1');
 INSERT INTO `users` VALUES ('30', 'Tutor1', 'supervisor1@gmail.com', '$2y$10$RajG.vdY5oYJI8fWpNS8w.HEjdQ3.g4dYYqQ3LOQJ/nqFaZuNKC5.', 'tRV3KBj7DiAySPq0A8tSd1FsbgOeMuuuXZGLnUpACFzO4FDiE0Gv6d4WXoDg', '2018-08-05 08:57:46', '2018-08-12 06:05:59', '0926339732', '2018-08-12 06:05:59', 'A', 'yHekX25SWuGGAGWpCPnsN3E6v4qDLPaH7j1gSHKR', 'TUT', null);
-INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'I6BO0sR2n9l46pWh3WlMhLwV980AiQGjdjHBN2LQQkwncuInqX6NqGzZv9Ra', '2018-08-11 14:29:42', '2018-08-13 10:54:07', '0922606223', '2018-08-13 10:54:07', 'A', '1F8EqpvhpYdQbCQNCUYFxafM443fSbpDIi0imhC4', null, null);
+INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'TV5umMfVLmPn3pzOcrptcGKtpOGwyIa5jkUsoA7nl0PRTYm7QOthHWEnQIRO', '2018-08-11 14:29:42', '2018-08-13 17:08:51', '0922606223', '2018-08-13 17:08:51', 'A', 'LjzBaZRXhGXwy7uVNTOa2dp5G6D6EBWPRDthJDOy', null, null);
 INSERT INTO `users` VALUES ('33', 'an ton', 'ad@ug.edu.ec', '$2y$10$5DLvpROz5/jZ1gZQ4n/sweYvmDaMgIN7HSqJLj8QCvOmpVi.Lps3W', 'ZWiMrvotiTzF97xonBztcuK7Zs0YPefDz7HvwhYuZPa5uuH3vmy2HGVzGThn', '2018-08-12 02:01:01', '2018-08-12 02:03:29', '0926339730', '2018-08-12 02:03:29', 'A', 'YzWAN6ERZctxkOxPdtZV3Ug0smiXq1rXHGHbpfCR', null, null);
 INSERT INTO `users` VALUES ('34', 'monitor', 'monitor@ug.edu.ec', '$2y$10$E3csZ049aUyiICXxkAvZo.yMVOJ9Whxa2N6gdHPEfKIocP7PwKz/K', 'AlKfqbdFtRQ4thNPlV2S01gErkwhpWa4S20uZW3LSqqN4gqvHEI16gMU3IFw', '2018-08-13 10:36:16', '2018-08-13 10:47:41', '1111111111', '2018-08-13 10:47:41', 'A', 'XnyM0kCT8R5VuJDrYlJZ8H5sHih07SIfBkWLeyt2', null, null);
