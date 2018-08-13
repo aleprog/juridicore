@@ -38,6 +38,7 @@ class DocenteController extends Controller
         
         return view('modules.Solicitudescj.docente.tutorindex',compact('objD'));
     }
+ 
     public function index(){
 
         $objD=DB::connection('mysql_solicitudescj')
