@@ -26,3 +26,6 @@ Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 
 	Route::get('admin/clientes/{id}/imprimir', 'Solicitudescj\ClientController@print')
 	->name('clients.print');
+
+	Route::post('admin/clientes/asignar/supervisor', 'Solicitudescj\ClientController@asignarSupervisor')
+	->name('clients.asignarSupervisor');

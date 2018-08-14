@@ -176,10 +176,10 @@
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        <div class="col-xs-4 form-group">
+                        {{--<div class="col-xs-4 form-group">
                             {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
                             {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
-                        </div>
+                        </div>--}}
 
                         
 

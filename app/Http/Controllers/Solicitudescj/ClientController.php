@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Solicitudescj;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Core\Entities\Solicitudescj\Client;
+use App\Core\Entities\Solicitudescj\Consulta;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
@@ -104,7 +105,7 @@ class ClientController extends Controller
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
-            'supervisor_id' => 'required',
+            //'supervisor_id' => 'required',
         ];/*
         $messages = [
             'descripcion.required' => 'Escriba el descripcion ',
@@ -152,7 +153,7 @@ class ClientController extends Controller
 	  $client->enfermedad = $request->enfermedad;
 	  $client->tipo_enfermedad = $request->tipo_enfermedad;
 	  $client->monitor_id = auth()->user()->id;
-    $client->supervisor_id = $request->supervisor_id;
+    //$client->supervisor_id = $request->supervisor_id;
 	  $client->estado = 'A';
 
 	  //dd($client);
@@ -220,7 +221,7 @@ class ClientController extends Controller
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
-            'supervisor_id' => 'required',
+            //'supervisor_id' => 'required',
         ];
         
         $this->validate($request, $rules);
@@ -250,7 +251,7 @@ class ClientController extends Controller
       $client->tipo_discapacidad = $request->tipo_discapacidad;
       $client->enfermedad = $request->enfermedad;
       $client->tipo_enfermedad = $request->tipo_enfermedad;
-      $client->supervisor_id = $request->supervisor_id;
+      //$client->supervisor_id = $request->supervisor_id;
       
       //dd($request);
       //dd($client);
@@ -301,6 +302,15 @@ class ClientController extends Controller
       $client=Client::find($id);
 
       return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+    }
+
+    public function asignarSupervisor(Request $request){
+      $consulta= new Consulta();
+      $consulta->client_id = $request->cliente_id;
+      $consulta->supervisor_id = $request->supervisor_id;
+      $consulta->save();
+
+      dd($request->all());
     }
 
 

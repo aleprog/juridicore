@@ -28,15 +28,15 @@
 @section('content')
     <hr/>
         <div class="col-md-12 col-md-offset-0">
-            {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id]]) !!}
+            
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @lang('global.app_update')
-                </div>
-
-                {{ method_field('PUT') }}
+                </div>              
 
                 <div class="panel-body" style="margin:25px">
+                {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id]]) !!}
+                    {{ method_field('PUT') }}
                     <div class="row">
                         <div class="col-xs-4 form-group">
                             {!! Form::label('nombres', 'Nonbres', ['class' => 'control-label']) !!}
@@ -181,11 +181,7 @@
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        <div class="col-xs-4 form-group">
-                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
-                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
-                        </div>
-
+                        
 
                     </div>
                    
@@ -194,10 +190,36 @@
                     <div class="pull-right">
                     {!! Form::button(trans('global.app_update'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
                     </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::open(['method' => 'POST', 'route' => ['clients.asignarSupervisor']]) !!}
+                    <div class="row">
+
+                        <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+                            <h4 style="padding-left: 10px;" >Asignar Nueva Consulta al Supervisor</h4>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 15px;">          
+
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
+                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>
+
+                        <input type="hidden" name="cliente_id" value="{{$client->id}}"/>
+                        <br>
+                        <div class="pull-right">
+                        {!! Form::button(trans('global.app_save'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
+
+                    </div>
+                    {!! Form::close() !!}
+
                 </div>
-            </div>
+            </div>       
         </div>
         
 
-        {!! Form::close() !!}
+        
         @stop

@@ -56,10 +56,10 @@
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;">{{$client->convencional}}</td>
 		<td style="width: 4%; border-right: 1px solid; padding: 5px; font-size: 10px;">SEXO</td>
 		<td style="width: 7%; border-right: 1px solid; padding: 5px; font-size: 10px;">FEMENINO</td>
-		<td style="width: 4%; border-right: 1px solid; padding: 5px; font-size: 20px; text-align: center;">{!!$client->sexo=='Femenino' ? '&check;' : ''!!}</td>
+		<td style="width: 4%; border-right: 1px solid; padding: 5px; font-size: 10px; text-align: center;">{!!$client->sexo=='Femenino' ? 'X' : ''!!}</td>
 		<td style="width: 7%; border-right: 1px solid; padding: 5px;font-size: 10px;">MASCULINO</td>
-		<td style="width: 4%; border-right: 1px solid; padding: 5px; font-size: 20px; text-align: center;">{!!$client->sexo=='Masculino' ? '&check;' : '' !!}</td>
-		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">OTROS {!!$client->sexo=='Otros' ? '&check;' : '' !!}</td>
+		<td style="width: 4%; border-right: 1px solid; padding: 5px; font-size: 10px; text-align: center;">{!!$client->sexo=='Masculino' ? 'X' : '' !!}</td>
+		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">OTROS {!!$client->sexo=='Otros' ? 'X' : '' !!}</td>
 		<td style="width: 12%; border-right: 1px solid; padding: 5px; font-size: 10px;">INDIQUE <p>{{ $client->sexo=='Otros' ? $client->tipo_sexo : '' }}</p></td>
 	</tr>
 </table>
@@ -67,11 +67,11 @@
 	<tr>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">INTRUCCIÓN</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">BÁSICA</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->instruccion=='Basica' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->instruccion=='Basica' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">SECUNDARIA</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->instruccion=='Secundaria' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->instruccion=='Secundaria' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">SUPERIOR</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->instruccion=='Superior' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->instruccion=='Superior' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">DOMICILIO</td>
 		<td style="width: 30%; border-right: 1px solid; padding: 5px;">{{$client->domicilio}}</td>
 	</tr>
@@ -81,13 +81,13 @@
 	<tr>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">ESTADO CIVIL</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">SOLTERA</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->estado_civil=='Soltera' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->estado_civil=='Soltera' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px; font-size: 10px;">CASADA</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->estado_civil=='Casada' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->estado_civil=='Casada' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">VIUDA</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->estado_civil=='Viuda' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->estado_civil=='Viuda' ? 'X' : ''!!}</td>
 		<td style="width: 5%; border-right: 1px solid; padding: 5px;font-size: 10px;">DIVORSIDAD</td>
-		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 20px;text-align: center;">{!!$client->estado_civil=='Divorsidad' ? '&check;' : ''!!}</td>
+		<td style="width: 3%; border-right: 1px solid; padding: 5px;font-size: 10px;text-align: center;">{!!$client->estado_civil=='Divorsidad' ? 'X' : ''!!}</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;font-size: 10px;">SECTOR DONDE VIVE</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;">{{$client->sector}}</td>
 	</tr>
@@ -117,11 +117,92 @@
 	</tr>
 </table>
 
-<br><br><br>
+<br>
 
 <p style="font-size: 12px;">RAZÓN POR LA QUE ACUDE AL CONSULTORIO</p> 
 
-<span style="font-size: 12px; padding-right: 200px;" >ASESORÍA <span style="border-right: 1px solid #000;" ></span></span> <span style="font-size: 12px;">PATROCINIO</span>
+<div style="width: 300px; font-size: 12px; display: inline-block;">
+	ASESORÍA <div style="display: inline-block;width: 10px; border: 1px solid #000; padding: 8px;">{!!$client->razon=='Asesoría' ? 'X' : '&nbsp;'!!}</div>
+</div>
+
+<div style="width: 300px; font-size: 12px; display: inline-block;">
+	PATROCINIO <div style="display: inline-block;width: 10px; border: 1px solid #000; padding: 8px;">{!!$client->razon=='Patrocinio' ? 'X' : '&nbsp;' !!}</div>
+</div>
+
+<br><br>
+
+<table style="width: 100%; border-collapse: collapse;font-size: 12px;">
+	
+	<tr>
+		<td style="border: 1px solid #000;height: 70px;vertical-align: text-top;" >DETALLE: {{$client->detalle}}</td>
+	</tr>
+</table>
+
+<br>
+
+<table style="width: 100%; border-collapse: collapse;font-size: 12px;">
+
+	<tr>
+		<td style="border: 1px solid #000;">CAUSA:</td>
+	</tr>
+
+	<tr>
+		<td style="border: 1px solid #000;">TIPO DE PROCESO:</td>
+	</tr>
+
+	<tr>
+		<td style="border: 1px solid #000;">UNIDAD JUDICIAL:</td>
+	</tr>
+
+	<tr>
+		<td style="border: 1px solid #000;">FECHA DE INICIO DE CAUSA:</td>
+	</tr>
+
+</table>
+
+<!--
+<div style="width: 100%; height: 70px; font-size: 12px; border: 1px solid #000; padding: 3px;">
+	
+</div>
+
+<br>
+
+<div style="width: 100%;  border: 1px solid #000; padding: 3px;">
+	CAUSA: 
+</div>
+<div style="width: 100%; font-size: 12px; border: 1px solid #000; padding: 3px;">
+	TIPO DE PROCESO: 
+</div>
+<div style="width: 100%; font-size: 12px; border: 1px solid #000; padding: 3px;">
+	UNIDAD JUDICIAL: 
+</div>
+<div style="width: 100%; font-size: 12px; border: 1px solid #000; padding: 3px;">
+	FECHA DE INICIO DE CAUSA: 
+</div>-->
+
+<!--<div style="width: 24%; font-size: 12px; border: 1px solid #000; padding: 3px; display: inline-block; margin-left: 0px;">
+	 
+</div>
+<div style="width: 24%; font-size: 12px; border: 1px solid #000; padding: 3px; display: inline-block;margin-left: -5px;">
+	&nbsp;
+</div>
+<div style="width: 24%; font-size: 12px; border: 1px solid #000; padding: 3px; display: inline-block;margin-left: -5px;">
+	DEMANDADO: 
+</div>
+<div style="width: 25%; font-size: 12px; border: 1px solid #000; padding: 3px; display: inline-block;margin-left: -5px;">
+	&nbsp;
+</div>-->
+
+<table style="width: 100%; border-collapse: collapse;">
+	<tr>
+		<td style="width: 25%;border: 1px solid #000; font-size: 12px;" >DEMANDANTE:</td>
+		<td style="width: 25%;border: 1px solid #000; font-size: 12px;" >&nbsp;</td>
+		<td style="width: 25%;border: 1px solid #000; font-size: 12px;" >DEMANDADO:</td>
+		<td style="width: 28%;border: 1px solid #000; font-size: 12px;">&nbsp;</td>
+	</tr>
+</table>
+
+
 
 <!--<div style="border: 1px solid #000; font-size: 12px;">
 	<div style="width: 15%; display: inline-block;">
@@ -153,6 +234,18 @@
 	</div>
 
 </div>-->
+<br><br><br><br>
+<div style="text-align: center; width: 49%; display: inline-block;">
+
+______________________________________
+<p>USUARIO</p>
+</div>
+
+<div style="text-align: center; width: 49%; display: inline-block;">
+
+______________________________________
+<p>ASESOR-TUTOR</p>
+</div>
 
 </body>
 </html>
