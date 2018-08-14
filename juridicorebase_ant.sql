@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-14 16:55:40
+Date: 2018-08-14 17:21:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -617,7 +617,7 @@ INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT
 INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', 'sDmwzD1IcIeF0AeJScwckKpIfZ5Idq1ntaw3w7BwHosP506SmIqrdreE1gMo', '2018-07-23 02:06:11', '2018-08-14 14:31:24', '0000000000', '2018-08-14 14:31:24', 'A', 'zxVe2qDB3akFKsiTIoTuHsvW4VzXe89VnSlyE5o7', 'SEC', null);
 INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', 'w0lEqkQXbSRA4gVJJvtHbvWkzfJI11BIyKXLfLKPV31rShBiMYi0tz3Uqrri', '2018-07-29 09:55:43', '2018-08-14 15:11:18', '0972725625', '2018-08-14 15:11:18', 'A', 'JbIkHbMv9T3AiZpoKhaIDDPCA51rPC0kFQEw1BBI', 'SUP', '1');
 INSERT INTO `users` VALUES ('30', 'Tutor1', 'supervisor1@gmail.com', '$2y$10$RajG.vdY5oYJI8fWpNS8w.HEjdQ3.g4dYYqQ3LOQJ/nqFaZuNKC5.', 'tRV3KBj7DiAySPq0A8tSd1FsbgOeMuuuXZGLnUpACFzO4FDiE0Gv6d4WXoDg', '2018-08-05 08:57:46', '2018-08-12 06:05:59', '0926339732', '2018-08-12 06:05:59', 'A', 'yHekX25SWuGGAGWpCPnsN3E6v4qDLPaH7j1gSHKR', 'TUT', null);
-INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'EHAVwrhzhV4mZ0EDdjvzF0r5J136XVPFdR35RI98lI0Nd2VN8wLV7v9webBC', '2018-08-11 14:29:42', '2018-08-14 16:19:25', '0922606223', '2018-08-14 16:19:25', 'A', '1dr5jNMJjulxc1BRQXat52t2pRM7KbXeBZ2Lqp4t', null, null);
+INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'iTggvttFxy1Ij8nXKshApIV99BXOcW2nZ2ODsevEkYdOhVhbzpGKgyoPtMRR', '2018-08-11 14:29:42', '2018-08-14 17:10:42', '0922606223', '2018-08-14 17:10:42', 'A', 'AMyzAEhNQx6rQBn2HqY3AQCq5gK2IPi47jCUsanc', null, null);
 INSERT INTO `users` VALUES ('33', 'an ton', 'ad@ug.edu.ec', '$2y$10$5DLvpROz5/jZ1gZQ4n/sweYvmDaMgIN7HSqJLj8QCvOmpVi.Lps3W', 'ZWiMrvotiTzF97xonBztcuK7Zs0YPefDz7HvwhYuZPa5uuH3vmy2HGVzGThn', '2018-08-12 02:01:01', '2018-08-12 02:03:29', '0926339730', '2018-08-12 02:03:29', 'A', 'YzWAN6ERZctxkOxPdtZV3Ug0smiXq1rXHGHbpfCR', null, null);
 INSERT INTO `users` VALUES ('34', 'monitor', 'monitor@ug.edu.ec', '$2y$10$E3csZ049aUyiICXxkAvZo.yMVOJ9Whxa2N6gdHPEfKIocP7PwKz/K', '35D2FCtAQXZqE8FXgGrGYAethsIPr2x01wWaBkSkXD8ak8I3wEmeLTHbr3iT', '2018-08-13 10:36:16', '2018-08-14 14:40:09', '1111111111', '2018-08-14 14:40:09', 'A', '24cNdL09g3AYpAWaI9z9CtFvrwREGG21HuV0IAr0', null, null);
 INSERT INTO `users` VALUES ('35', 'Bryan Alcivar', 'bryan.alcivarv@ug.edu.ec', '$2y$10$RDd1Mj6NRPlM00LNHVRUz.KYd4kBlBOuW1zc6qxsu3FxyVaPZr/6K', 'ZlkJlMOOzWs6HuRngOJOW1saVSfZNsokmr7C5DFLiJ93Xm2UiGwhmQILmc7l', '2018-08-14 12:57:25', '2018-08-14 13:12:55', '0926570136', '2018-08-14 13:12:55', 'A', 'UFimnSes1jcAMwoIRxZfVxPdAyJ7GYncXlGn9ogv', null, null);
