@@ -12,6 +12,7 @@ Route::get('/', function () {
  Route::get('/plantilla', function () { 
     return view('frontend/datos');
  })->name('frontend.datos');
+   
 
  Route::get('/plantillaImprime', function () { 
     return view('frontend/datosimprimir');

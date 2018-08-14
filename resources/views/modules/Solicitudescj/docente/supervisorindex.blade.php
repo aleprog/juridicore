@@ -357,7 +357,7 @@ style='border-collapse:
  <tr height=20 style='height:15.0pt'>
   <td colspan=3 height=20 class=xl672406 width=371 style='height:15.0pt;
   border-left:none;width:279pt'>Demuestra ser cuidadoso en su presentación personal</td>
-  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e7" value="5"></td>
+  <td class=xl632406 style='border-top:none;border-left:none'><input type="radio"required name="e8" value="5"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="4"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="3"></td>
   <td class=xl632406 style='border-top:none;border-left:none'><input type="radio" name="e8" value="2"></td>

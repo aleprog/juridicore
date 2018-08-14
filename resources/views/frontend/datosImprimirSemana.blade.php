@@ -99,7 +99,7 @@
 																			</div>
 																			</div>
 														<br/>
-																	<table width="100%" border="1" style="text-align:center;" cellpadding="0" cellspacing="0" >
+																	<table width="100%" border="1" style="text-align:left;" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td><strong>Fecha</strong></td>
 																		<td><strong>Horas diarias</strong></td>

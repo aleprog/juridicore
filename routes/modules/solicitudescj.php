@@ -46,7 +46,7 @@ Route::post('tutor/evaluacionSave', 'Solicitudescj\DocenteController@evaluacionS
 Route::post('student/evaluacionSave', 'Solicitudescj\StudentController@evaluacionSave')
 ->name('student.evaluacionSave');
 Route::get('imprimirEvaluacion/{id}', 'Solicitudescj\DocenteController@imprimirEvaluacion')->name('tutor.imprimirEvaluacion');
-
+Route::get('plantillaficha', 'Solicitudescj\StudentController@imprimirFicha')->name('student.imprimirFicha');
 Route::get('/supervisor/evaluacionDesempeño', 'Solicitudescj\DocenteController@evaluacionDesempeño')->name('supervisor.evaluacionDesempeño');
 Route::get('datatableEvaluacionesSup', 'Solicitudescj\DocenteController@datatableEvaluacionesSup');
 Route::post('supervisor/evaluacionSupSave', 'Solicitudescj\DocenteController@evaluacionSupSave')

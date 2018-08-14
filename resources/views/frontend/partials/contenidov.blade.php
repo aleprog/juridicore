@@ -255,9 +255,10 @@
 												
 													<div class="col-md-6 col-md-offset-4">
 													<button type="submit" class="btn btn-primary" value="3" name="btnvg">Grabar</button>
+												</form>
+												<a href="{{route('student.imprimirFicha')}}" target="_blank" class="btn btn-success">Imprimir</a>
 													</div>
 												</div>
-												</form>
 											</div>
 							
 						</div>

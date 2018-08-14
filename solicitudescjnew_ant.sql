@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-13 17:37:57
+Date: 2018-08-14 17:21:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `asistencias` (
   `hora_inicio` time DEFAULT NULL,
   `hora_fin` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of asistencias
@@ -44,6 +44,12 @@ INSERT INTO `asistencias` VALUES ('15', '32', '25', '2018-08-03', 'A', 'Semana 1
 INSERT INTO `asistencias` VALUES ('16', '32', '25', '2018-08-10', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '0', '2018-08-11 18:45:39', '2018-08-11 18:45:39', '09:00:00', '09:00:00');
 INSERT INTO `asistencias` VALUES ('17', '32', '25', '2018-08-11', 'A', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '0', '2018-08-11 18:46:31', '2018-08-11 18:46:31', '11:00:00', '11:00:00');
 INSERT INTO `asistencias` VALUES ('18', '32', '25', '2018-08-12', 'A', 'Semana 2', 'asdsd', '2', '2018-08-12 12:50:13', '2018-08-12 13:22:00', '10:00:00', '12:00:00');
+INSERT INTO `asistencias` VALUES ('19', '32', '25', '2018-08-13', 'A', 'Semana 2', null, '0', '2018-08-14 12:07:11', '2018-08-14 12:07:11', '13:00:00', '13:00:00');
+INSERT INTO `asistencias` VALUES ('20', '32', '25', '2018-08-14', 'A', 'Semana 2', null, '0', '2018-08-14 12:07:26', '2018-08-14 12:07:26', '13:00:00', '13:00:00');
+INSERT INTO `asistencias` VALUES ('21', '32', '25', '2018-08-15', 'A', 'Semana 2', null, '0', '2018-08-14 12:07:38', '2018-08-14 12:07:38', '15:00:00', '15:00:00');
+INSERT INTO `asistencias` VALUES ('22', '32', '25', '2018-08-17', 'A', 'Semana 2', null, '0', '2018-08-14 12:07:51', '2018-08-14 12:07:51', '12:00:00', '12:00:00');
+INSERT INTO `asistencias` VALUES ('23', '32', '25', '2018-08-31', 'A', 'Semana 3', null, '0', '2018-08-14 15:11:41', '2018-08-14 15:11:41', '09:00:00', '09:00:00');
+INSERT INTO `asistencias` VALUES ('24', '32', '25', '2018-09-07', 'I', 'Semana 3', null, '4', '2018-08-14 15:15:33', '2018-08-14 15:15:33', '11:00:00', '15:00:00');
 
 -- ----------------------------
 -- Table structure for clientes
@@ -75,7 +81,16 @@ CREATE TABLE `clientes` (
   `tipo_enfermedad` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `estado` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `monitor_id` int(11) DEFAULT NULL,
-  `supervidor_id` int(11) DEFAULT NULL,
+  `supervisor_id` int(11) DEFAULT NULL,
+  `practicante_id` int(11) DEFAULT NULL,
+  `razon` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `detalle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `causa` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_proceso` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `unidad_judicial` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `demandante` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `demandado` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -117,6 +132,7 @@ CREATE TABLE `evaluacionestudiante` (
 -- ----------------------------
 -- Records of evaluacionestudiante
 -- ----------------------------
+INSERT INTO `evaluacionestudiante` VALUES ('1', '32', '2018-08-14 13:24:00', '2018-08-14 13:24:00', '5', '5', '4', '4', '4', '3', '3', '3', '2', '2', '2', null, 'ab', 'bb', 'cc', 'dd', 'asd');
 
 -- ----------------------------
 -- Table structure for evaluacionsupervisor
@@ -156,12 +172,12 @@ CREATE TABLE `evaluacionsupervisor` (
   `sum4` varchar(3) DEFAULT NULL,
   `sum5` varchar(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of evaluacionsupervisor
 -- ----------------------------
-INSERT INTO `evaluacionsupervisor` VALUES ('3', '32', '2018-08-13 15:54:08', '2018-08-13 15:54:08', '5', '5', '5', '5', '4', '4', '4', '3', '2', '2', '1', null, null, null, null, '40', '1', '2', '1', '4', null, '25', '1', '3', '4', '3', '12', '20');
+INSERT INTO `evaluacionsupervisor` VALUES ('7', '32', '2018-08-14 14:00:08', '2018-08-14 14:00:08', '5', '4', '3', '3', '2', '2', '2', '2', '1', '1', '1', null, null, null, null, '26', '3', '4', '3', '8', '10', '25', '2', '1', '1', '6', '4', '5');
 
 -- ----------------------------
 -- Table structure for evaluaciontutor
@@ -184,16 +200,16 @@ CREATE TABLE `evaluaciontutor` (
   `ec3` varchar(2) DEFAULT NULL,
   `ec4` varchar(2) DEFAULT NULL,
   `ec5` varchar(2) DEFAULT NULL,
-  `vfa` int(2) DEFAULT NULL,
-  `vfr` int(2) DEFAULT NULL,
+  `vfa` varchar(2) DEFAULT NULL,
+  `vfr` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of evaluaciontutor
 -- ----------------------------
-INSERT INTO `evaluaciontutor` VALUES ('8', '25', '32', '2018-08-12 16:51:11', '2018-08-12 16:51:11', '1', '1', '0', '1', '1', '1', '0', '1', '1', '1', '1', '8', '0');
-INSERT INTO `evaluaciontutor` VALUES ('9', '25', '32', '2018-08-12 17:25:12', '2018-08-12 17:25:12', '2', '0', '0', '1', '1', '1', '1', '1', '1', '1', '1', '8', '0');
+INSERT INTO `evaluaciontutor` VALUES ('17', '25', '32', '2018-08-14 14:14:22', '2018-08-14 14:14:22', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'X', '');
+INSERT INTO `evaluaciontutor` VALUES ('18', '25', '32', '2018-08-14 14:32:07', '2018-08-14 14:32:07', '2', '0', '1', '1', '1', '1', '0', '1', '1', '1', '1', 'X', '');
 
 -- ----------------------------
 -- Table structure for horarios
@@ -289,12 +305,12 @@ CREATE TABLE `postulants` (
   `constitucional` int(11) DEFAULT '0',
   `motivo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of postulants
 -- ----------------------------
-INSERT INTO `postulants` VALUES ('39', 'asd', 'ddd', '0922606223', '7', 'Derecho', 'asd', '0999999999', null, '22', '2018-08-03', null, '1', '1', 'aaa', '1', '1', '1', '1', '1', '2018-08-11 14:27:15', '2018-08-11 14:27:15', 'A', null, 'SEMESTRAL', 'MATUTINO', 'guayas', 'guayaquil', 'NO', null, null, null, 'NO', null, 'SOLTERO', null, 'ab@ug.edu.ec', '0', '1', '0', '0', '0', '0', '0', '0', '0', null);
+INSERT INTO `postulants` VALUES ('39', 'asd', 'ddd', '0922606223', '7', 'Derecho', 'asd', '0999999999', null, '22', '2018-08-03', null, '1', '1', 'aaa', '1', '1', '1', '1', '1', '2018-08-14 16:50:03', '2018-08-14 16:50:03', 'A', '3', 'SEMESTRAL', 'MATUTINO', 'guayas', 'guayaquil', 'NO', null, null, null, 'NO', null, 'SOLTERO', null, 'ab@ug.edu.ec', '0', '1', '0', '0', '0', '0', '0', '0', '0', null);
 INSERT INTO `postulants` VALUES ('40', 'an', 'ton', '0926339730', '7', 'Sociologia', 'asd', '0999999999', null, '22', '2018-08-17', null, '1', '1', 'd', '1', '1', '1', '1', '1', '2018-08-12 02:00:18', '2018-08-12 02:00:18', 'A', null, 'SEMESTRAL', 'MATUTINO', 'a', 'f', 'NO', null, null, null, 'NO', null, 'SOLTERO', null, 'ab@ug.edu.ec', '0', '0', '0', '0', '0', '1', '0', '0', '1', null);
 INSERT INTO `postulants` VALUES ('54', 'a', 'v', '0999999999', '7', 'Derecho', 's', '0999999999', null, null, null, null, '0', '0', null, '0', '0', '0', '0', '0', '2018-08-12 05:46:31', '2018-08-12 05:46:31', 'A', null, null, null, null, null, null, null, null, null, null, null, null, null, 'aaab@ug.edu.ec', '0', '0', '0', '0', '0', '0', '0', '0', '0', null);
 
@@ -317,7 +333,10 @@ INSERT INTO `products_photos` VALUES ('32', 'photos/4lupY43JvS4ZJ6REtS8P85sfY6D2
 INSERT INTO `products_photos` VALUES ('32', 'photos/mo3QuCHPQuB0EjkNzjrvUNvR4tJlFUnC0OvdHQeI.jpeg', '2018-08-12 00:23:07', '2018-08-12 00:23:07');
 INSERT INTO `products_photos` VALUES ('32', 'photos/hVPKVcphAf8es3he7ma3eiiA2MFaUwioxHDnPTsX.jpeg', '2018-08-12 11:09:08', '2018-08-12 11:09:08');
 INSERT INTO `products_photos` VALUES ('32', 'photos/BaGg9rBwancNVcqA3lsjPwnLUMO8n0QT5w7lv8gA.jpeg', '2018-08-12 13:17:30', '2018-08-12 13:17:30');
-INSERT INTO `products_photos` VALUES ('32', 'photos/OdPtTaavHhg4IVf5klThCN5SGaqZKS7sEEo9a2HD.jpeg', '2018-08-12 13:18:58', '2018-08-12 13:18:58');
+INSERT INTO `products_photos` VALUES ('32', 'photos/yR7qsYcdPRZF4aR9pmfY5bsBFbdVkNgAQu4pBBg5.jpeg', '2018-08-14 12:25:42', '2018-08-14 12:25:42');
+INSERT INTO `products_photos` VALUES ('35', 'photos/S2WgFdgaPv6zoRXkZjvTL1VTr2gS6MO7kx64MLBO.jpeg', '2018-08-14 13:01:31', '2018-08-14 13:01:31');
+INSERT INTO `products_photos` VALUES ('35', 'photos/A8fVFV8G4QXQzJu1s7ZMiPFZcqHGcdYotHZ4L9U9.jpeg', '2018-08-14 13:02:12', '2018-08-14 13:02:12');
+INSERT INTO `products_photos` VALUES ('35', 'photos/BNcKpmNSL1iDKdJuziCC3hKVTzy7pIZ7vwLnk2u8.jpeg', '2018-08-14 13:09:15', '2018-08-14 13:09:15');
 
 -- ----------------------------
 -- Table structure for requests
@@ -331,7 +350,7 @@ CREATE TABLE `requests` (
   `estado` varchar(1) DEFAULT 'A',
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of requests
@@ -366,6 +385,13 @@ INSERT INTO `requests` VALUES ('47', '5', '51', '2018-08-12 05:43:47', 'A', '201
 INSERT INTO `requests` VALUES ('48', '5', '52', '2018-08-12 05:45:18', 'A', '2018-08-12 05:45:18');
 INSERT INTO `requests` VALUES ('49', '5', '53', '2018-08-12 05:45:55', 'A', '2018-08-12 05:45:55');
 INSERT INTO `requests` VALUES ('50', '5', '54', '2018-08-12 05:46:31', 'A', '2018-08-12 05:46:31');
+INSERT INTO `requests` VALUES ('51', '5', '55', '2018-08-14 12:31:04', 'A', '2018-08-14 12:31:04');
+INSERT INTO `requests` VALUES ('52', '5', '56', '2018-08-14 12:37:20', 'A', '2018-08-14 12:37:20');
+INSERT INTO `requests` VALUES ('53', '5', '57', '2018-08-14 12:37:53', 'A', '2018-08-14 12:37:53');
+INSERT INTO `requests` VALUES ('54', '5', '58', '2018-08-14 12:38:44', 'A', '2018-08-14 12:38:44');
+INSERT INTO `requests` VALUES ('55', '5', '59', '2018-08-14 12:39:15', 'A', '2018-08-14 12:39:15');
+INSERT INTO `requests` VALUES ('56', '5', '60', '2018-08-14 12:40:28', 'A', '2018-08-14 12:40:28');
+INSERT INTO `requests` VALUES ('57', '2', '61', '2018-08-14 12:57:25', 'A', '2018-08-14 12:57:25');
 
 -- ----------------------------
 -- Table structure for semanaobservaciones
@@ -385,7 +411,7 @@ CREATE TABLE `semanaobservaciones` (
 -- ----------------------------
 -- Records of semanaobservaciones
 -- ----------------------------
-INSERT INTO `semanaobservaciones` VALUES ('2', 'Semana 1', 'asd', '32', '2018-08-12 03:01:18', '2018-08-12 03:01:18', '25');
+INSERT INTO `semanaobservaciones` VALUES ('2', 'Semana 1', 'hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola', '32', '2018-08-14 12:20:13', '2018-08-14 12:20:13', '25');
 INSERT INTO `semanaobservaciones` VALUES ('3', null, null, null, '2018-08-12 10:41:35', '2018-08-12 10:41:35', '25');
 INSERT INTO `semanaobservaciones` VALUES ('4', null, null, null, '2018-08-12 10:44:29', '2018-08-12 10:44:29', '25');
 INSERT INTO `semanaobservaciones` VALUES ('5', null, null, null, '2018-08-12 10:44:47', '2018-08-12 10:44:47', '25');

@@ -18,11 +18,14 @@ class StorageController extends Controller
    }
    public function fotosClinica(request $request)
    {
-	$obj=ProductsPhoto::where([
+		$obj=ProductsPhoto::where([
 		'user_id' => Auth::user()->id
 		])->get()->count();
 		$m="El limite de fotos es 6";
-		if($obj<6)
+
+		$ccob=$obj+count($request->photos);
+		
+		if($obj<6 && $ccob<7)
 		{
 			foreach ($request->photos as $photo) {
 				$filename = $photo->store('photos');
@@ -102,7 +105,10 @@ class StorageController extends Controller
 			$defensoria=1;	
 		}
 	$id=$request->idusuario;
-	
+	if($request->nivel=="EGRESADO")
+	{
+		$request->paralelo="-";
+	}
 	$objPostulant=Postulant::where('id',$id)->where('estado','A')->update([
 
 	  "carrera" => $request->carrera,

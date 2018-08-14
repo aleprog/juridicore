@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('contentheader_title')
-    NextCore
+    Juridicore
 @endsection
 
 @section('contentheader_description')
@@ -44,7 +44,7 @@
                     @endif
                 </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '']) !!}
@@ -55,7 +55,7 @@
                         </p>
                     @endif
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col-xs-12 form-group">
                     {!! Form::label('roles', 'Roles*', ['class' => 'control-label']) !!}

@@ -115,7 +115,7 @@
 																			</div>
 																			<div class="divTableRow">
 																			<div class="divTableCell">&nbsp;Area de Desempeño</div>
-																			<div class="divTableCell">&nbsp;</div>
+																			<div class="divTableCell">&nbsp;CONSULTORÍA JURÍDICA</div>
 																			</div>
 																			<div class="divTableRow">
 																			<div class="divTableCell">&nbsp;Supervisor Institucional</div>

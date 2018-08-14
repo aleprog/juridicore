@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('contentheader_title')
-    NextCore
+    Juridiore
 @endsection
 
 @section('contentheader_description')
