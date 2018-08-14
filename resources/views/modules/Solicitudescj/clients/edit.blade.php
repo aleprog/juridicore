@@ -12,7 +12,7 @@
     <link href="{{ url('adminlte/plugins/datepicker/') }}/datepicker3.css" rel="stylesheet">
 @endsection
 @section('javascript')
-    <script src="{{ url('js/modules/solicitudescj/periodis.js') }}"></script>
+    <script src="{{ url('js/modules/solicitudescj/clients.js') }}"></script>
     <script src="{{ url('adminlte/plugins/datepicker/') }}/bootstrap-datepicker.js"></script>
     <script>
         $('.pickadate').datepicker({
@@ -179,6 +179,11 @@
                         <div class="col-xs-4 form-group">
                             {!! Form::label('tipo_enfermedad', 'Tipo de Enfermedad', ['class' => 'control-label']) !!}
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
+                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
 

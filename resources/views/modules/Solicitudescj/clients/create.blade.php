@@ -144,11 +144,8 @@
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ingresos', 'Ingresos', ['class' => 'control-label']) !!}
                             {!! Form::text('ingresos', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                           
-                        </div>
-
-                        
-
-                        
+                        </div> 
+                      
 
                         <div class="col-xs-12 clearfix" style="height: 10px;"></div>
 
@@ -178,6 +175,14 @@
                             {!! Form::label('tipo_enfermedad', 'Tipo de Enfermedad', ['class' => 'control-label']) !!}
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
+                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>
+
+                        
+
 
 
                     </div>

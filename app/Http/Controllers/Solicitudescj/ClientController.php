@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Core\Entities\Solicitudescj\Client;
 use Yajra\Datatables\Datatables;
+use App\User;
+use App\Core\Entities\Solicitudescj\StudentsSteachers;
 
 class ClientController extends Controller
 {
@@ -15,31 +17,57 @@ class ClientController extends Controller
 		dd($users);*/
 		//dd($users[0]->roles_label);
 		//dd(User::all());
+
+    
+
+    
+
 		return view('modules.Solicitudescj.clients.index');
 	}
 
 
 	public function getDatatable()
-    {
+  {
 
+      
+      $auth=auth()->user()->roles->where('abv','SUP');
 
-	    $clients=Client::get();
+      if(count($auth)>0){
 
-    	//dd($clients);
+        $clients=Client::where('supervisor_id',auth()->user()->id)->get();
 
-        return DataTables::of($clients)->addColumn('actions', function ($select) {
-			return '<p class="text-center"><a title="Gestionar Clientes" href="'.route('clients.show',$select->id).'"><span class="fa fa-cog"></span></a><p>';
-        })->addColumn('estado_label', function ($select) {
-            return $select->estado_label;
-        })->rawColumns(['actions','estado_label'])
-        ->make(true);
+        //dd($clients);
 
+          return DataTables::of($clients)->addColumn('actions', function ($select) {
+        return '<p class="text-center"><a title="Gestionar Clientes" href="'.route('clients.show',$select->id).'"><span class="fa fa-cog"></span></a><p>';
+          })->addColumn('estado_label', function ($select) {
+              return $select->estado_label;
+          })->rawColumns(['actions','estado_label'])
+          ->make(true);
 
-    }
+      }else{
 
-    public function create(){
+  	    $clients=Client::get();
+
+      	//dd($clients);
+
+          return DataTables::of($clients)->addColumn('actions', function ($select) {
+  			return '<p class="text-center"><a title="Gestionar Clientes" href="'.route('clients.edit',$select->id).'"><span class="fa fa-cog"></span></a><p>';
+          })->addColumn('estado_label', function ($select) {
+              return $select->estado_label;
+          })->rawColumns(['actions','estado_label'])
+          ->make(true);
+      }
+
+  }
+
+  public function create(){
+
+    $supervisors=User::whereHas('roles', function ($query) {
+      $query->whereIn('abv',['SUP']);
+    })->pluck('name','id');
 		
-		return view('modules.Solicitudescj.clients.create');
+		return view('modules.Solicitudescj.clients.create',compact('supervisors'));
 	}
 
 	public function store(Request $request)
@@ -69,6 +97,7 @@ class ClientController extends Controller
             'tipo_dicapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
+            'supervisor_id' => 'required',
         ];/*
         $messages = [
             'descripcion.required' => 'Escriba el descripcion ',
@@ -116,6 +145,7 @@ class ClientController extends Controller
 	  $client->enfermedad = $request->enfermedad;
 	  $client->tipo_enfermedad = $request->tipo_enfermedad;
 	  $client->monitor_id = auth()->user()->id;
+    $client->supervisor_id = $request->supervisor_id;
 	  $client->estado = 'A';
 
 	  //dd($client);
@@ -124,14 +154,36 @@ class ClientController extends Controller
       return redirect()->route('clients.index');
     }
 
-    public function show($id){
+    public function edit($id){
      	$client=Client::find($id);
 
-		if(!$client){
+		  if(!$client){
             return redirect()->route('client.index')->with('danger','No se ha encontrado el period');
-        }
+      }
 
-        return view('modules.Solicitudescj.clients.edit', compact('client'));
+      $supervisors=User::whereHas('roles', function ($query) {
+        $query->whereIn('abv',['SUP']);
+      })->pluck('name','id');
+
+      return view('modules.Solicitudescj.clients.edit', compact('client','supervisors'));
+    }
+
+     public function show($id){
+      $client=Client::find($id);
+
+      $students = StudentsSteachers::where('user_doc_id',auth()->user()->id)->where('tipo','SUP')->where('estado','A')->pluck('user_est_id');
+
+     
+
+      $practicantes=User::whereIn('id',$students)->where('estado','A')->get();
+
+      //dd($students,$practicantes);
+
+      if(!$client){
+            return redirect()->route('client.index')->with('danger','No se ha encontrado el period');
+      }
+
+      return view('modules.Solicitudescj.clients.show', compact('client','practicantes'));
     }
 
     public function update(Request $request,$id)
@@ -161,6 +213,7 @@ class ClientController extends Controller
             'tipo_dicapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
+            'supervisor_id' => 'required',
         ];
         
         $this->validate($request, $rules);
@@ -190,11 +243,52 @@ class ClientController extends Controller
       $client->tipo_discapacidad = $request->tipo_discapacidad;
       $client->enfermedad = $request->enfermedad;
       $client->tipo_enfermedad = $request->tipo_enfermedad;
-
+      $client->supervisor_id = $request->supervisor_id;
+      
+      //dd($request);
       //dd($client);
       $client->save();
 
       return redirect()->route('clients.index');
     }
+
+
+    public function updateCaso(Request $request,$id)
+    {
+
+      $rules = [
+        'razon' => 'required',
+        'causa' => 'required',
+        'detalle' => 'required',
+        'tipo_proceso' => 'required',
+        'unidad_judicial' => 'required',
+        'fecha_inicio' => 'required',
+        'demandante' => 'required',
+        'demandado' => 'required',
+        'practicante_id' => 'required',
+      ];
+        
+      $this->validate($request, $rules);
+
+      //dd($request->all());
+      $client = Client::find($id);
+      $client->razon = $request->razon;
+      $client->causa = $request->causa;
+      $client->detalle = $request->detalle;
+      $client->tipo_proceso = $request->tipo_proceso;
+      $client->unidad_judicial = $request->unidad_judicial;
+      $client->fecha_inicio = $request->fecha_inicio;
+      $client->demandante = $request->demandante;
+      $client->demandado = $request->demandado;
+      $client->practicante_id = $request->practicante_id;
+
+      //dd($client);
+ 
+      $client->save();
+
+      return redirect()->route('clients.index');
+
+    }
+
 
 }
