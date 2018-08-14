@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-08-13 17:38:13
+Date: 2018-08-14 16:55:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,6 +125,7 @@ INSERT INTO `model_has_roles` VALUES ('5', '30', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('4', '32', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('4', '33', 'App\\User');
 INSERT INTO `model_has_roles` VALUES ('8', '34', 'App\\User');
+INSERT INTO `model_has_roles` VALUES ('4', '35', 'App\\User');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -269,12 +270,11 @@ INSERT INTO `role_has_permission` VALUES ('57', '5');
 INSERT INTO `role_has_permission` VALUES ('57', '6');
 INSERT INTO `role_has_permission` VALUES ('59', '4');
 INSERT INTO `role_has_permission` VALUES ('62', '8');
-INSERT INTO `role_has_permission` VALUES ('62', '4');
 INSERT INTO `role_has_permission` VALUES ('41', '8');
-INSERT INTO `role_has_permission` VALUES ('41', '4');
 INSERT INTO `role_has_permission` VALUES ('63', '5');
 INSERT INTO `role_has_permission` VALUES ('63', '6');
-INSERT INTO `role_has_permission` VALUES ('64', '6');
+INSERT INTO `role_has_permission` VALUES ('41', '6');
+INSERT INTO `role_has_permission` VALUES ('62', '6');
 
 -- ----------------------------
 -- Table structure for role_has_permissions
@@ -608,15 +608,16 @@ CREATE TABLE `users` (
   `abv` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lugarasignado_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', '0IOThCekiSAnn8mXR4kMpOFRmOXwPMmYj79vBKAlLayDTbyiwDvHJMmc4dBn', '2018-04-04 14:20:51', '2018-08-13 17:09:09', '0926339731', '2018-08-13 17:09:09', 'A', 'MYe7ZfqLIs0AybxhW9FIT0lSO1Jpx7U4CaCsKih3', '202', null);
-INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', 'gsVbB2DmW6w5aJm4sbsrmQQgkeSp65sNFadFlLTjsvLyyA9X8NHJbr0Bcuws', '2018-07-23 02:06:11', '2018-08-12 01:58:34', '0000000000', '2018-08-12 01:58:34', 'A', '0HGPadrJeYNZzRW2hJ7uEOAUbFEIwc58r9hsJPvY', 'SEC', null);
-INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', '6oIDAq2mIPzZvF7G5p3OIrChn4S5uZCDLn0EHhoFqPn9M7f60S0xYcMPuCy5', '2018-07-29 09:55:43', '2018-08-13 17:09:38', '0972725625', '2018-08-13 17:09:38', 'A', 'vyz6I9SqGUE0J1nvyY3mL5csyszXRiaDIRScv43p', 'SUP', '1');
+INSERT INTO `users` VALUES ('1', 'Admin', 'admin@admin.com', '$2y$10$42HlUwqhBfT.SAbH2dY3.e9VC9Ple2liXvlqppc.uuID8OsVKOXSq', 'guetxwoPMCjlX4uzHrLcHRW4QHdHQlCfyKkVztrE7ngxZQIj3dsOaANJnjUC', '2018-04-04 14:20:51', '2018-08-14 15:58:52', '0926339731', '2018-08-14 15:58:52', 'A', 'BSWAYulAYKV2sGVM8no79i7CUS42g75U4TcyYIhK', '202', null);
+INSERT INTO `users` VALUES ('21', 'usuario', 'ajr@gmail.com', '$2y$10$RAVT/P0IuHasWIBRnwxKA.yxuw9Il874aMHT1BJW.SuiCeQp0dKeO', 'sDmwzD1IcIeF0AeJScwckKpIfZ5Idq1ntaw3w7BwHosP506SmIqrdreE1gMo', '2018-07-23 02:06:11', '2018-08-14 14:31:24', '0000000000', '2018-08-14 14:31:24', 'A', 'zxVe2qDB3akFKsiTIoTuHsvW4VzXe89VnSlyE5o7', 'SEC', null);
+INSERT INTO `users` VALUES ('25', 'supervisor', 'a646@hotmail.com', '$2y$10$CTuAc5v1y0MnXQuYtpWyHO7g6aB57JL0vOKm3EeXIHRMZATyfu9KW', 'w0lEqkQXbSRA4gVJJvtHbvWkzfJI11BIyKXLfLKPV31rShBiMYi0tz3Uqrri', '2018-07-29 09:55:43', '2018-08-14 15:11:18', '0972725625', '2018-08-14 15:11:18', 'A', 'JbIkHbMv9T3AiZpoKhaIDDPCA51rPC0kFQEw1BBI', 'SUP', '1');
 INSERT INTO `users` VALUES ('30', 'Tutor1', 'supervisor1@gmail.com', '$2y$10$RajG.vdY5oYJI8fWpNS8w.HEjdQ3.g4dYYqQ3LOQJ/nqFaZuNKC5.', 'tRV3KBj7DiAySPq0A8tSd1FsbgOeMuuuXZGLnUpACFzO4FDiE0Gv6d4WXoDg', '2018-08-05 08:57:46', '2018-08-12 06:05:59', '0926339732', '2018-08-12 06:05:59', 'A', 'yHekX25SWuGGAGWpCPnsN3E6v4qDLPaH7j1gSHKR', 'TUT', null);
-INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'TV5umMfVLmPn3pzOcrptcGKtpOGwyIa5jkUsoA7nl0PRTYm7QOthHWEnQIRO', '2018-08-11 14:29:42', '2018-08-13 17:08:51', '0922606223', '2018-08-13 17:08:51', 'A', 'LjzBaZRXhGXwy7uVNTOa2dp5G6D6EBWPRDthJDOy', null, null);
+INSERT INTO `users` VALUES ('32', 'asd ddd', 'ab@ug.edu.ec', '$2y$10$M/8.qEiIRqMzzFLYPWpr3.IOE7DbeBx6t8BU7cx7ntXEX4uFigqp2', 'EHAVwrhzhV4mZ0EDdjvzF0r5J136XVPFdR35RI98lI0Nd2VN8wLV7v9webBC', '2018-08-11 14:29:42', '2018-08-14 16:19:25', '0922606223', '2018-08-14 16:19:25', 'A', '1dr5jNMJjulxc1BRQXat52t2pRM7KbXeBZ2Lqp4t', null, null);
 INSERT INTO `users` VALUES ('33', 'an ton', 'ad@ug.edu.ec', '$2y$10$5DLvpROz5/jZ1gZQ4n/sweYvmDaMgIN7HSqJLj8QCvOmpVi.Lps3W', 'ZWiMrvotiTzF97xonBztcuK7Zs0YPefDz7HvwhYuZPa5uuH3vmy2HGVzGThn', '2018-08-12 02:01:01', '2018-08-12 02:03:29', '0926339730', '2018-08-12 02:03:29', 'A', 'YzWAN6ERZctxkOxPdtZV3Ug0smiXq1rXHGHbpfCR', null, null);
-INSERT INTO `users` VALUES ('34', 'monitor', 'monitor@ug.edu.ec', '$2y$10$E3csZ049aUyiICXxkAvZo.yMVOJ9Whxa2N6gdHPEfKIocP7PwKz/K', 'AlKfqbdFtRQ4thNPlV2S01gErkwhpWa4S20uZW3LSqqN4gqvHEI16gMU3IFw', '2018-08-13 10:36:16', '2018-08-13 10:47:41', '1111111111', '2018-08-13 10:47:41', 'A', 'XnyM0kCT8R5VuJDrYlJZ8H5sHih07SIfBkWLeyt2', null, null);
+INSERT INTO `users` VALUES ('34', 'monitor', 'monitor@ug.edu.ec', '$2y$10$E3csZ049aUyiICXxkAvZo.yMVOJ9Whxa2N6gdHPEfKIocP7PwKz/K', '35D2FCtAQXZqE8FXgGrGYAethsIPr2x01wWaBkSkXD8ak8I3wEmeLTHbr3iT', '2018-08-13 10:36:16', '2018-08-14 14:40:09', '1111111111', '2018-08-14 14:40:09', 'A', '24cNdL09g3AYpAWaI9z9CtFvrwREGG21HuV0IAr0', null, null);
+INSERT INTO `users` VALUES ('35', 'Bryan Alcivar', 'bryan.alcivarv@ug.edu.ec', '$2y$10$RDd1Mj6NRPlM00LNHVRUz.KYd4kBlBOuW1zc6qxsu3FxyVaPZr/6K', 'ZlkJlMOOzWs6HuRngOJOW1saVSfZNsokmr7C5DFLiJ93Xm2UiGwhmQILmc7l', '2018-08-14 12:57:25', '2018-08-14 13:12:55', '0926570136', '2018-08-14 13:12:55', 'A', 'UFimnSes1jcAMwoIRxZfVxPdAyJ7GYncXlGn9ogv', null, null);
