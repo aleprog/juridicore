@@ -18,7 +18,11 @@
 @section('content')
       <div class="col-lg-2 text-right" style="float:right">
 
+      @if(!count($sup)>0)
+
         <a class="btn btn-primary" href="{{route('clients.create')}}" >Agregar</a>
+
+      @endif
           
       </div>
 <hr/>

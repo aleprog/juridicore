@@ -74,14 +74,154 @@
 		        <div class="col-sm-4 col-md-3">
 		            <dt>Fecha de Registro</dt>
 		            <dd><p>{{$postulant->created_at_es}}</p></dd>
-		        </div>
-
-		        
+		        </div>		        
 
 		        <div class="col-sm-4 col-md-3">
-		            <dt>Correo Eléctronico</dt>
+		            <dt>Correo Institucional</dt>
 		            <dd><p>{{$postulant->correo_institucional}}</p></dd>
 		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Correo Personal</dt>
+		            <dd><p>{{$postulant->correo_institucional}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Horario</dt>
+		            <dd><p>{{$postulant->horario}}</p></dd>
+		        </div>
+
+		         <div class="col-sm-4 col-md-3">
+		            <dt>Fecha de Nacimiento</dt>
+		            <dd><p>{{$postulant->fecha_nacimiento}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Edad</dt>
+		            <dd><p>{{$postulant->edad}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Modalidad</dt>
+		            <dd><p>{{$postulant->modalidad}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Provincia</dt>
+		            <dd><p>{{$postulant->provincia_id}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Ciudad</dt>
+		            <dd><p>{{$postulant->ciudad_id}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Discapacidad</dt>
+		            <dd><p>{{$postulant->discapacidad}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Estado Civil</dt>
+		            <dd><p>{{$postulant->estado_civil}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Labora</dt>
+		            <dd><p>{{$postulant->labora}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Direccion Laboral</dt>
+		            <dd><p>{{$postulant->direccion_t ? $postulant->direccion_t : '&nbsp;' }}</}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Horario</dt>
+		            <dd><p>{{$postulant->horario_t ? $postulant->horario_t : '&nbsp;' }}</}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Telefono</dt>
+		            <dd><p>{{$postulant->telefono_t ? $postulant->telefono_t : '&nbsp;' }}</}}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Area</dt>
+		            <dd><p>{{$postulant->area ? $postulant->area : '&nbsp;' }}</p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt>Carnet</dt>
+		            <dd><p>{{$postulant->carnet ? $postulant->carnet : '&nbsp;' }}</p></dd>
+		        </div>
+
+
+		        <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+		        	<h4 style="padding-left: 10px;" >Area de Preferencia</h4>
+	            </div>
+
+	            <div class="col-md-12" style="margin-top: 15px;">          
+
+	            </div>
+
+	            <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Civil</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->civil ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Penal</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->penal ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Familia</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->familia ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Laboral</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->laboral ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Violencia familiar</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->violenciaf ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Inquilinato</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->inquilinato ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Fiscalia</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->fiscalia ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Defensoria</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->defensoria ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <div class="col-sm-4 col-md-3">
+		            <dt class="text-center">Constitucional</dt>
+		            <dd class="text-center"><p><input type="checkbox" disabled="disabled" {{$postulant->constitucional ? 'checked' : ''}}></p></dd>
+		        </div>
+
+		        <!--civil	int(11) NULL [0]	 
+				penal	int(11) NULL [0]	 
+				familia	int(11) NULL [0]	 
+				laboral	int(11) NULL [0]	 
+				violenciaf	int(11) NULL [0]	 
+				inquilinato	int(11) NULL [0]	 
+				fiscalia	int(11) NULL [0]	 
+				defensoria	int(11) NULL [0]	 
+				constitucional-->
+		        
+
+
 
 		        @if($postulant->status_request!='PENDIENTE')
 		          

@@ -23,3 +23,6 @@ Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 
 	Route::put('admin/clientes/{id}/caso', 'Solicitudescj\ClientController@updateCaso')
 	->name('clients.updateCaso');
+
+	Route::get('admin/clientes/{id}/imprimir', 'Solicitudescj\ClientController@print')
+	->name('clients.print');

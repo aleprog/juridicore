@@ -242,6 +242,10 @@
 	                </div>
 	                <div class="pull-right">
 	                    {!! Form::button(trans('global.app_save'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
+
+	                    &nbsp;
+
+	                    <a class="btn btn-warning" href="{{route('clients.print',$client->id)}}">Imprimir</a>
 	                </div>
 
                 {!! Form::close() !!}
