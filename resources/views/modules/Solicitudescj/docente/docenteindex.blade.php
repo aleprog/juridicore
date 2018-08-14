@@ -152,7 +152,7 @@ $.fn.dataTable.ext.errMode = 'throw';
 	  
 	  
 		"lengthMenu": [[10, -1], [10, "All"]],
-		"order": [[1, 'desc']],
+		"order": [[6, 'ASC']],
 		"searching": true,
 		"info": true,
 		"ordering": true,

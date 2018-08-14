@@ -59,6 +59,11 @@ class StudentController extends Controller
 	}
 	public function evaluacionSave(request $request)
 	{
+		$m="Ya tiene un registro ingresado";
+		$obj=evaluacionest::where('user_id',Auth::user()->id)->get()->count();
+
+		if($obj>1)
+		{
 			$objEe=new evaluacionest();
 			$objEe->e1=$request->e1;
 			$objEe->e2=$request->e2;
@@ -80,7 +85,9 @@ class StudentController extends Controller
 			
 			$objEe->save();
 			$m="grabado exitoso";
-			$obj=1;
+			
+		}
+			
 			return view('modules.solicitudescj.student.ficha')
 			->with(['m'=>$m,'obj'=>$obj]);
 
@@ -118,6 +125,14 @@ class StudentController extends Controller
 	
 			$pdf=\PDF::loadView('modules.Solicitudescj.student.evaluacion',compact(
 				'objPostulant','teachers','objEv'));
+			return $pdf->stream();
+	}
+	public function imprimirFicha(){
+		$identificacion=Auth::user()->persona_id;
+		$ob=Postulant::where(['identificacion'=>$identificacion,'estado'=>'A'])->get()->first();
+	
+			$pdf=\PDF::loadView('modules.Solicitudescj.student.datosficha',compact(
+				'ob','identificacion'));
 			return $pdf->stream();
 	}
     public function estudianteperfil()

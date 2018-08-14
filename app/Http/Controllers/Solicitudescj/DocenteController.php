@@ -66,9 +66,9 @@ class DocenteController extends Controller
         $semanasNo=DB::connection('mysql_solicitudescj')->table('semanaObservaciones')
         ->where(['user_id'=>$request->valor])
         ->select('semana')
-        ->get()->toArray();
+        ->get()->pluck('semana');
        
-        
+   
 		$result = DB::connection('mysql_solicitudescj')
             ->table('asistencias')
             ->where('user_id', $request->valor)
@@ -79,9 +79,6 @@ class DocenteController extends Controller
             ->orderBy('semana', 'DSC')
             ->select('semana as id', 'semana as descripcion')->get();
            
-
-           // dd($result);
-
         if (count($result) > 0) {
             //$result = $result->get('descripcion', 'id');
             //$lista['data'] = $result;
@@ -99,17 +96,20 @@ class DocenteController extends Controller
     {
         $obc=evaluaciontutor::where('docente_id',Auth::user()->id)
         ->where('user_id',$request->estudianteo)->get()->count();
+        
+   
         $obc=$obc+1;
-        $vfa=0;
-        $vfr=0;
+        $vfa="";
+        $vfr="";
         $vf=array_sum($request->opcion);
+       
         if($vf<7)
         {
-            $vfr=$vf;
-        }else{
-            $vfa=$vf; 
+            $vfr="X";
+        }else
+        {
+            $vfa="X"; 
         }
-        
 
         $objEv=new evaluaciontutor();
         $objEv->user_id=$request->estudianteo;
@@ -318,14 +318,14 @@ class DocenteController extends Controller
     
 
     public function datatableAsistencia()
-	{
+	{   
        return DataTables::of(
             DB::connection('mysql_solicitudescj')
                 ->table('asistencias AS a')
                 ->where('a.docente_id',Auth::user()->id)
                 ->join('juridicorebase_ant.users as u','u.id','a.user_id')
                 ->join('postulants as p','p.identificacion','u.persona_id')
-                ->orderby('a.created_at', 'ASC')
+                ->orderby('a.estado','DESC')
                 ->select(
                     'a.descripcion as descripcion',
 				'a.id as id',
@@ -335,7 +335,8 @@ class DocenteController extends Controller
                 'a.semana as semana',
                 'a.hora_inicio as hora_inicio',
                 'a.hora_fin as hora_fin',
-				'a.horas as horas')
+                'a.horas as horas')
+                
                 ->get()
 
         )->addColumn('Estado', function ($select) {
@@ -393,6 +394,7 @@ class DocenteController extends Controller
     public function evaluacionSupSave(request $request)
     {
         $countEs=evaluacionSup::where('user_id',$request->estudianteo)->get()->count();
+        $m="El estudiante ya tiene un registro";
         if($countEs<1)
         {
             $e1=$request->e1;
@@ -669,7 +671,8 @@ class DocenteController extends Controller
                      break;
      
                  }
-                
+                $tt=($c5*5)+($c4*4)+($c3*3)+($c2*2)+($c1*1);
+                $n=round($tt*0.18181,2);
              $obj=new evaluacionSup();
              $obj->user_id=$request->estudianteo;
              $obj->docente_id=Auth::user()->id;
@@ -700,8 +703,9 @@ class DocenteController extends Controller
              $obj->sum4=$c4*4;
              $obj->sum5=$c5*5;
               
-             $obj->total=($c5*5)+($c4*4)+($c3*3)+($c2*2)+($c1*1);
+             $obj->total=$tt;
             
+            $obj->nota=$n;
              $obj->save();
     
              $m='Grabado Correctamente';
@@ -716,7 +720,7 @@ class DocenteController extends Controller
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
 
-        $m="El estudiante ya tiene un registro";
+        
       
         return view('modules.Solicitudescj.docente.supervisorindex',compact('objD','m'));
     }

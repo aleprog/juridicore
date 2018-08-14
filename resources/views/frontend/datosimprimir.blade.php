@@ -39,7 +39,7 @@ ol.u {list-style-type: none;}
 																<div class="modal-body" >
 																	<br/>
 																	<p align="right">
-																	Guayaquil,.............de 2018
+																	Guayaquil,{{date("d") . " / " . date("m") . " / " . date("Y")}}
 																	</p>
 																	<br/>
 																	
@@ -62,8 +62,15 @@ ol.u {list-style-type: none;}
 																
 																	<li align="justify">
 																	Yo, {{$nombres}} {{$apellidos}} , con cédula de ciudadania Nº {{$identificacion}} ,
-																	estudiante matriculado en el {{$nivel}} de la carrera {{$carrera}} , solicito 
-																	a usted muy comedidamente se me asigneuna institucion , fecha de inicio y fin , 
+																	estudiante  
+																	@if($nivel!="EGRESADO")
+																	{{"matriculado en el ".$nivel." Semestre"}}
+																	@endif
+																	@if($nivel=="EGRESADO")
+																	{{$nivel}}
+																	@endif
+																	 de la carrera {{$carrera}} , solicito 
+																	a usted muy comedidamente se me asigne una institucion , fecha de inicio y fin , 
 																	asi como un tutor académico para realizar las prácticas preprofesionales.
 																	</li>
 																	
