@@ -27,12 +27,17 @@ class ClientController extends Controller
 
 
 	public function getDatatable()
+
   {
 
       
       $auth=auth()->user()->roles->where('abv','SUP');
 
       if(count($auth)>0){
+
+       
+            $clients=Client::get();
+
 
         $clients=Client::where('supervisor_id',auth()->user()->id)->get();
 

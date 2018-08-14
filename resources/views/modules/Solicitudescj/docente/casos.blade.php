@@ -10,13 +10,6 @@
 @section('css')
     <link href="{{ url('adminlte/plugins/notifications/sweetalert.css') }}" rel="stylesheet">
 	<style>
-	}
-.letrap{
-		font-size:12px;
-}
-.letrapp{
-		font-size:11px;
-}
 	a.tooltips {
   position: relative;
   display: inline;
@@ -113,7 +106,7 @@ var hora_inicio=$("#horario_inicio").val().split(":")[0];
 
 </script>
 	
-  <script>
+<script>
 
 $("body").addClass("sidebar-collapse");
 
@@ -143,67 +136,14 @@ $.fn.dataTable.ext.errMode = 'throw';
 		"serverSide": true,
 		"deferRender": true,
 		"destroy": true,
-		"ajax": "/datatableEvaluacionesTutorEst/" ,
-
-		"columns": [
-	 
-			{data: 'fecha_registro', "width": "10%"},
-			{data: 'visita', "width": "10%"},
-			{
-                    data: 'Opciones',
-                    "width": "20%",
-                    "bSortable": true,
-                    "searchable": true,
-                    "targets": 0,
-                    "render": function (data, type, row) {
-                        return $('<div />').html(row.Opciones).text();
-                    }
-             },
-	
-			
-		]
-	}).ajax.reload();
-
-
-
-</script>
-
-<script>
-
-$('#dtmenue').DataTable().destroy();
-$('#tbobymenue').html('');
-
-$('#dtmenue').show();
-$.fn.dataTable.ext.errMode = 'throw';
-	var table=$('#dtmenue').DataTable(
-	{
-
-		dom: 'lfrtip',
-
-		responsive: true, "oLanguage":
-			{
-				"sUrl": "/js/config/datatablespanish.json"
-			},
-	  
-	  
-		"lengthMenu": [[10, -1], [10, "All"]],
-		"order": [[1, 'desc']],
-		"searching": true,
-		"info": true,
-		"ordering": true,
-		"bPaginate": true,
-		"processing": true,
-		"serverSide": true,
-		"deferRender": true,
-		"destroy": true,
-		"ajax": "/datatableEvaluacionesSupEst/" ,
+		"ajax": "/datatableEvaluacionesTutor/" ,
 
 		"columns": [
 	 
 			{data: 'fecha_registro', "width": "10%"},
 			{data: 'estudiante', "width": "10%"},
 
-			{data: 'total', "width": "10%"},
+			{data: 'visita', "width": "10%"},
 			{
                     data: 'Opciones',
                     "width": "20%",
@@ -237,46 +177,100 @@ $.fn.dataTable.ext.errMode = 'throw';
 									<div class="tabbable" id="tabs-999753">
 										<ul class="nav nav-tabs">
 											<li class="nav-item active">
-												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Consulta Evaluacion Tutor</a>
+												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Consulta Casos Asignados</a>
 											</li>
-									
-                    	<li class="nav-item ">
+											<li class="nav-item ">
 												<a class="nav-link " href="#panel-778868" data-toggle="tab">
-                        Consulta Evaluacion Supervisor
+													 Casos
                                                 </a>
 											</li>
-                 
 										</ul>
 										<div class="tab-content">
 											<div class="tab-pane " id="panel-778868">
 												<p>
-												<table class="table table-bordered table-striped " id="dtmenue" style="width:100%!important" >
-																<thead>
+												<form method="POST" action="{{ route ('tutor.evaluacionSave')}}" accept-charset="UTF-8">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-																<th>Fecha de Registro</th>
-																<th>Estudiante</th>
-																<th>Total</th>
-																<th>Opciones</th>
-															
+												<table width="100%">
+													<tr>
+													<td>Estudiante</td>
+												
+													<td>Opciones</td>
+													</tr>
+													<tr>
+													<td>{!! Form::select('estudianteo', $objD, null,['class' => 'form-control select2',"style"=>"width:100%","id"=>"estudianteo","placeholder"=>"ESTUDIANTES","name"=>"estudianteo","required"=>""]) !!}</td>
+													<td><button type="submit"class="btn btn-primary" id="enviarform">Generar</button></td>
+													</tr>
+												</table>
 
-																</thead>
-																<tbody id="tbobymenue">
+												<table>
+												<tr>
+												<td colspan="4"><strong>Causas por la que acude al consultorio</strong></td>
+												</tr>
+												<tr>
+												<td>Asesoria</td>
+												<td><input type="radio" name="razon"value="asesoria"></td>
+												<td>Patrocinio</td>
+												<td><input type="radio" name="razon"value="patrocinio"></td>
+												</tr>
+												</table>
+												<hr/>
+												<table width="100%">
+													<tr>
+													<td>
+													Detalle
+													</td>
+													<td>{!! Form::textarea('detalle', null,['class' => 'form-control-t',"style"=>"width:100%","id"=>"detalle","placeholder"=>"Detalle","name"=>"detalle","required"=>""]) !!}</td>
+													</tr>
+													<tr>
+													<td>
+													Tipo de Proceso
+													</td>
+													<td>{!! Form::textarea('tipo_proceso', null,['class' => 'form-control',"style"=>"width:100%","id"=>"tipo_proceso","placeholder"=>"tipo_proceso","name"=>"tipo_proceso","required"=>""]) !!}</td>
+													</tr>
+													<tr>
+													<td>
+													Unidad Judicial
+													</td>
+													<td>{!! Form::text('unidad', null,['class' => 'form-control',"style"=>"width:100%","id"=>"unidad","placeholder"=>"unidad","name"=>"unidad","required"=>""]) !!}</td>
+													</tr>
+													<tr>
+													<td>
+													Fecha que inicio causa
+													</td>
+													<td>{!! Form::text('fecha_inicio', null,['class' => 'form-control',"style"=>"width:100%","id"=>"fecha_inicio","placeholder"=>"Detalle","name"=>"fecha_inicio","required"=>""]) !!}</td>
+													
+													
+													</tr>
+													
+													</table>
+											<table width="50%">
+											<tr>
+												<td>Demandante:</td>
+												<td><input type="radio" name="razon"value="asesoria"></td>
+										
+												<td>Demandado:</td>
+												<td><input type="radio" name="razon"value="patrocinio"></td>
+										
+												</tr>
+											</table>
 
-																</tbody>
-															</table>
-
+													</form>
 												</p>
 											
 											<hr/>
 									
 												</div>
+
+												
 											<div class="tab-pane active" id="panel-717633">
 												<p>
 												<div class="panel-body">
-                         <table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
+															<table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
 																<thead>
 
 																<th>Fecha de Registro</th>
+																<th>Estudiante</th>
 																<th>Visita</th>
 																<th>Opciones</th>
 															
@@ -287,7 +281,7 @@ $.fn.dataTable.ext.errMode = 'throw';
 																</tbody>
 															</table>
 												</div>
-												</p>	
+												</p>
 											</div>
 										</div>
 									</div>
