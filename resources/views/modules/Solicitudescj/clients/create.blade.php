@@ -151,7 +151,7 @@
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('bono', 'Bono', ['class' => 'control-label']) !!}
-                            {!! Form::text('bono', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                           
+                            {!! Form::select('bono',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
                         <div class="col-xs-4 form-group">

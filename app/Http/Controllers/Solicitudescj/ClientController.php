@@ -18,11 +18,13 @@ class ClientController extends Controller
 		//dd($users[0]->roles_label);
 		//dd(User::all());
 
-    
+    $sup=auth()->user()->roles->where('abv','SUP');
+
+
 
     
 
-		return view('modules.Solicitudescj.clients.index');
+		return view('modules.Solicitudescj.clients.index',compact('sup'));
 	}
 
 
@@ -86,7 +88,7 @@ class ClientController extends Controller
             'cedula' => 'required|digits_between:7,10|unique:mysql_solicitudescj.clientes,cedula',
             'fecha_nacimiento' => 'required',
             'nacionalidad' => 'required',
-            'etnia' => 'nullable',
+            'etnia' => 'required',
             'celular' => 'required|regex:/(09)[0-9]{8}/',
             'convencional' => 'nullable|digits_between:7,10',
             'instruccion' => 'required',
@@ -97,9 +99,9 @@ class ClientController extends Controller
             'sector' => 'required',
             'ocupacion' => 'required',
             'ingresos' => 'required|numeric',
-            'bono' => 'nullable|numeric',
+            'bono' => 'required',
             'discapacidad' => 'required',
-            'tipo_dicapacidad' => 'required_if:discapacidad,==,SI',
+            'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
             'supervisor_id' => 'required',
@@ -202,7 +204,7 @@ class ClientController extends Controller
             'cedula' => 'required|digits_between:7,10|unique:mysql_solicitudescj.clientes,cedula,'.$id.',id',
             'fecha_nacimiento' => 'required',
             'nacionalidad' => 'required',
-            'etnia' => 'nullable',
+            'etnia' => 'required',
             'celular' => 'required|regex:/(09)[0-9]{8}/',
             'convencional' => 'nullable|digits_between:7,10',
             'instruccion' => 'required',
@@ -213,9 +215,9 @@ class ClientController extends Controller
             'sector' => 'required',
             'ocupacion' => 'required',
             'ingresos' => 'required|numeric',
-            'bono' => 'nullable|numeric',
+            'bono' => 'required',
             'discapacidad' => 'required',
-            'tipo_dicapacidad' => 'required_if:discapacidad,==,SI',
+            'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
             'supervisor_id' => 'required',
@@ -294,6 +296,13 @@ class ClientController extends Controller
       return redirect()->route('clients.index');
 
     }
+
+    public function print($id){
+      $client=Client::find($id);
+
+      return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+    }
+
 
 
 }
