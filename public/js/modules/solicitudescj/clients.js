@@ -46,12 +46,12 @@ function PedirConfirmacion(id,dato,event)
 
 function changeDatatable()
 {
-    $('#dtmenu').DataTable().destroy();
-    $('#tbobymenu').html('');
+    //$('#dtmenu').DataTable().destroy();
+    //$('#tbobymenu').html('');
 
-        $('#dtmenu').show();
-        $.fn.dataTable.ext.errMode = 'throw';
-        $('#dtmenu').DataTable(
+        //$('#dtmenu').show();
+        //$.fn.dataTable.ext.errMode = 'throw';
+        var dataSource0 = $('#dtmenu').DataTable(
             {
                 responsive: true,"oLanguage":
                     {
@@ -88,3 +88,4 @@ function changeDatatable()
 
 
 }
+

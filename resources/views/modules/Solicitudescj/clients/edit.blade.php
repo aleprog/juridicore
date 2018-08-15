@@ -13,6 +13,53 @@
 @endsection
 @section('javascript')
     <script src="{{ url('js/modules/solicitudescj/clients.js') }}"></script>
+    <script type="text/javascript">
+        //$('#dtmenuCS').DataTable().destroy();
+        //$('#tbobymenuCS').html('');
+
+        //$('#dtmenuCS').show();
+        //$.fn.dataTable.ext.errMode = 'throw';
+        
+ 
+        var dataSource = $('#dtmenuCS').DataTable(
+            {
+                responsive: true,"oLanguage":
+                    {
+                        "sUrl": "/js/config/datatablespanish.json"
+                    },
+                "lengthMenu": [[5,10,20 -1], [5,10,20, "All"]],
+                "order": [[ 1, 'desc' ]],
+                "searching": true,
+                "info":  false,
+                "ordering": false,
+                "bPaginate": true,
+                "processing": true,
+                "serverSide": true,
+                "deferRender": true,
+                "destroy": true,
+                "ajax": "/admin/clientes/data/consulta_asignacion/{{$client->id}}",
+                "columns":[
+
+                    {data: 'supervisor.name', "width": "20%"},
+                    {data: 'created_at',   "width": "10%"},
+                    /*{
+                        data: 'actions',
+                        "width": "10%",
+                        "bSortable": false,
+                        "searchable": false,
+                        "targets": 0,
+                        
+                    }*/
+                ],
+
+            }).ajax.reload();
+
+    
+
+    
+
+    
+    </script>
     <script src="{{ url('adminlte/plugins/datepicker/') }}/bootstrap-datepicker.js"></script>
     <script>
         $('.pickadate').datepicker({
@@ -24,6 +71,7 @@
             orientation: 'top'
         });
     </script>
+    
 @endsection
 @section('content')
     <hr/>
@@ -192,11 +240,34 @@
                     </div>
                     {!! Form::close() !!}
 
-                    {!! Form::open(['method' => 'POST', 'route' => ['clients.asignarSupervisor']]) !!}
                     <div class="row">
 
                         <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
-                            <h4 style="padding-left: 10px;" >Asignar Nueva Consulta al Supervisor</h4>
+                            <h4 style="padding-left: 10px;" >Historial de Asignación</h4>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 15px;">          
+
+                        </div>                   
+
+                        <table class="table table-bordered table-striped " id="dtmenuCS" style="width:100%!important" >
+                              <thead>
+                              <tr>
+                                <th>Supervisor</th>
+                                <th>Fecha</th>                 
+                              </tr>
+                              </thead>
+                              <tbody >
+
+                              </tbody>
+                        </table>
+
+                    </div>
+                     {!! Form::open(['method' => 'POST', 'route' => ['clients.asignarSupervisor']]) !!}
+                    <div class="row">
+
+                        <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+                            <h4 style="padding-left: 10px;" >Asignar Supervisor</h4>
                         </div>
 
                         <div class="col-md-12" style="margin-top: 15px;">          

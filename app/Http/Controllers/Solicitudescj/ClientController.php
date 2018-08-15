@@ -38,11 +38,9 @@ class ClientController extends Controller
 
       if(count($auth)>0){
 
-       
-            $clients=Client::get();
-
 
         $clients=Client::where('supervisor_id',auth()->user()->id)->get();
+
 
         //dd($clients);
 
@@ -305,13 +303,35 @@ class ClientController extends Controller
     }
 
     public function asignarSupervisor(Request $request){
+
+      $rules = [
+        'supervisor_id' => 'required',
+      ];
+        
+      $this->validate($request, $rules);
+
       $consulta= new Consulta();
-      $consulta->client_id = $request->cliente_id;
+      $consulta->cliente_id = $request->cliente_id;
       $consulta->supervisor_id = $request->supervisor_id;
       $consulta->save();
 
-      dd($request->all());
+      //dd($request->all());
+      return redirect()->route('clients.index');
     }
+
+    public function getDatatableConsultaAsignacion($id){
+
+
+
+        $consultas= Consulta::with(['supervisor'])->where('cliente_id',$id)->get();
+
+        return DataTables::of($consultas)->addColumn('actions', function ($select) {
+          return '';
+        })->rawColumns(['actions'])
+        ->make(true);
+
+
+    } 
 
 
 
