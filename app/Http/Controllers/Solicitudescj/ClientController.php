@@ -8,6 +8,7 @@ use App\Core\Entities\Solicitudescj\Consulta;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
+use Storage;
 
 class ClientController extends Controller
 {
@@ -97,12 +98,13 @@ class ClientController extends Controller
             'tipo_sexo' => 'required_if:sexo,==,Otros',
             'sector' => 'required',
             'ocupacion' => 'required',
-            'ingresos' => 'required|numeric',
+            'ingresos' => 'required',
             'bono' => 'required',
             'discapacidad' => 'required',
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
+            'foto_cedula' => 'required|image',
             //'supervisor_id' => 'required',
         ];/*
         $messages = [
@@ -153,9 +155,18 @@ class ClientController extends Controller
 	  $client->monitor_id = auth()->user()->id;
     //$client->supervisor_id = $request->supervisor_id;
 	  $client->estado = 'A';
+    $client->foto_cedula = '';
 
-	  //dd($client);
+
+    //dd($client);
 	  $client->save();
+
+    if ($request->hasFile('foto_cedula')){
+      $path = $request->file('foto_cedula')->store('clientes'.'/'.$client->id,'file');
+      $client->foto_cedula=$path;
+    }
+
+    $client->save();
 
       return redirect()->route('clients.index');
     }
@@ -213,12 +224,13 @@ class ClientController extends Controller
             'tipo_sexo' => 'required_if:sexo,==,Otros',
             'sector' => 'required',
             'ocupacion' => 'required',
-            'ingresos' => 'required|numeric',
+            'ingresos' => 'required',
             'bono' => 'required',
             'discapacidad' => 'required',
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
+            'foto_cedula' => 'nullable|image',
             //'supervisor_id' => 'required',
         ];
         
@@ -254,6 +266,16 @@ class ClientController extends Controller
       //dd($request);
       //dd($client);
       $client->save();
+
+      if ($request->hasFile('foto_cedula')){
+        $foto = $client->foto_cedula;
+        if(Storage::disk('file')->has($foto)){
+          Storage::disk('file')->delete($foto);
+        }
+        $path = $request->file('foto_cedula')->store('clientes'.'/'.$client->id,'file');
+        $client->foto_cedula=$path;
+        $client->save();
+      }
 
       return redirect()->route('clients.index');
     }

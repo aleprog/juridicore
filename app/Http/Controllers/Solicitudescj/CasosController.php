@@ -66,8 +66,9 @@ class CasosController extends Controller
         'tipo_proceso' => 'required_if:razon,==,Patrocinio',
         'unidad_judicial' => 'required_if:razon,==,Patrocinio',
         'fecha_inicio' => 'required_if:razon,==,Patrocinio',
-        'demandante' => 'required_if:razon,==,Patrocinio',
-        'demandado' => 'required_if:razon,==,Patrocinio',
+        //'demandante' => 'required_if:razon,==,Patrocinio',
+        //'demandado' => 'required_if:razon,==,Patrocinio',
+        'tipo_usuario' => 'required_if:razon,==,Patrocinio',
         'practicante_id' => 'required',
       ];
         
@@ -81,8 +82,9 @@ class CasosController extends Controller
       $client->tipo_proceso = $request->tipo_proceso;
       $client->unidad_judicial = $request->unidad_judicial;
       $client->fecha_inicio = $request->fecha_inicio;
-      $client->demandante = $request->demandante;
-      $client->demandado = $request->demandado;
+      $client->tipo_usuario = $request->tipo_usuario;
+      //$client->demandante = $request->demandante;
+      //$client->demandado = $request->demandado;
       $client->practicante_id = $request->practicante_id;
       $client->estado = 'A';
 
@@ -90,7 +92,7 @@ class CasosController extends Controller
  
       $client->save();
 
-      return redirect()->route('casos.index');
+      return redirect()->route('casos.show',$client->id);
 
     }
 

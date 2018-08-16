@@ -36,6 +36,13 @@
 		    }   
 
 		});
+
+		@if($caso->estado=='A')
+		  $( "#razon").prop( "disabled", true );
+		  $( ".pt" ).prop( "disabled", true );
+		  $( ".as" ).prop( "disabled", true );
+		  $( "#practicante_id").prop( "disabled", true );
+		@endif
     </script>
     <script src="{{ url('adminlte/plugins/datepicker/') }}/bootstrap-datepicker.js"></script>
     <script>
@@ -90,7 +97,7 @@
 
 		        <div class="col-sm-4 col-md-3">
 		            <dt>Edad</dt>
-		            <dd><p>12</p></dd>
+		            <dd><p>{{$client->edad}}</p></dd>
 		        </div>
 
 		        <div class="col-sm-4 col-md-3">
@@ -200,6 +207,11 @@
 
 			    @endif
 
+			    <div class="col-sm-6 col-md-6">
+			    	<dt>Foto Cedula</dt>
+			    	<dd><img src="{{asset('file/'.$client->foto_cedula)}}" class="img-responsive" width="100%"></dd>
+			    </div>
+
 			    <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
 	        		<h4 style="padding-left: 10px;" >Información del caso</h4>
 	          	</div>
@@ -227,6 +239,10 @@
 	                    {!! Form::textarea('detalle', null, ['class' => 'form-control as', 'placeholder' => '', 'maxlength'=>'255', 'rows'=>'3','style'=>'height:auto !important']) !!}                           
 	                </div>
 	                
+	                <div class="col-xs-6 form-group">
+	                    {!! Form::label('tipo_usuario', 'Tipo Usuario', ['class' => 'control-label']) !!}
+	                    {!! Form::select('tipo_usuario',['Demandante'=>'Demandante','Demandado'=>'Demanandado'], Null, ['class' => 'form-control pt', 'placeholder' => '']) !!}                             
+	                </div>
 
 	                <div class="col-xs-6 form-group">
 	                    {!! Form::label('tipo_proceso', 'Tipo Proceso', ['class' => 'control-label']) !!}
@@ -246,7 +262,7 @@
 	                </div>
 
 
-	                <div class="col-xs-6 form-group">
+	                <!--<div class="col-xs-6 form-group">
 	                    {!! Form::label('demandante', 'Demandante', ['class' => 'control-label']) !!}
 	                    {!! Form::text('demandante', null, ['class' => 'form-control pt', 'placeholder' => '']) !!}                           
 	                </div>
@@ -254,17 +270,18 @@
 	                <div class="col-xs-6 form-group">
 	                    {!! Form::label('demandado', 'Demandado', ['class' => 'control-label']) !!}
 	                    {!! Form::text('demandado', null, ['class' => 'form-control pt', 'placeholder' => '']) !!}                           
-	                </div>
+	                </div>-->
 
 
 	                <div class="col-xs-6 form-group">
 	                    {!! Form::label('practicante_id', 'Practicante', ['class' => 'control-label']) !!}
-	                    {!! Form::select('practicante_id',$practicantes->pluck('name','id'), Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+	                    {!! Form::select('practicante_id',$practicantes->pluck('name','id'), Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '','practicante_id']) !!}                             
 	                </div>
 
 					<div class="col-xs-12">
 	                	<br><br>
 	                </div>
+	                @if($caso->estado=='P')
 	                <div class="pull-right">
 	                    {!! Form::button(trans('global.app_save'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
 
@@ -272,6 +289,7 @@
 
 	                    {{--<a class="btn btn-warning" href="{{route('clients.print',$client->id)}}">Imprimir</a>--}}
 	                </div>
+	                @endif
 
                 {!! Form::close() !!}
 

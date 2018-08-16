@@ -11,7 +11,7 @@ class Client extends Model
 
     protected $table = 'clientes';
 
-    protected $append = ['estado_label'];
+    protected $append = ['estado_label','edad'];
 
     public function getEstadoLabelAttribute(){
 
@@ -26,6 +26,11 @@ class Client extends Model
         }
 
         return $label;
+    }
+
+
+    public function getEdadAttribute(){
+        return \Carbon\Carbon::parse($this->fecha_nacimiento)->age;
     }
 
 }

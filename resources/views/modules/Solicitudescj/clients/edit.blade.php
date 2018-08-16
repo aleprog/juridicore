@@ -83,7 +83,7 @@
                 </div>              
 
                 <div class="panel-body" style="margin:25px">
-                {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id]]) !!}
+                {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id], 'enctype'=>"multipart/form-data"]) !!}
                     {{ method_field('PUT') }}
                     <div class="row">
                         <div class="col-xs-4 form-group">
@@ -113,11 +113,21 @@
                             
                         </div>
 
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('edad', 'Edad', ['class' => 'control-label']) !!}
+                            {!! Form::text('edad', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                            
+                        </div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('nacionalidad', 'Nacionalidad', ['class' => 'control-label']) !!}
                             {!! Form::text('nacionalidad', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
                             
                         </div>
+
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('etnia', 'Etnia', ['class' => 'control-label']) !!}
@@ -125,8 +135,7 @@
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
-
+                        
                         <div class="col-xs-4 form-group">
                             {!! Form::label('celular', 'Celular', ['class' => 'control-label']) !!}
                             {!! Form::text('celular', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
@@ -139,13 +148,13 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('instruccion', 'Instrucción', ['class' => 'control-label']) !!}
                             {!! Form::select('instruccion',['Basica'=>'Basica','Segundaria'=>'Segundaria','Superior'=>'Superior'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!} 
                             
-                        </div>
-
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        </div>                       
 
                         <div class="col-xs-8 form-group">
                             {!! Form::label('domiciolio', 'Domicilio', ['class' => 'control-label']) !!}
@@ -153,13 +162,15 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                          <div class="col-xs-4 form-group">
                             {!! Form::label('estado_civil', 'Estado Civil', ['class' => 'control-label']) !!}
                             {!! Form::select('estado_civil',['Soltera'=>'Soltera','Casada'=>'Casada','Viuda'=>'Viuda','Divorciada'=>'Divorciada'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!} 
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('sexo', 'Sexo', ['class' => 'control-label']) !!}
@@ -173,13 +184,15 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('sector', 'Sector donde vive', ['class' => 'control-label']) !!}
                             {!! Form::text('sector', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ocupacion', 'Ocupación', ['class' => 'control-label']) !!}
@@ -191,16 +204,12 @@
                             {!! Form::select('iess',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ingresos', 'Ingresos', ['class' => 'control-label']) !!}
-                            {!! Form::text('ingresos', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                           
-                        </div>
-
-                        
-
-                        
-
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                            {!! Form::select('ingresos',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('bono', 'Bono', ['class' => 'control-label']) !!}
@@ -212,12 +221,14 @@
                             {!! Form::select('discapacidad',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('tipo_discapacidad', 'Tipo de Discapacidad', ['class' => 'control-label']) !!}
                             {!! Form::text('tipo_discapacidad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('enfermedad', 'Enfermedad Catastrófica', ['class' => 'control-label']) !!}
@@ -229,7 +240,14 @@
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
+                        <div class="col-xs-6 form-group">
+                            {!! Form::label('foto_cedula', 'Foto Cedula', ['class' => 'control-label']) !!}
+                            <img src="{{asset('file/'.$client->foto_cedula)}}" class="img-responsive" width="100%">
+                            <br>
+                            {!! Form::file('foto_cedula',['class' => 'form-control']) !!}                             
+                        </div>                        
 
                     </div>
                    
