@@ -313,6 +313,7 @@ class ClientController extends Controller
       $consulta= new Consulta();
       $consulta->cliente_id = $request->cliente_id;
       $consulta->supervisor_id = $request->supervisor_id;
+      $consulta->estado = 'P';
       $consulta->save();
 
       //dd($request->all());
