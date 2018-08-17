@@ -289,6 +289,10 @@
 
 	                    {{--<a class="btn btn-warning" href="{{route('clients.print',$client->id)}}">Imprimir</a>--}}
 	                </div>
+	                @elseif($caso->estado=='A')
+	                    <div class="pull-right">
+	                		<a class="btn btn-warning" target="_blank" href="{{route('casos.print',$caso->id)}}">Imprimir Planilla</a> <a class="btn btn-info" target="_blank" href="{{route('casos.printCedula',$caso->id)}}">Imprimir Cedula</a>
+	                	</div>
 	                @endif
 
                 {!! Form::close() !!}

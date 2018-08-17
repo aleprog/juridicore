@@ -8,6 +8,8 @@ use App\Core\Entities\Solicitudescj\Consulta;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
+use PDF;
+
 
 class CasosController extends Controller
 {
@@ -94,6 +96,71 @@ class CasosController extends Controller
 
       return redirect()->route('casos.show',$client->id);
 
+    }
+
+    public function print($id){
+
+      $caso = Consulta::find($id);
+      $client=Client::find($caso->cliente_id);
+
+      //return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+
+      $path1=public_path() . '/images/ug.png';
+      $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+      $im1 = file_get_contents($path1);
+      $imdata1 = base64_encode($im1);
+
+      $path2=public_path() . '/images/juris.png';
+      $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+      $im2 = file_get_contents($path2);
+      $imdata2 = base64_encode($im2);
+
+      $pdf = PDF::loadView('modules.Solicitudescj.casos.imprimir', [
+           'client' => $client,
+           'caso' => $caso,
+           'logo1'=>$imdata1,
+           'type_image1'=>$type1,
+           'logo2'=>$imdata2,
+           'type_image2'=>$type2,
+       ]);
+
+      return $pdf->stream('caso_'.$id.'.pdf');
+    }
+
+    public function printCedula($id){
+
+      $caso = Consulta::find($id);
+      $client=Client::find($caso->cliente_id);
+
+      //return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+
+      $path1=public_path() . '/images/ug.png';
+      $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+      $im1 = file_get_contents($path1);
+      $imdata1 = base64_encode($im1);
+
+      $path2=public_path() . '/images/juris.png';
+      $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+      $im2 = file_get_contents($path2);
+      $imdata2 = base64_encode($im2);
+
+      $path3=public_path() . '/file/'.$client->foto_cedula;
+      $type3 = pathinfo($path3, PATHINFO_EXTENSION);
+      $im3 = file_get_contents($path3);
+      $imdata3 = base64_encode($im3);
+
+      
+      $pdf = PDF::loadView('modules.Solicitudescj.casos.imprimirCedula', [
+           'client' => $client,
+           'logo1'=>$imdata1,
+           'type_image1'=>$type1,
+           'logo2'=>$imdata2,
+           'type_image2'=>$type2,
+           'logo3'=>$imdata3,
+           'type_image3'=>$type3,
+       ]);
+
+      return $pdf->stream('cedula_cliente_'.$client->cedula.'.pdf');
     }
 
 }

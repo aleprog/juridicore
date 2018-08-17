@@ -11,3 +11,9 @@
 
 	Route::put('admin/casos/{id}/caso', 'Solicitudescj\CasosController@updateCaso')
 	->name('casos.updateCaso');
+
+	Route::get('admin/casos/{id}/imprimir', 'Solicitudescj\CasosController@print')
+	->name('casos.print');
+
+	Route::get('admin/casos/{id}/imprimir_cedula', 'Solicitudescj\CasosController@printCedula')
+	->name('casos.printCedula');
