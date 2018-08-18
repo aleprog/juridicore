@@ -64,7 +64,7 @@
 								<form method="POST" action="{{ route ('student.deleteFoto')}}" accept-charset="UTF-8">
 								<input type="hidden" value="{{$image->filename}}" name="filename">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+	
 								<button type="submit" class="btn btn-danger btn-sm fa fa-trash"></button>
 								</form>
 								</div>

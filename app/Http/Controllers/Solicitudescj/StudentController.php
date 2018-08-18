@@ -61,8 +61,8 @@ class StudentController extends Controller
 	{
 		$m="Ya tiene un registro ingresado";
 		$obj=evaluacionest::where('user_id',Auth::user()->id)->get()->count();
-
-		if($obj>1)
+		
+		if($obj<1)
 		{
 			$objEe=new evaluacionest();
 			$objEe->e1=$request->e1;
