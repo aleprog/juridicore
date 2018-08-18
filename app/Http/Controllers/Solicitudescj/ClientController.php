@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Solicitudescj;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Core\Entities\Solicitudescj\Client;
+use App\Core\Entities\Solicitudescj\Consulta;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
+use Storage;
 
 class ClientController extends Controller
 {
@@ -37,11 +39,9 @@ class ClientController extends Controller
 
       if(count($auth)>0){
 
-       
-            $clients=Client::get();
-
 
         $clients=Client::where('supervisor_id',auth()->user()->id)->get();
+
 
         //dd($clients);
 
@@ -98,13 +98,14 @@ class ClientController extends Controller
             'tipo_sexo' => 'required_if:sexo,==,Otros',
             'sector' => 'required',
             'ocupacion' => 'required',
-            'ingresos' => 'required|numeric',
+            'ingresos' => 'required',
             'bono' => 'required',
             'discapacidad' => 'required',
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
-            'supervisor_id' => 'required',
+            'foto_cedula' => 'required|image',
+            //'supervisor_id' => 'required',
         ];/*
         $messages = [
             'descripcion.required' => 'Escriba el descripcion ',
@@ -152,11 +153,20 @@ class ClientController extends Controller
 	  $client->enfermedad = $request->enfermedad;
 	  $client->tipo_enfermedad = $request->tipo_enfermedad;
 	  $client->monitor_id = auth()->user()->id;
-    $client->supervisor_id = $request->supervisor_id;
+    //$client->supervisor_id = $request->supervisor_id;
 	  $client->estado = 'A';
+    $client->foto_cedula = '';
 
-	  //dd($client);
+
+    //dd($client);
 	  $client->save();
+
+    if ($request->hasFile('foto_cedula')){
+      $path = $request->file('foto_cedula')->store('clientes'.'/'.$client->id,'file');
+      $client->foto_cedula=$path;
+    }
+
+    $client->save();
 
       return redirect()->route('clients.index');
     }
@@ -214,13 +224,14 @@ class ClientController extends Controller
             'tipo_sexo' => 'required_if:sexo,==,Otros',
             'sector' => 'required',
             'ocupacion' => 'required',
-            'ingresos' => 'required|numeric',
+            'ingresos' => 'required',
             'bono' => 'required',
             'discapacidad' => 'required',
             'tipo_discapacidad' => 'required_if:discapacidad,==,SI',
             'enfermedad' => 'required',
             'tipo_enfermedad' => 'required_if:enfermedad,==,SI',
-            'supervisor_id' => 'required',
+            'foto_cedula' => 'nullable|image',
+            //'supervisor_id' => 'required',
         ];
         
         $this->validate($request, $rules);
@@ -250,11 +261,21 @@ class ClientController extends Controller
       $client->tipo_discapacidad = $request->tipo_discapacidad;
       $client->enfermedad = $request->enfermedad;
       $client->tipo_enfermedad = $request->tipo_enfermedad;
-      $client->supervisor_id = $request->supervisor_id;
+      //$client->supervisor_id = $request->supervisor_id;
       
       //dd($request);
       //dd($client);
       $client->save();
+
+      if ($request->hasFile('foto_cedula')){
+        $foto = $client->foto_cedula;
+        if(Storage::disk('file')->has($foto)){
+          Storage::disk('file')->delete($foto);
+        }
+        $path = $request->file('foto_cedula')->store('clientes'.'/'.$client->id,'file');
+        $client->foto_cedula=$path;
+        $client->save();
+      }
 
       return redirect()->route('clients.index');
     }
@@ -302,6 +323,38 @@ class ClientController extends Controller
 
       return view('modules.Solicitudescj.clients.imprimir', compact('client'));
     }
+
+    public function asignarSupervisor(Request $request){
+
+      $rules = [
+        'supervisor_id' => 'required',
+      ];
+        
+      $this->validate($request, $rules);
+
+      $consulta= new Consulta();
+      $consulta->cliente_id = $request->cliente_id;
+      $consulta->supervisor_id = $request->supervisor_id;
+      $consulta->estado = 'P';
+      $consulta->save();
+
+      //dd($request->all());
+      return redirect()->route('clients.index');
+    }
+
+    public function getDatatableConsultaAsignacion($id){
+
+
+
+        $consultas= Consulta::with(['supervisor'])->where('cliente_id',$id)->get();
+
+        return DataTables::of($consultas)->addColumn('actions', function ($select) {
+          return '';
+        })->rawColumns(['actions'])
+        ->make(true);
+
+
+    } 
 
 
 

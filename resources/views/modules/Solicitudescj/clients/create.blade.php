@@ -28,7 +28,7 @@
 @section('content')
     <hr/>
         <div class="col-md-12 col-md-offset-0">
-            {!! Form::open(['method' => 'POST', 'route' => ['clients.store']]) !!}
+            {!! Form::open(['method' => 'POST', 'route' => ['clients.store'], 'enctype'=>"multipart/form-data"]) !!}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @lang('global.app_create')
@@ -143,8 +143,8 @@
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ingresos', 'Ingresos', ['class' => 'control-label']) !!}
-                            {!! Form::text('ingresos', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                           
-                        </div> 
+                            {!! Form::select('ingresos',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>
                       
 
                         <div class="col-xs-12 clearfix" style="height: 10px;"></div>
@@ -177,8 +177,9 @@
                         </div>
 
                         <div class="col-xs-4 form-group">
-                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
-                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                            {!! Form::label('foto_cedula', 'Foto Cedula', ['class' => 'control-label']) !!}
+                            <br>
+                            {!! Form::file('foto_cedula',['required'=>'','class' => 'form-control']) !!}                             
                         </div>
 
                         

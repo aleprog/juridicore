@@ -13,6 +13,53 @@
 @endsection
 @section('javascript')
     <script src="{{ url('js/modules/solicitudescj/clients.js') }}"></script>
+    <script type="text/javascript">
+        //$('#dtmenuCS').DataTable().destroy();
+        //$('#tbobymenuCS').html('');
+
+        //$('#dtmenuCS').show();
+        //$.fn.dataTable.ext.errMode = 'throw';
+        
+ 
+        var dataSource = $('#dtmenuCS').DataTable(
+            {
+                responsive: true,"oLanguage":
+                    {
+                        "sUrl": "/js/config/datatablespanish.json"
+                    },
+                "lengthMenu": [[5,10,20 -1], [5,10,20, "All"]],
+                "order": [[ 1, 'desc' ]],
+                "searching": true,
+                "info":  false,
+                "ordering": false,
+                "bPaginate": true,
+                "processing": true,
+                "serverSide": true,
+                "deferRender": true,
+                "destroy": true,
+                "ajax": "/admin/clientes/data/consulta_asignacion/{{$client->id}}",
+                "columns":[
+
+                    {data: 'supervisor.name', "width": "20%"},
+                    {data: 'created_at',   "width": "10%"},
+                    /*{
+                        data: 'actions',
+                        "width": "10%",
+                        "bSortable": false,
+                        "searchable": false,
+                        "targets": 0,
+                        
+                    }*/
+                ],
+
+            }).ajax.reload();
+
+    
+
+    
+
+    
+    </script>
     <script src="{{ url('adminlte/plugins/datepicker/') }}/bootstrap-datepicker.js"></script>
     <script>
         $('.pickadate').datepicker({
@@ -24,19 +71,20 @@
             orientation: 'top'
         });
     </script>
+    
 @endsection
 @section('content')
     <hr/>
         <div class="col-md-12 col-md-offset-0">
-            {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id]]) !!}
+            
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @lang('global.app_update')
-                </div>
-
-                {{ method_field('PUT') }}
+                </div>              
 
                 <div class="panel-body" style="margin:25px">
+                {!! Form::model($client,['method' => 'POST', 'route' => ['clients.update',$client->id], 'enctype'=>"multipart/form-data"]) !!}
+                    {{ method_field('PUT') }}
                     <div class="row">
                         <div class="col-xs-4 form-group">
                             {!! Form::label('nombres', 'Nonbres', ['class' => 'control-label']) !!}
@@ -65,11 +113,21 @@
                             
                         </div>
 
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('edad', 'Edad', ['class' => 'control-label']) !!}
+                            {!! Form::text('edad', null, ['class' => 'form-control', 'placeholder' => '', 'disabled']) !!}
+                            
+                        </div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('nacionalidad', 'Nacionalidad', ['class' => 'control-label']) !!}
                             {!! Form::text('nacionalidad', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
                             
                         </div>
+
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('etnia', 'Etnia', ['class' => 'control-label']) !!}
@@ -77,8 +135,7 @@
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
-
+                        
                         <div class="col-xs-4 form-group">
                             {!! Form::label('celular', 'Celular', ['class' => 'control-label']) !!}
                             {!! Form::text('celular', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
@@ -91,13 +148,13 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('instruccion', 'Instrucción', ['class' => 'control-label']) !!}
                             {!! Form::select('instruccion',['Basica'=>'Basica','Segundaria'=>'Segundaria','Superior'=>'Superior'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!} 
                             
-                        </div>
-
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        </div>                       
 
                         <div class="col-xs-8 form-group">
                             {!! Form::label('domiciolio', 'Domicilio', ['class' => 'control-label']) !!}
@@ -105,13 +162,15 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                          <div class="col-xs-4 form-group">
                             {!! Form::label('estado_civil', 'Estado Civil', ['class' => 'control-label']) !!}
                             {!! Form::select('estado_civil',['Soltera'=>'Soltera','Casada'=>'Casada','Viuda'=>'Viuda','Divorciada'=>'Divorciada'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!} 
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('sexo', 'Sexo', ['class' => 'control-label']) !!}
@@ -125,13 +184,15 @@
                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('sector', 'Sector donde vive', ['class' => 'control-label']) !!}
                             {!! Form::text('sector', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}   
                             
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ocupacion', 'Ocupación', ['class' => 'control-label']) !!}
@@ -143,16 +204,12 @@
                             {!! Form::select('iess',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ingresos', 'Ingresos', ['class' => 'control-label']) !!}
-                            {!! Form::text('ingresos', null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                           
-                        </div>
-
-                        
-
-                        
-
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                            {!! Form::select('ingresos',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('bono', 'Bono', ['class' => 'control-label']) !!}
@@ -164,12 +221,14 @@
                             {!! Form::select('discapacidad',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
                         </div>
 
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+
                         <div class="col-xs-4 form-group">
                             {!! Form::label('tipo_discapacidad', 'Tipo de Discapacidad', ['class' => 'control-label']) !!}
                             {!! Form::text('tipo_discapacidad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
+                        
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('enfermedad', 'Enfermedad Catastrófica', ['class' => 'control-label']) !!}
@@ -181,11 +240,14 @@
                             {!! Form::text('tipo_enfermedad', null, ['class' => 'form-control', 'placeholder' => '']) !!}                           
                         </div>
 
-                        <div class="col-xs-4 form-group">
-                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
-                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
-                        </div>
+                        <div class="col-xs-12 clearfix" style="height: 10px;"></div>
 
+                        <div class="col-xs-6 form-group">
+                            {!! Form::label('foto_cedula', 'Foto Cedula', ['class' => 'control-label']) !!}
+                            <img src="{{asset('file/'.$client->foto_cedula)}}" class="img-responsive" width="100%">
+                            <br>
+                            {!! Form::file('foto_cedula',['class' => 'form-control']) !!}                             
+                        </div>                        
 
                     </div>
                    
@@ -194,10 +256,59 @@
                     <div class="pull-right">
                     {!! Form::button(trans('global.app_update'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
                     </div>
+                    {!! Form::close() !!}
+
+                    <div class="row">
+
+                        <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+                            <h4 style="padding-left: 10px;" >Historial de Asignación</h4>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 15px;">          
+
+                        </div>                   
+
+                        <table class="table table-bordered table-striped " id="dtmenuCS" style="width:100%!important" >
+                              <thead>
+                              <tr>
+                                <th>Supervisor</th>
+                                <th>Fecha</th>                 
+                              </tr>
+                              </thead>
+                              <tbody >
+
+                              </tbody>
+                        </table>
+
+                    </div>
+                     {!! Form::open(['method' => 'POST', 'route' => ['clients.asignarSupervisor']]) !!}
+                    <div class="row">
+
+                        <div class="col-md-12" style="background-color: #ccc; margin-top: 20px;">
+                            <h4 style="padding-left: 10px;" >Asignar Supervisor</h4>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 15px;">          
+
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('supervisor_id', 'Supervisor', ['class' => 'control-label']) !!}
+                            {!! Form::select('supervisor_id', $supervisors, Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>
+
+                        <input type="hidden" name="cliente_id" value="{{$client->id}}"/>
+                        <br>
+                        <div class="pull-right">
+                        {!! Form::button(trans('global.app_save'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
+
+                    </div>
+                    {!! Form::close() !!}
+
                 </div>
-            </div>
+            </div>       
         </div>
         
 
-        {!! Form::close() !!}
+        
         @stop

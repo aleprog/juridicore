@@ -6,6 +6,9 @@ Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 	Route::get('admin/clientes/data', 'Solicitudescj\ClientController@getDatatable')
 	->name('clients.data');
 
+	Route::get('admin/clientes/data/consulta_asignacion/{id}', 'Solicitudescj\ClientController@getDatatableConsultaAsignacion')
+	->name('clients.dataConsultaAsignacion');
+
 	Route::get('admin/cliente/{id}', 'Solicitudescj\ClientController@edit')
 	->name('clients.edit');
 
@@ -26,3 +29,6 @@ Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 
 	Route::get('admin/clientes/{id}/imprimir', 'Solicitudescj\ClientController@print')
 	->name('clients.print');
+
+	Route::post('admin/clientes/asignar/supervisor', 'Solicitudescj\ClientController@asignarSupervisor')
+	->name('clients.asignarSupervisor');

@@ -12,7 +12,7 @@ use App\Core\Entities\Solicitudescj\StudentsSteachers;
 
 use App\Core\Entities\Solicitudescj\Horario;
 use App\Core\Entities\Solicitudescj\Asistencia;
-use App\Core\Entities\Solicitudescj\semanaObservaciones;
+use App\Core\Entities\Solicitudescj\semanaobservaciones as semanaObservaciones;
 use App\Core\Entities\Solicitudescj\evaluacionest;
 
 
@@ -50,12 +50,12 @@ class StudentController extends Controller
     
 	public function evaluacionSupervisor()
 	{
-		return view('modules.solicitudescj.student.evaluacionDocente');
+		return view('modules.Solicitudescj.student.evaluacionDocente');
 	}
 	public function indexEvaluacion()
 	{
 		$obj=evaluacionest::where('user_id',Auth::user()->id)->get()->count();
-		return view('modules.solicitudescj.student.ficha')->with(['obj'=>$obj]);
+		return view('modules.Solicitudescj.student.ficha')->with(['obj'=>$obj]);
 	}
 	public function evaluacionSave(request $request)
 	{
@@ -88,7 +88,7 @@ class StudentController extends Controller
 			
 		}
 			
-			return view('modules.solicitudescj.student.ficha')
+			return view('modules.Solicitudescj.student.ficha')
 			->with(['m'=>$m,'obj'=>$obj]);
 
 	}

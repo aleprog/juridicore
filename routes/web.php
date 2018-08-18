@@ -11,6 +11,7 @@ require __DIR__ . '/modules/employees.php';
 require __DIR__ . '/modules/periods.php';
 require __DIR__ . '/modules/passants.php';
 require __DIR__ . '/modules/clients.php';
+require __DIR__ . '/modules/casos.php';
 
 
 
