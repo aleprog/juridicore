@@ -152,7 +152,7 @@
 		        </div>
 
 		        <div class="col-sm-4 col-md-3">
-		            <dt>Carnet</dt>
+		            <dt>Carnet CONADIS</dt>
 		            <dd><p>{{$postulant->carnet ? $postulant->carnet : '&nbsp;' }}</p></dd>
 		        </div>
 

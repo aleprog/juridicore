@@ -23,7 +23,7 @@ class EmployeeController extends Controller
 	}
 
 	public function create(){
-		$roles = Role::selectRaw('name, concat(abv,"-",id) as id')->whereIn('abv',['SUP','TUT','SEC'])->pluck('name','id');
+		$roles = Role::selectRaw('name, concat(abv,"-",id) as id')->whereIn('abv',['SUP','MON','SEC'])->pluck('name','id');
 
         $places = Place::pluck('descripcion','id');
 
@@ -35,7 +35,7 @@ class EmployeeController extends Controller
 
 
 	    $users=User::whereHas('roles', function ($query) {
-		    $query->whereIn('abv',['SUP','TUT','SEC']);
+		    $query->whereIn('abv',['SUP','MON','SEC']);
 		})->get();
 
     	//dd($postulants);
@@ -114,6 +114,7 @@ class EmployeeController extends Controller
             'email' => 'required|unique:mysql.users,email,'.$id.',id',
             'persona_id' => 'required|unique:mysql.users,persona_id,'.$id.',id',
             'roles' => 'required',
+            'lugar' => 'required_with:lugar'
             //'sale_price' => 'required_if:roles,==,TUT|required_if:roles,==,SUP'
         ];
         $messages = [
@@ -149,10 +150,10 @@ class EmployeeController extends Controller
     public function show($id){
      
         $employee=User::whereHas('roles', function ($query) {
-		    $query->whereIn('abv',['SUP','TUT','SEC']);
+		    $query->whereIn('abv',['SUP','MON','SEC']);
 		})->find($id);
 
-		$roles = Role::selectRaw('name, concat(abv,"-",id) as id')->whereIn('abv',['SUP','TUT','SEC'])->pluck('name','id');
+		$roles = Role::selectRaw('name, concat(abv,"-",id) as id')->whereIn('abv',['SUP','MON','SEC'])->pluck('name','id');
 
         $places = Place::pluck('descripcion','id');
         //dd($postulant);
@@ -161,7 +162,7 @@ class EmployeeController extends Controller
 
 
         if(!$employee){
-            return redirect()->route('postulant.index')->with('danger','No se ha encontrado el postulante');
+            return redirect()->route('postulant.index')->with('danger','No se ha encontrado el empleado');
         }  
 
         //dd($postulant);

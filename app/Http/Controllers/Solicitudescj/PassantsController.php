@@ -158,7 +158,8 @@ class PassantsController extends Controller
         $students_teachers->estado = 'A';
         $students_teachers->save();
 
-        return redirect()->route('passants.index');
+        //return redirect()->route('passants.index');
+        return redirect()->route('passants.show',$request->postulant_id);
 
     }
 

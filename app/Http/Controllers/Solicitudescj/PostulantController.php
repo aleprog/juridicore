@@ -87,17 +87,27 @@ class PostulantController extends Controller
 
             //dd($postulant);
 
-            $user = new User();
-            $user->name = $postulant->nombres.' '.$postulant->apellidos;
-            $user->email = $postulant->correo_institucional;
-            $user->password = bcrypt($password); 
-            $user->persona_id = $postulant->identificacion;
-            $user->estado = 'A';
-            $user->save();
+            $verifiqueUser = User::where('persona_id',$postulant->identificacion)->get();
 
-            $user->assignRole([4]);
+            if(count($verifiqueUser)<1){
 
-            Mail::to($user->email)->send(new CreateUserStudent($user, $password));
+                $user = new User();
+                $user->name = $postulant->nombres.' '.$postulant->apellidos;
+                $user->email = $postulant->correo_institucional;
+                $user->password = bcrypt($password); 
+                $user->persona_id = $postulant->identificacion;
+                $user->estado = 'A';
+                $user->save();
+
+                $user->assignRole([4]);
+
+                Mail::to($user->email)->send(new CreateUserStudent($user, $password));
+
+            }else{
+
+                $verifiqueUser[0]->estado = 'A';
+                $verifiqueUser[0]->save();
+            }
         }
 
 

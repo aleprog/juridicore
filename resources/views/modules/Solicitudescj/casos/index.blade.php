@@ -41,7 +41,8 @@
 
                     {data: 'cliente.nombres', "width": "20%"},
                     {data: 'cliente.apellidos', "width": "20%"},
-                    {data: 'cliente.cedula', "width": "20%"},
+                    {data: 'cliente.cedula', "width": "20%"},                    
+                    {data: 'created_at',   "width": "10%"},
                     {data: 'estado_label',   "width": "10%"},
                     {
                         data: 'actions',
@@ -81,7 +82,8 @@
 
                   <th>Nombres</th>
                   <th>Apellidos</th>                  
-                  <th>Cedula</th>
+                  <th>Cedula</th>                  
+                  <th>Fecha</th>
                   <th>Estado</th>
                   <th>Opciones</th>
 

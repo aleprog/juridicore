@@ -16,7 +16,7 @@ CREATE TABLE `clientes` (
   `sector` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `ocupacion` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `iess` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
-  `ingresos` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ingresos` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bono` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `discapacidad` varchar(2) COLLATE utf8_unicode_ci NOT NULL,
   `tipo_discapacidad` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,

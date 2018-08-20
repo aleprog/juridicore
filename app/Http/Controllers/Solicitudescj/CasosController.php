@@ -88,13 +88,86 @@ class CasosController extends Controller
       //$client->demandante = $request->demandante;
       //$client->demandado = $request->demandado;
       $client->practicante_id = $request->practicante_id;
-      $client->estado = 'A';
+      if($request->razon=='Patrocinio'){
+          $client->estado = 'PI';
+      }else{
+          $client->estado = 'F';
+      }      
 
       //dd($client);
  
       $client->save();
 
       return redirect()->route('casos.show',$client->id);
+
+    }
+
+
+    public function updateCasoAsesoria(Request $request,$id)
+    {
+
+      $rules = [
+        'materia' => 'required',
+        'defensoria_publica' => 'required',
+        'convirtio_patrocinio' => 'required',
+      ];
+        
+      $this->validate($request, $rules);
+
+      //dd($request->all());
+      $consulta = Consulta::find($id);
+      $consulta->materia = $request->materia;
+      $consulta->defensoria_publica = $request->defensoria_publica;
+      $consulta->convirtio_patrocinio = $request->convirtio_patrocinio;
+      $consulta->estado = 'AT';      
+
+      //dd($client);
+ 
+      $consulta->save();
+
+      return redirect()->route('casos.show',$consulta->id);
+
+    }
+
+    public function updateCasoPatrocinio(Request $request,$id)
+    {
+
+      $rules = [
+        'materia' => 'required',
+        'tipo_judicatura' => 'required',
+        'tipo_patrocinio' => 'required',
+        'pretension_presion' => 'required|numeric|min:1',
+        'nombre_juez' => 'required',
+        'ultima_actividad' => 'required',
+        'fecha_ultima_actividad' => 'required',
+        'estado_caso' => 'required',
+        'defensoria_publica' => 'required',
+        'resolución_judicial' => 'nullable',
+        'fecha_resolucion' => 'nullable',
+      ];
+        
+      $this->validate($request, $rules);
+
+      //dd($request->all());
+      $consulta = Consulta::find($id);
+      $consulta->materia = $request->materia;
+      $consulta->tipo_judicatura = $request->tipo_judicatura;
+      $consulta->tipo_patrocinio = $request->tipo_patrocinio;
+      $consulta->pretension_presion = $request->pretension_presion;
+      $consulta->nombre_juez = $request->nombre_juez;
+      $consulta->ultima_actividad = $request->ultima_actividad;
+      $consulta->fecha_ultima_actividad = $request->fecha_ultima_actividad;
+      $consulta->estado_caso = $request->estado_caso;
+      $consulta->defensoria_publica = $request->defensoria_publica;
+      $consulta->resolucion_judicial = $request->resolucion_judicial;
+      $consulta->fecha_resolucion = $request->fecha_resolucion;
+      $consulta->estado = 'AT';      
+
+      //dd($client);
+ 
+      $consulta->save();
+
+      return redirect()->route('casos.show',$consulta->id);
 
     }
 
@@ -161,6 +234,150 @@ class CasosController extends Controller
        ]);
 
       return $pdf->stream('cedula_cliente_'.$client->cedula.'.pdf');
+    }
+
+    public function search(){
+      return view('modules.Solicitudescj.casos.search');
+    }
+
+    public function searchPost(Request $request){
+
+       $rules = [
+        'fecha_desde' => 'required|date',
+        'fecha_hasta' => 'required|date|after_or_equal:fecha_desde',
+        'tipo' => 'required',
+      ];
+        
+      $this->validate($request, $rules);
+
+      if($request->tipo=='Asesoria'){
+        return redirect()->route('casos.searchFechaAsesoria',[$request->fecha_desde,$request->fecha_hasta]);
+      }elseif($request->tipo=='Patrocinio'){
+        return redirect()->route('casos.searchFechaPatrocinio',[$request->fecha_desde,$request->fecha_hasta]);
+      }
+    
+    }
+
+    public function searchFechaAsesoria($fecha_desde,$fecha_hasta){
+
+      return view('modules.Solicitudescj.casos.reporteAsesoria',compact('fecha_desde','fecha_hasta'));
+
+    }
+
+    public function searchFechaPatrocinio($fecha_desde,$fecha_hasta){
+
+      return view('modules.Solicitudescj.casos.reportePatrocinio',compact('fecha_desde','fecha_hasta'));
+
+    }
+
+    public function searchDataAsesoria($fecha_desde,$fecha_hasta){
+      //dd($fecha_desde,$fecha_hasta);
+
+      $rol=auth()->user()->roles->where('abv','DIR');
+
+      if(count($rol)>0){
+
+        $casos=Consulta::with(['cliente','supervisor'])
+        ->whereBetween('created_at', [$fecha_desde, $fecha_hasta])
+        ->where('razon','Asesoría')
+        ->orderBy('estado','DESC')
+        ->orderBy('id','ASC')
+        ->get();
+
+      }else{
+
+        $casos=Consulta::with(['cliente','supervisor'])
+        ->where('supervisor_id',auth()->user()->id)
+        ->whereBetween('created_at', [$fecha_desde, $fecha_hasta])
+        ->where('razon','Asesoría')
+        ->orderBy('estado','DESC')
+        ->orderBy('id','ASC')
+        ->get();
+
+      }
+
+      //dd($casos[0]->cliente->fecha_nacimiento_es);
+
+
+      return DataTables::of($casos)->addColumn('actions', function ($select) {
+        return '<p class="text-center"><a title="Gestionar Clientes" href="'.route('casos.show',$select->id).'"><span class="fa fa-cog"></span></a><p>';
+          })->addColumn('estado_label', function ($select) {
+              return $select->estado_label;
+      })->addColumn('cjga', function ($select) {
+              return $select->cjga;
+      })->addColumn('mes', function ($select) {
+              return $select->mes_label;
+      })->addColumn('annio', function ($select) {
+              return $select->annio;
+      })->addColumn('provincia', function ($select) {
+              return $select->provincia;
+      })->addColumn('ciudad', function ($select) {
+              return $select->ciudad;
+      })->addColumn('created_at_es', function ($select) {
+              return $select->created_at_es;
+      })->addColumn('cliente_nombre', function ($select) {
+              return $select->cliente_nombre;
+      })->addColumn('cliente_fecha_nacimiento', function ($select) {
+              return $select->cliente->fecha_nacimiento_es;
+      })->addColumn('detalle', function ($select) {
+              return $select->observacion;
+      })->rawColumns(['actions','estado_label'])
+      ->make(true); 
+
+
+    }
+
+    public function searchDataPatrocinio($fecha_desde,$fecha_hasta){
+      //dd($fecha_desde,$fecha_hasta);
+
+      $rol=auth()->user()->roles->where('abv','DIR');
+
+      if(count($rol)>0){
+
+        $casos=Consulta::with(['cliente','supervisor'])
+        ->whereBetween('created_at', [$fecha_desde, $fecha_hasta])
+        ->where('razon','Patrocinio')
+        ->orderBy('estado','DESC')
+        ->orderBy('id','ASC')
+        ->get();
+
+      }else{
+
+        $casos=Consulta::with(['cliente','supervisor'])
+        ->where('supervisor_id',auth()->user()->id)
+        ->whereBetween('created_at', [$fecha_desde, $fecha_hasta])
+        ->where('razon','Patrocinio')
+        ->orderBy('estado','DESC')
+        ->orderBy('id','ASC')
+        ->get();
+
+      }
+
+      //dd($casos[0]->cliente->fecha_nacimiento_es);
+
+
+      return DataTables::of($casos)->addColumn('cjga', function ($select) {
+              return $select->cjga;
+      })->addColumn('mes', function ($select) {
+              return $select->mes_label;
+      })->addColumn('annio', function ($select) {
+              return $select->annio;
+      })->addColumn('provincia', function ($select) {
+              return $select->provincia;
+      })->addColumn('ciudad', function ($select) {
+              return $select->ciudad;
+      })->addColumn('created_at_es', function ($select) {
+              return $select->created_at_es;
+      })->addColumn('cliente_nombre', function ($select) {
+              return $select->cliente_nombre;
+      })->addColumn('cliente_fecha_nacimiento', function ($select) {
+              return $select->cliente->fecha_nacimiento_es;
+      })->addColumn('detalle', function ($select) {
+              return $select->observacion;
+      })->rawColumns(['actions','estado_label'])
+      ->make(true); 
+
+
     }
 
 }

@@ -12,6 +12,30 @@
 	Route::put('admin/casos/{id}/caso', 'Solicitudescj\CasosController@updateCaso')
 	->name('casos.updateCaso');
 
+	Route::put('admin/casos/{id}/caso/asesoria', 'Solicitudescj\CasosController@updateCasoAsesoria')
+	->name('casos.updateCasoAsesoria');
+
+	Route::put('admin/casos/{id}/caso/Patrocinio', 'Solicitudescj\CasosController@updateCasoPatrocinio')
+	->name('casos.updateCasoPatrocinio');
+
+	Route::get('admin/casos/busqueda', 'Solicitudescj\CasosController@search')
+	->name('casos.search');
+
+	Route::post('admin/casos/busqueda/fecha', 'Solicitudescj\CasosController@searchPost')
+	->name('casos.searchPost');
+
+	Route::get('admin/casos/busqueda/asesorias/{fechaInicio}/{fechaFinal}', 'Solicitudescj\CasosController@searchFechaAsesoria')
+	->name('casos.searchFechaAsesoria');
+
+	Route::get('admin/casos/busqueda/patrocionio/{fechaInicio}/{fechaFinal}', 'Solicitudescj\CasosController@searchFechaPatrocinio')
+	->name('casos.searchFechaPatrocinio');
+
+	Route::get('admin/casos/busqueda/data/asesoria/{fechaInicio}/{fechaFinal}', 'Solicitudescj\CasosController@searchDataAsesoria')
+	->name('casos.searchDataAsesoria');
+
+	Route::get('admin/casos/busqueda/data/patrocinio/{fechaInicio}/{fechaFinal}', 'Solicitudescj\CasosController@searchDataPatrocinio')
+	->name('casos.searchDataPatrocinio');
+
 	Route::get('admin/casos/{id}/imprimir', 'Solicitudescj\CasosController@print')
 	->name('casos.print');
 
