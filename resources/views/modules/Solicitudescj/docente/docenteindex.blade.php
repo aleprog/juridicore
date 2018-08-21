@@ -248,16 +248,27 @@ $.fn.dataTable.ext.errMode = 'throw';
 								<div class="col-md-12">
 									<div class="tabbable" id="tabs-999753">
 										<ul class="nav nav-tabs">
+		
 											<li class="nav-item active">
-												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Asistencia</a>
+												<a class="nav-link active" href="#panel-717633" data-toggle="tab">Reporte de Asistencia</a>
 											</li>
+											@if($sup>0)
+											<li class="nav-item">
+												<a class="nav-link" href="#asistencia" data-toggle="tab">
+													Registro de Asistencia
+                                                </a>
+											</li>
+										@endif
+										@if($sup>0)
 											<li class="nav-item">
 												<a class="nav-link" href="#panel-778868" data-toggle="tab">
 													Observaciones Semanales
                                                 </a>
 											</li>
+										@endif
 										</ul>
 										<div class="tab-content">
+										@if($sup>0)
 											<div class="tab-pane" id="panel-778868">
 												<p>
 												<form method="POST" action="{{ route ('supervisor.observacionSave')}}" accept-charset="UTF-8">
@@ -281,28 +292,37 @@ $.fn.dataTable.ext.errMode = 'throw';
 												</p>
 											
 											<hr/>
-											<div class="panel-body">
-															<table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
-																<thead>
+												<div class="panel-body">
+																<table class="table table-bordered table-striped " id="dtmenuo" style="width:100%!important" >
+																	<thead>
 
-																<th>Fecha de Registro</th>
-																<th>Estudiante</th>
-																<th>Semana</th>
-																<th>Observacion</th>
-															
+																	<th>Fecha de Registro</th>
+																	<th>Estudiante</th>
+																	<th>Semana</th>
+																	<th>Observacion</th>
+																
 
-																</thead>
-																<tbody id="tbobymenuo">
+																	</thead>
+																	<tbody id="tbobymenuo">
 
-																</tbody>
-															</table>
+																	</tbody>
+																</table>
 												</div>
-												</div>
+											</div>
+										@endif
 											<div class="tab-pane active" id="panel-717633">
 												<p>
 												@include('modules.Solicitudescj.docente.asistencia')
 												</p>
 											</div>
+										@if($sup>0)
+											<div class="tab-pane" id="asistencia">
+												<p>
+												@include('modules.Solicitudescj.docente.asistenciaRegistro')
+												</p>
+											</div>
+
+										@endif
 										</div>
 									</div>
 								</div>

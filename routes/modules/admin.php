@@ -6,7 +6,15 @@ return $pdf->stream();
 })->name('frontend.pdf');
 
 Route::get('/', function () { 
-    return view('frontend.home');
+    $obj=\DB::connection('mysql_solicitudescj')
+    ->table('periodos')->where('estado','A')->get()->first();
+
+    $cc=\DB::connection('mysql_solicitudescj')
+    ->table('periodos')->where('estado','A')->where('habilita','A')->get()->count();
+ 
+   
+
+    return view('frontend.home')->with(['obj'=>$obj,'cc'=>$cc]);
  })->name('frontend.home');
  
  Route::get('/plantilla', function () { 

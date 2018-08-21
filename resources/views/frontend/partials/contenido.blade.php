@@ -247,6 +247,12 @@
 									<input type="file" class="form-control" name="cedula" accept="application/pdf" >
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['cedula_archivo'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['cedula_archivo'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>
@@ -256,6 +262,12 @@
 									<input type="file" class="form-control" name="papeleta" accept="application/pdf">
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['papeleta_archivo'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['papeleta_archivo'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>
@@ -265,6 +277,12 @@
 									<input type="file" class="form-control" name="foto" accept="image/jpeg">
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['foto_archivo'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['foto_archivo'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en jpeg</strong></h6>
 									</div>
 								</div>
@@ -274,6 +292,12 @@
 									<input type="file" class="form-control" name="curriculum" accept="application/pdf">
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['curriculum_archivo'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['curriculum_archivo'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>
@@ -283,6 +307,12 @@
 									<input type="file" class="form-control" name="certificado_matricula" accept="application/pdf" >
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['certificado_matricula'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['certificado_matricula'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>
@@ -292,6 +322,12 @@
 									<input type="file" class="form-control" name="certificado_arrastre" accept="application/pdf" >
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['certificado_no_arrastre'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['certificado_no_arrastre'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>
@@ -301,6 +337,12 @@
 									<input type="file" class="form-control" name="solicitud_sellada" accept="application/pdf" >
 								  </div>
 									<div class="col-md-2">
+									@if(session('data')['solicitud_sellada'])
+									<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+									@endif
+									@if(!session('data')['solicitud_sellada'])
+									<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+									@endif
 									<h6><strong>Archivo en PDF</strong></h6>
 									</div>
 								</div>

@@ -236,13 +236,13 @@ class PassantsController extends Controller
         $postulantRequest = RequestPostulant::where('postulant_id',$request->postulant_id)->first(); 
 
         $status=State::where('abv','NE')->first();
-
         $motivo= $request->motivo;
         $postulant = Postulant::find($request->postulant_id); 
         $postulant->motivo=$motivo;
+        $postulant->estado='I';
         $postulant->save();
 
-        $user = User::where('persona_id',$postulant->identificacion)->get();
+        $user = User::where('persona_id',$postulant->identificacion)->first();
 
         $user->estado = 'I';
         $user->save();

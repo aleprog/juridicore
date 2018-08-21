@@ -130,7 +130,20 @@ class UsersController extends Controller
 
         return redirect()->route('admin.users.index');
     }
+    public function userstate($id)
+    {
+        $user = User::findOrFail($id);
+        if($user->estado=='A')
+        {
+            $user->estado='I';
+        }else
+        {
+            $user->estado='A';
+        }
+        $user->save();
 
+        return redirect()->route('admin.users.index');
+    }
     /**
      * Delete all selected User at once.
      *

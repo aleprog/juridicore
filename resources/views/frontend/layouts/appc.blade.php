@@ -11,7 +11,7 @@
 	<div class="banner" id="home">
 		<!-- agileinfo-dot -->
 		<div class="agileinfo-dot">
-          @include('frontend.partials.menu')
+      <!--    @include('frontend.partials.menu')-->
          
 		</div>
 		<!-- //agileinfo-dot -->

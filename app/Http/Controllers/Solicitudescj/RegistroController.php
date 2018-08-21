@@ -22,7 +22,7 @@ class RegistroController extends Controller
 			$carrera=$request->carrera;
 			$correo_institucional=$request->correo_institucional;
 				$this->validate($request,[
-				'identificacion'=>'required|unique:mysql_solicitudescj.postulants',	
+				'identificacion'=>'required|unique:mysql_solicitudescj.postulants,identificacion,null,id,estado,A',	
 				
 					],['identiticacion.uniqued'=>'Ya posee una solicitud en procesos',
 				]);
@@ -108,6 +108,7 @@ class RegistroController extends Controller
 					$datos['data']=$objPostulant;
 					$datos['message']=$message;
 					$datos['id']=$idv;
+					
 					$datos['usuario']=$objPostulant['nombres'].' '.$objPostulant['apellidos'];
 					return redirect()->route('frontend.datos')->with($datos);
 					break;
@@ -126,7 +127,31 @@ class RegistroController extends Controller
 
 					break;
 					case 'PE':
-
+					$objPostulant=Postulant::where(['identificacion'=>$identificacion,'estado'=>'A'])->get()->toArray();
+		  
+					$objPostulant=$objPostulant[0];
+					
+					$identificacion=$objPostulant['identificacion'];
+					$nombres=$objPostulant['nombres'];
+					$apellidos=$objPostulant['apellidos'];
+					$nivel=$objPostulant['semestre'];
+					$carrera=$objPostulant['carrera'];
+					$correo_institucional=$objPostulant['correo_institucional'];
+					$convencional=$objPostulant['convencional'];
+					$celular=$objPostulant['celular'];
+					 $direccion=$objPostulant['direccion'];
+					
+					  $pdf= \PDF::loadView('frontend.datosimprimir',compact(
+						  'identificacion',
+						  'nombres',
+						  'apellidos',
+						  'nivel',
+						  'carrera',
+						  'correo_institucional',
+						  'convencional',
+						  'direccion',
+						  'celular'));
+						  return $pdf->stream();
 					break;
 				}
 				$message="Solicitud se encuentra en estado,".$estadodescripcion;
@@ -140,3 +165,4 @@ class RegistroController extends Controller
 
     }
 }
+	

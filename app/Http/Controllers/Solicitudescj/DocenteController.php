@@ -23,7 +23,7 @@ class DocenteController extends Controller
 {
     public function evaluacionSupervision()
     {
-       
+    
 
         $objD=DB::connection('mysql_solicitudescj')
         ->table('students_teachers as et')
@@ -35,8 +35,9 @@ class DocenteController extends Controller
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
 
-        
-        return view('modules.Solicitudescj.docente.tutorindex',compact('objD'));
+        $sup= Auth::user()->evaluarole(['Supervisor']);
+
+        return view('modules.Solicitudescj.docente.tutorindex',compact('objD','sup'));
     }
  
     public function index(){
@@ -49,8 +50,11 @@ class DocenteController extends Controller
         ->where('et.estado','A')
    
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
-        ->pluck('apellidos','id');
-        return view('modules.Solicitudescj.docente.docenteindex',compact('objD'));
+        ->get()->pluck('apellidos','id')->toArray();
+  
+        $sup= Auth::user()->evaluarole(['Supervisor']);
+
+        return view('modules.Solicitudescj.docente.docenteindex',compact('objD','sup'));
     }
     public function StateActividad($id)
     {
@@ -191,8 +195,6 @@ class DocenteController extends Controller
     public function asistenciaSave(request $request)   
     {
        
-        $objAsistencia=Asistencia::where(['user_id'=>$request->estudiante,
-        'fecha'=>$request->fecha_registro])->count();
         $objD=DB::connection('mysql_solicitudescj')
         ->table('students_teachers as et')
         ->where('et.user_doc_id',Auth::user()->id)
@@ -201,46 +203,69 @@ class DocenteController extends Controller
         ->where('et.estado','A')
    
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
-        ->pluck('apellidos','id');
-
-        $semana='Semana '.$request->semana;
-        $objAsistencia2=Asistencia::where(['user_id'=>$request->estudiante,
-        'semana'=>$semana])->count();
+        ->get()->pluck('apellidos','id')->toArray();
+             
+        $sup= Auth::user()->evaluarole(['Supervisor']);
        
+        foreach($request->estudianteid as $id)
+        {
+            
+            $objAsistencia=Asistencia::where(['user_id'=>$id,
+            'fecha'=>$request->fecha_registro])->count();
 
-        if($objAsistencia<1 && $objAsistencia2<5)
-        {
-            $docent_id=Auth::user()->id;
-            $objAsistencia=new Asistencia();
-            $objAsistencia->user_id=$request->estudiante;
-            $objAsistencia->docente_id=$docent_id;
-            $objAsistencia->fecha=$request->fecha_registro;
-            $objAsistencia->hora_inicio=$request->hora_inicio;
-            $objAsistencia->hora_fin=$request->hf;
-            if($request->cant_horas==0)
+            
+            if($objAsistencia>0)
             {
-                $objAsistencia->estado='A';
+                
+                $m="Ya existe este registro";
+                
+  
+        return view('modules.Solicitudescj.docente.docenteindex',compact('objD','sup','m'));
+              //  return redirect()->route('supervisor.asistencia')->with(['m'=>$m]);
     
             }
-            $objAsistencia->horas=$request->cant_horas;
-            $objAsistencia->semana='Semana '.$request->semana;
-           
-            $objAsistencia->save();
+          /*  foreach($request->semana as $se)
+            {
+                $objAsistencia2=Asistencia::where(['user_id'=>$id,
+                'semana'=>$se])->count();
+                    if($objAsistencia2>4)
+                    {
+                        $m="Ya tiene la asistencia completa de la semana";
+                        return view('modules.Solicitudescj.docente.docenteindex',compact('objD','sup','m'));
+                    
+                     //   return redirect()->route('supervisor.asistencia')->with(['m'=>$m]);
           
-                $m="Registro Grabado Exitosamente";
-                return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
-    
-        }else
-        {
-            if($objAsistencia2>4)
-            {
-                $m="Ya tiene la asistencia completa de la semana";
-                return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
-    
+                    }
             }
-            $m="Ya existe este registro";
-            return view('modules.Solicitudescj.docente.docenteindex')->with(['m'=>$m,'objD'=>$objD]);
+           */
+               
+                
         }
+        foreach($request->estudianteid as $id)
+        {
+                $docent_id=Auth::user()->id;
+                $objAsistencia=new Asistencia();
+                $objAsistencia->user_id=$id;
+                $objAsistencia->docente_id=$docent_id;
+                $objAsistencia->fecha=$request->fecha_registro;
+                $objAsistencia->hora_inicio=$request->hora_inicio[$id];
+                $objAsistencia->hora_fin=$request->hf[$id];
+                if($request->cant_horas[$id]==0)
+                {
+                    $objAsistencia->estado='A';
+        
+                }
+                $objAsistencia->horas=$request->cant_horas[$id];
+                $objAsistencia->semana='Semana '.$request->semana[$id];
+               
+                $objAsistencia->save();
+              
+                    $m="Registro Grabado Exitosamente";
+                    
+        }
+        return view('modules.Solicitudescj.docente.docenteindex',compact('objD','sup','m'));
+
+      //  return redirect()->route('supervisor.asistencia')->with(['m'=>$m]);
 
     }
     
@@ -268,22 +293,25 @@ class DocenteController extends Controller
     }
     public function datatableEvaluacionesSup()
 	{
-       return DataTables::of(
-            DB::connection('mysql_solicitudescj')
-                ->table('evaluacionsupervisor AS a')
-                ->where('a.docente_id',Auth::user()->id)
-                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
-                ->join('postulants as p','p.identificacion','u.persona_id')
-                ->orderby('a.created_at', 'ASC')
-                ->select(
-                    'a.id as id',
-                'a.total as total',
-                DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
-				'a.created_at as fecha_registro'
-               )
-                ->get()
-
-        )->addColumn('Opciones', function ($select) {
+        $Directora = Auth::user()->evaluarole(['Directora']);
+        $result=DB::connection('mysql_solicitudescj')
+        ->table('evaluacionsupervisor AS a');
+        if($Directora==0)
+        {
+            $result=$result->where('a.docente_id',Auth::user()->id);
+        }
+        $result=$result->join('juridicorebase_ant.users as u','u.id','a.user_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('p.estado','A')
+        ->orderby('a.created_at', 'ASC')
+        ->select(
+            'a.id as id',
+        'a.total as total',
+        DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
+        'a.created_at as fecha_registro'
+        )
+        ->get();
+       return DataTables::of($result)->addColumn('Opciones', function ($select) {
 		        return '<a href="'.route('supervisor.imprimirEvaluacionSup',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
             })
            
@@ -293,25 +321,28 @@ class DocenteController extends Controller
     
     public function datatableEvaluacionesTutor()
 	{
-       return DataTables::of(
-            DB::connection('mysql_solicitudescj')
-                ->table('evaluaciontutor AS a')
-                ->where('a.docente_id',Auth::user()->id)
-                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
-                ->join('postulants as p','p.identificacion','u.persona_id')
-                ->orderby('a.created_at', 'ASC')
-                ->select(
-                    'a.id as id',
-                'a.visita as visita',
-                DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
-				'a.created_at as fecha_registro'
-               )
-                ->get()
+        $Directora = Auth::user()->evaluarole(['Directora']);
 
-        )->addColumn('Opciones', function ($select) {
+        $result=DB::connection('mysql_solicitudescj')
+        ->table('evaluaciontutor AS a');
+        if($Directora==0)
+        {
+            $result=$result->where('a.docente_id',Auth::user()->id);
+        }
+        $result=$result->join('juridicorebase_ant.users as u','u.id','a.user_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('p.estado','A')
+        ->orderby('a.created_at', 'ASC')
+        ->select(
+            'a.id as id',
+        'a.visita as visita',
+        DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
+        'a.created_at as fecha_registro'
+       )
+        ->get();
+       return DataTables::of($result)->addColumn('Opciones', function ($select) {
 		        return '<a href="'.route('tutor.imprimirEvaluacion',$select->id).'" target="_blank" class="btn btn-primary btn-sm">Imprimir</a>';
             })
-           
           
             ->make(true);
     }
@@ -319,25 +350,28 @@ class DocenteController extends Controller
 
     public function datatableAsistencia()
 	{   
-       return DataTables::of(
-            DB::connection('mysql_solicitudescj')
-                ->table('asistencias AS a')
-                ->where('a.docente_id',Auth::user()->id)
-                ->join('juridicorebase_ant.users as u','u.id','a.user_id')
-                ->join('postulants as p','p.identificacion','u.persona_id')
-                ->orderby('a.estado','DESC')
-                ->select(
-                    'a.descripcion as descripcion',
-				'a.id as id',
-                'a.estado as estado',
-                DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
-				'a.fecha as fecha',
-                'a.semana as semana',
-                'a.hora_inicio as hora_inicio',
-                'a.hora_fin as hora_fin',
-                'a.horas as horas')
-                
-                ->get()
+        $Directora = Auth::user()->evaluarole(['Directora']);
+        $result=DB::connection('mysql_solicitudescj')
+        ->table('asistencias AS a');
+        if($Directora==0)
+        {
+            $result= $result->where('a.docente_id',Auth::user()->id);
+        }
+        $result= $result->join('juridicorebase_ant.users as u','u.id','a.user_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('p.estado','A')
+        ->orderby('a.estado','DESC')
+        ->select(
+            'a.descripcion as descripcion',
+        'a.id as id',
+        'a.estado as estado',
+        DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
+        'a.fecha as fecha',
+        'a.semana as semana',
+        'a.hora_inicio as hora_inicio',
+        'a.hora_fin as hora_fin',
+        'a.horas as horas')->get();
+       return DataTables::of($result         
 
         )->addColumn('Estado', function ($select) {
 				switch($select->estado)
@@ -388,8 +422,9 @@ class DocenteController extends Controller
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
 
-        
-        return view('modules.Solicitudescj.docente.supervisorindex',compact('objD'));
+        $sup= Auth::user()->evaluarole(['Supervisor']);
+
+        return view('modules.Solicitudescj.docente.supervisorindex',compact('objD','sup'));
     }
     public function evaluacionSupSave(request $request)
     {

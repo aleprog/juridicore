@@ -21,9 +21,13 @@
 							<li class="nav-item dropdown">
 							 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">Practicas</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-								 <a class="dropdown-item" href="#">Cronograma</a> 
+								@if($cc>0)
+								 <a class="dropdown-item" data-target="#myModal2" data-toggle="modal">Cronograma</a> 
+								 @endif
 								 <a class="dropdown-item" href="#">Requisitos</a> 
+								 @if($cc>0)
 								 <a href="#" class="dropdown-item" data-target="#myModal" data-toggle="modal">Solicitud </a>
+								 @endif
 							</div>
 								
 							</li>

@@ -29,6 +29,15 @@ Solicitud de Prácticas Pre Profesionales
 
 					<!-- Text input-->
 					<div class="form-group">
+					  <label class="col-md-4 control-label" for="Identificacion">Tipo de identificacion</label>  
+					  <div class="col-md-5">
+					  {!! Form::select('tipo_identificacion',['cedula'=>'cedula','pasaporte'=>'pasaporte'],null,['class'=>'form-control']) !!}
+
+
+					  </div>
+						
+					</div>
+					<div class="form-group">
 					  <label class="col-md-4 control-label" for="Identificacion">Identificacion</label>  
 					  <div class="col-md-5">
 					  <input id="identificacion" name="identificacion" type="text" placeholder="Identificacion" class="form-control input-md" minlength="10" maxlength="10" onKeyPress="return soloNumeros(event)" required="">
@@ -168,3 +177,102 @@ Solicitud de Prácticas Pre Profesionales
 		</div>
 		</div>
 	</div>
+
+<!--MODAL 2 -->
+
+<div class="modal about-modal fade" id="myModal2" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			
+			
+			
+			<div class="modal-content">
+			
+
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h3 class="modal-title">
+											Cronograma
+									</h3>
+								</div>
+								<div class="modal-body">
+								<div class="panel-body" style="">
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('descripcion', 'Descripción', ['class' => 'control-label']) !!}
+                            {!! Form::text('descripcion', $obj->descripcion, ['disabled'=>'','class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                            
+                            
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('recepcioni', 'Inicio Recepcion de Carpetas', ['class' => 'control-label']) !!}
+                            {!! Form::text('recepcioni',$obj->recepcioni,['disabled'=>'','class'=>'form-control pickadate','id'=>'recepcioni','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('recepcionf', 'Final Recepcion de Carpetas', ['class' => 'control-label']) !!}
+                            {!! Form::text('recepcionf',$obj->recepcionf,['disabled'=>'','class'=>'form-control pickadate','id'=>'recepcionf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('notificai', 'Inicio Notificación del Consultorio o institución Asignada', ['class' => 'control-label']) !!}
+                            {!! Form::text('notificai',$obj->notificai,['disabled'=>'','class'=>'form-control pickadate','id'=>'recepcioni','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('notificaf', 'Final Notificación del Consultorio o institución Asignada', ['class' => 'control-label']) !!}
+                            {!! Form::text('notificaf',$obj->notificaf,['disabled'=>'','class'=>'form-control pickadate','id'=>'notificaf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('fechai', 'Fecha Inicio del ciclo pasantias', ['class' => 'control-label']) !!}
+                            {!! Form::text('fechai',$obj->fechai,['disabled'=>'','class'=>'form-control pickadate','id'=>'fechai','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('fechaf', 'Fecha Final del ciclo pasantias', ['class' => 'control-label']) !!}
+                            {!! Form::text('fechaf',$obj->fechaf,['disabled'=>'','class'=>'form-control pickadate','id'=>'fechaf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+													<div class="col-md-12">
+														<strong>Meses de Pasantias<strong></div>
+														<div class="col-md-4"> 
+															{!! Form::select('mesi',['enero'=>'enero','febrero'=>'febrero',
+															'marzo'=>'marzo','abril'=>'abril','mayo'=>'mayo','junio'=>'junio',
+															'julio'=>'julio',
+															'agosto'=>'agosto','septiembre'=>'septiembre','octubre'=>'octubre','noviembre'=>'noviembre',
+															'diciembre'=>'diciembre'],$obj->mesi,['class'=>'form-control select2','id'=>'fechai','placeholder'=>'Seleccione Mes', "",'disabled'=>'']) !!}
+														</div>
+														<div class="col-md-4"> 
+
+															{!! Form::select('mesf',['enero','febrero','marzo','abril','mayo','junio','julio',
+															'agosto','septiembre','octubre','noviembre','diciembre'],$obj->mesf,['disabled'=>'','class'=>'form-control select2','id'=>'fechaf','placeholder'=>'Seleccione Mes ', ""]) !!}
+														</div>
+													</div>
+											  </div>
+							     	</div>
+								</div>
+			</div>
+		 </div>
+</div>
+		

@@ -46,10 +46,41 @@
                             
                         </div>
                     </div>
+                
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            {!! Form::label('fechai', 'Fecha Inicio', ['class' => 'control-label']) !!}
-                            {!! Form::text('fechai',null,['class'=>'form-control pickadate','id'=>'fechai','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            {!! Form::label('recepcioni', 'Inicio Recepcion de Carpetas', ['class' => 'control-label']) !!}
+                            {!! Form::text('recepcioni',old('recepcioni'),['class'=>'form-control pickadate','id'=>'recepcioni','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('recepcionf', 'Final Recepcion de Carpetas', ['class' => 'control-label']) !!}
+                            {!! Form::text('recepcionf',old('recepcionf'),['class'=>'form-control pickadate','id'=>'recepcionf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('notificai', 'Inicio Notificación del Consultorio o institución Asignada', ['class' => 'control-label']) !!}
+                            {!! Form::text('notificai',old('notificai'),['class'=>'form-control pickadate','id'=>'recepcioni','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('notificaf', 'Final Notificación del Consultorio o institución Asignada', ['class' => 'control-label']) !!}
+                            {!! Form::text('notificaf',old('notificaf'),['class'=>'form-control pickadate','id'=>'notificaf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            {!! Form::label('fechai', 'Fecha Inicio del ciclo pasantias', ['class' => 'control-label']) !!}
+                            {!! Form::text('fechai',old('fechai'),['class'=>'form-control pickadate','id'=>'fechai','placeholder'=>'Seleccione fecha ', ""]) !!}
                             
                         </div>
                     </div>
@@ -58,41 +89,36 @@
 
                      <div class="row">
                         <div class="col-xs-12 form-group">
-                            {!! Form::label('fechaf', 'Fecha Final', ['class' => 'control-label']) !!}
-                            {!! Form::text('fechaf',null,['class'=>'form-control pickadate','id'=>'fechaf','placeholder'=>'Seleccione fecha ', ""]) !!}
+                            {!! Form::label('fechaf', 'Fecha Final del ciclo pasantias', ['class' => 'control-label']) !!}
+                            {!! Form::text('fechaf',old('fechaf'),['class'=>'form-control pickadate','id'=>'fechaf','placeholder'=>'Seleccione fecha ', ""]) !!}
                             
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 form-group">                            
-                        
-                            {!! Form::label('Max Tutorias', 'Maxima Tutorias', ['class' => 'control-label']) !!}
-                            {!! Form::text('maxtutoria', null, ['class' => 'form-control', 'placeholder' => '','maxlength'=>'50']) !!}
-                            
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            {!! Form::label('fechai_extraordinaria', 'Fecha Inicio Extraordinaria', ['class' => 'control-label']) !!}
-                            {!! Form::text('fechai_extraordinaria',null,['class'=>'form-control pickadate','id'=>'fechai_extraordinaria','placeholder'=>'Seleccione fecha ', ""]) !!}
-                            
+                        <div class="col-md-12">
+<strong>Meses de Pasantias<strong></div>
+                          <div class="col-md-4"> 
+                            {!! Form::select('mesi',['enero'=>'enero','febrero'=>'febrero',
+                            'marzo'=>'marzo','abril'=>'abril','mayo'=>'mayo','junio'=>'junio',
+                            'julio'=>'julio',
+                            'agosto'=>'agosto','septiembre'=>'septiembre','octubre'=>'octubre','noviembre'=>'noviembre',
+                            'diciembre'=>'diciembre'],old('mesi'),['class'=>'form-control select2','id'=>'fechai','placeholder'=>'Seleccione Mes', ""]) !!}
+                            </div>
+                            <div class="col-md-4"> 
+
+                            {!! Form::select('mesf',['enero','febrero','marzo','abril','mayo','junio','julio',
+                             'agosto','septiembre','octubre','noviembre','diciembre'],old('mesf'),['class'=>'form-control select2','id'=>'fechaf','placeholder'=>'Seleccione Mes ', ""]) !!}
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-                            {!! Form::label('fechaf_extraordinaria', 'Fecha Final Extraordinaria', ['class' => 'control-label']) !!}
-                            {!! Form::text('fechaf_extraordinaria',null,['class'=>'form-control pickadate','id'=>'fechaf_extraordinaria','placeholder'=>'Seleccione fecha ', ""]) !!}
-                            
-                        </div>
-                    </div>
                 
-                    
                     <br>
                     <div class="pull-right">
                     {!! Form::button(trans('global.app_update'), ['type'=>'submit','class' => 'btn btn-primary']) !!}
+                    <a href="{{route('periods.index')}}" class="btn btn-danger">Cancelar</a>
+                    
                     </div>
                 </div>
             </div>

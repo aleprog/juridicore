@@ -223,26 +223,68 @@
 												<div class="form-group">
 
 													<label class="col-md-4 control-label">Cedula</label>
-													
+													<div class="col-md-4">
+													@if($datos['data']['cedula_archivo'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['cedula_archivo'])
+													<span class="label label-warning label-sm"><i class="fa fa-times"></i></span>
+													@endif
+													</div>
 													<input type="file" class="form-control" name="cedula" accept="application/pdf" >
-												
-													<label class="col-md-4 control-label">Papel</label>
+													
+													<label class="col-md-4 control-label">Papeleta/votacion</label>
+													@if($datos['data']['papeleta_archivo'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['papeleta_archivo'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="papeleta" accept="application/pdf">
-												
+													
 													<label class="col-md-4 control-label">Foto</label>
+													@if($datos['data']['foto_archivo'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['foto_archivo'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="foto"accept="application/pdf">
 												
 													<label class="col-md-4 control-label">Curriculum</label>
+													@if($datos['data']['curriculum_archivo'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['curriculum_archivo'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="curriculum" accept="application/pdf">
 												
 													<label class="col-md-4 control-label">Certificado de Matricula</label>
+													@if($datos['data']['certificado_matricula'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['certificado_matricula'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="certificado_matricula" accept="application/pdf" >
 													
 													<label class="col-md-4 control-label">Certificado de No Arrastre</label>
+													@if($datos['data']['certificado_no_arrastre'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['certificado_no_arrastre'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="certificado_arrastre" accept="application/pdf" >
 												
 													<label class="col-md-4 control-label">Solicitud Sellada</label>
-												
+													@if($datos['data']['solicitud_sellada'])
+													<span class="label label-success label-sm"><i class="fa fa-check"></i></span>
+													@endif
+													@if(!$datos['data']['solicitud_sellada'])
+													<span class="label label-warning label-sm"><i class="fa fa-remove"></i></span>
+													@endif
 													<input type="file" class="form-control" name="solicitud_sellada" accept="application/pdf" >
 												
 												</div>
@@ -256,7 +298,7 @@
 													<div class="col-md-6 col-md-offset-4">
 													<button type="submit" class="btn btn-primary" value="3" name="btnvg">Grabar</button>
 												</form>
-												<a href="{{route('student.imprimirFicha')}}" target="_blank" class="btn btn-success">Imprimir</a>
+														<a href="{{route('student.imprimirFicha')}}" target="_blank" class="btn btn-success">Imprimir</a>
 													</div>
 												</div>
 											</div>

@@ -86,7 +86,7 @@ class PostulantController extends Controller
             $password=str_random(8);
 
             //dd($postulant);
-
+         
             $user = new User();
             $user->name = $postulant->nombres.' '.$postulant->apellidos;
             $user->email = $postulant->correo_institucional;

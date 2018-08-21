@@ -22,6 +22,7 @@
                         <th>cedula</th>
                         <th>@lang('global.users.fields.email')</th>
                         <th>@lang('global.users.fields.roles')</th>
+                        <th>Estado</th>
                         <th>&nbsp;</th>
 
                     </tr>
@@ -36,13 +37,25 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->persona_id }}</td>
                                 <td>{{ $user->email }}</td>
+                                
                                 <td>
                                     @foreach ($user->roles()->pluck('name') as $role)
                                         <span class="label label-info label-many">{{ $role }}</span>
                                     @endforeach
                                 </td>
                                 <td>
+                                @if($user->estado=='A')
+                                <span class="label label-primary label-many">Activo</span>
+
+                                @endif
+                                @if($user->estado=='I')
+                                <span class="label label-danger label-many">Inactivo</span>
+
+                                @endif
+                                </td>
+                                <td>
                                     <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('admin.userstate',[$user->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-check"></i></a>
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',

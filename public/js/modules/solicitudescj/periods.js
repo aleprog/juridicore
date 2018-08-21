@@ -58,10 +58,10 @@ function changeDatatable()
                         "sUrl": "/js/config/datatablespanish.json"
                     },
                 "lengthMenu": [[5,10,20 -1], [5,10,20, "All"]],
-                "order": [[ 1, 'desc' ]],
+                "order": [[ 3, 'asc' ]],
                 "searching": true,
-                "info":  false,
-                "ordering": false,
+                "info":  true,
+                "ordering": true,
                 "bPaginate": true,
                 "processing": true,
                 "serverSide": true,
@@ -74,12 +74,11 @@ function changeDatatable()
                     {data: 'fechai', "width": "12%"},
                     {data: 'fechaf',   "width": "10%"},
                     {data: 'estado_label',   "width": "12%"},
-                    {data: 'maxtutoria',   "width": "10%"},
                     {
                         data: 'actions',
                         "width": "10%",
-                        "bSortable": false,
-                        "searchable": false,
+                        "bSortable": true,
+                        "searchable": true,
                         "targets": 0,
                         
                     }

@@ -17,3 +17,7 @@ Route::get('admin/gestion/periodos', 'Solicitudescj\PeriodController@index')
 
 	Route::put('admin/gestion/{id}/periodos/editar', 'Solicitudescj\PeriodController@update')
 	->name('periods.update');
+
+	Route::get('admin/gestion/periodos/habilita/{id}', 'Solicitudescj\PeriodController@habilita')
+	->name('periods.habilita');
+

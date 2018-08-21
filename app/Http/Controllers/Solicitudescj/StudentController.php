@@ -228,7 +228,7 @@ class StudentController extends Controller
 			return $pdf->stream();
 	//	}
 			$m="Aun no ha completado las 160 horas para realizar la evaluacion, Porfavor revise la cantidad de sus horas";
-			$cc=2;
+			//$cc=2;
 		
 		
 		return view('modules.Solicitudescj.student.actividades')->with(['m'=>$m,'cc'=>$cc]);

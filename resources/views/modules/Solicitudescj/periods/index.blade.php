@@ -36,7 +36,6 @@
                   <th>Fecha Inicio</th>                  
                   <th>Fecha Final</th>
                   <th>Estado</th>
-                  <th>Max Tutorias</th>
                   <th>Opciones</th>
 
                   </thead>

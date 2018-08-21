@@ -311,15 +311,21 @@ var b=0;
 });
 $('#verif').on('click', function (e) {
 		var dato = $('input[name^="identificacion"]').val();
-	//	if(dato.length<10)
-	//	{
-	//		alert("Formato incorrecto de cedula , verifique el numero sea igual a 10 digitos")
-			$("#dependencia").show();	
+		var tipo=$('[name^="tipo_identificacion"]').val();
+    if(tipo!='cedula')
+    {
+        $("#dependencia").show();	
 
-	//	}else{
-//			verifica(dato); 
-//}
+    }else{
+        if(dato.length<10)
+		{
+		alert("Formato incorrecto de cedula , verifique el numero sea igual a 10 digitos")
+		$("#dependencia").hide();	
 
+		}else{
+			verifica(dato); 
+        }
+    }
 });
 function validarEmail(dato) {
 	var valor=$('#'+dato+'').val();

@@ -109,10 +109,13 @@ function soloNumeros1_99(e){
 	return (key >= 49 && key <= 54)
 }
 
-function agregahora()
+function agregahora(id)
 {
-    var horario_inicio=$("#horario_inicio").val();
-    var cant_horas=$("#cant_horas").val();
+    var horario_inicio=$("[name*='hora_inicio["+id+"]']" ).val();
+    var cant_horas=$("[name*='cant_horas["+id+"]']" ).val();
+
+   // var horario_inicio=$("#horario_inicio").val();
+   // var cant_horas=$("#cant_horas").val();
     if(cant_horas==null || cant_horas=='')
     {
         cant_horas=2;
@@ -125,10 +128,12 @@ if(fin<10)
 {
     fin="0"+fin;
 }
-   // var h=horario_inicio.add(cant_horas*3600,"hours").format('HH:mm');
-    var horario_fin=$("#horario_fin").val(fin+":00").change();
-    var idhf=$("#idhf").val(fin+":00").change();
 
+   // var h=horario_inicio.add(cant_horas*3600,"hours").format('HH:mm');
+   // var horario_fin=$("#horario_fin").val(fin+":00").change();
+   // var idhf=$("#idhf").val(fin+":00").change();
+   $("[name*='hora_fin["+id+"]']" ).val(fin+":00").change();
+   $("[name*='hf["+id+"]']" ).val(fin+":00").change();
 }			
     </script>
 
