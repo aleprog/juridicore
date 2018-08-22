@@ -209,7 +209,7 @@ text-align:center;
 							{{"X"}}
 							@endif
 							</td>
-							<td>Carnet:
+							<td>Carnet CONADIS:
 							{{$ob->carnet}}
 						</td>
 							<td>No:
