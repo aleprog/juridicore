@@ -1,5 +1,8 @@
 <?php
 
+Route::middleware(['auth'])->group(function () {
+
+
 Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 	->name('clients.index');
 
@@ -32,3 +35,5 @@ Route::get('admin/clientes', 'Solicitudescj\ClientController@index')
 
 	Route::post('admin/clientes/asignar/supervisor', 'Solicitudescj\ClientController@asignarSupervisor')
 	->name('clients.asignarSupervisor');
+
+});

@@ -227,8 +227,13 @@
 
                         <div class="col-xs-4 form-group text-right">
                         <input type="hidden" name="id" value="{{$student[0]->id}}" >
+                        <input type="hidden" name="postulant_id" value="{{$postulant->id}}" >
                         <br>
                         <button id="btnGuardar" class="btn btn-primary " type="submit">Asignar Tutor</button>
+                        @if($supervisor)
+                        	<a target="_blank" href="{{route('passants.printPlanillaTutor',$postulant->id)}}" class="btn btn-warning">Imprimir Planilla</a>
+                        @endif
+
                         </div>
                   
                   {!! Form::close() !!}
@@ -358,6 +363,8 @@
 							</div>
 							<div v-else >
 								<label class="label label-success">Supervidor Aprobado</label>
+								<br><br>
+								<a target="_blank" href="{{route('passants.printPlanillaSupervisor',$postulant->id)}}" class="btn btn-warning">Imprimir Planilla</a>
 							</div>
 
 						</div>

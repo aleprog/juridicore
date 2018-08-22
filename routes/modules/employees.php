@@ -1,5 +1,8 @@
 <?php
 
+Route::middleware(['auth'])->group(function () {
+
+
 Route::get('admin/gestion/empleados', 'Solicitudescj\EmployeeController@index')
 	->name('employees.index');
 
@@ -17,3 +20,5 @@ Route::get('admin/gestion/empleados', 'Solicitudescj\EmployeeController@index')
 
 	Route::put('admin/gestion/{id}/empleados/editar', 'Solicitudescj\EmployeeController@update')
 	->name('employees.update');
+
+});

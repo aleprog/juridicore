@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Core\Entities\Solicitudescj\Client;
 use App\Core\Entities\Solicitudescj\Consulta;
+use App\Core\Entities\Solicitudescj\Archivo;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Core\Entities\Solicitudescj\StudentsSteachers;
@@ -71,7 +72,7 @@ class CasosController extends Controller
         //'demandante' => 'required_if:razon,==,Patrocinio',
         //'demandado' => 'required_if:razon,==,Patrocinio',
         'tipo_usuario' => 'required_if:razon,==,Patrocinio',
-        'practicante_id' => 'required',
+        'practicante_id' => 'nullable',
       ];
         
       $this->validate($request, $rules);
@@ -379,5 +380,64 @@ class CasosController extends Controller
 
 
     }
+
+    public function archivo(){
+    
+      return view('modules.Solicitudescj.casos.archivo');
+
+    }
+
+    public function archivoSubir(){
+    
+      return view('modules.Solicitudescj.casos.subir');
+
+    }
+
+    public function archivoGuardar(Request $request){
+        $rules = [
+            'nombre' => 'required',
+            'archivo_caso' => 'required|mimes:xls,xlsx',
+            
+        ];
+
+        $this->validate($request, $rules);
+
+        //dd($request->archivo_caso,$request->all);
+        //
+
+        //dd($request->file('archivo_caso'),$request->file('archivo_caso')->getMimeType());
+
+        $archivo = new Archivo();
+        $archivo->nombre =  $request->nombre;
+        $archivo->archivo_caso = '';
+
+        $archivo->save();
+
+        if ($request->hasFile('archivo_caso')){
+          $path = $request->file('archivo_caso')->storeAs('archivos'.'/'.$archivo->id,str_slug($archivo->nombre, "_").'.xlsx','file');
+          $archivo->archivo_caso=$path;
+        }
+
+        $archivo->save();
+
+        return redirect()->route('casos.archivo');
+    }
+
+    public function archivoData()
+    {
+
+      $archivos=Archivo::orderBy('created_at','DESC')->get();
+
+
+
+       //dd($casos);
+
+      return DataTables::of($archivos)->addColumn('actions', function ($select) {
+        return '<p class="text-center"><a title="Descargar" target="_blank" href="'.asset('file/'.$select->archivo_caso).'"><span class="fa fa-download"></span></a><p>';
+      })->rawColumns(['actions'])
+      ->make(true);     
+
+    }
+
 
 }

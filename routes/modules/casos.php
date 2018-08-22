@@ -1,5 +1,8 @@
 <?php
 
+Route::middleware(['auth'])->group(function () {
+
+
 	Route::get('admin/casos', 'Solicitudescj\CasosController@index')
 	->name('casos.index');
 
@@ -41,3 +44,17 @@
 
 	Route::get('admin/casos/{id}/imprimir_cedula', 'Solicitudescj\CasosController@printCedula')
 	->name('casos.printCedula');
+
+	Route::get('admin/casos/archivo', 'Solicitudescj\CasosController@archivo')
+	->name('casos.archivo');
+
+	Route::get('admin/casos/archivo/data', 'Solicitudescj\CasosController@archivoData')
+	->name('casos.archivoData');
+
+	Route::get('admin/casos/archivo/subir', 'Solicitudescj\CasosController@archivoSubir')
+	->name('casos.archivoSubir');
+
+	Route::post('admin/casos/archivo/guardar', 'Solicitudescj\CasosController@archivoGuardar')
+	->name('casos.archivoGuardar');
+
+});

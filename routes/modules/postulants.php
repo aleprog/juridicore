@@ -1,5 +1,7 @@
 <?php
 
+Route::middleware(['auth'])->group(function () {
+
 	Route::get('admin/postulantes', 'Solicitudescj\PostulantController@index')
 	->name('porstulants.index');
 
@@ -15,4 +17,5 @@
 	Route::post('admin/gestion/postulante/rechazo', 'Solicitudescj\PostulantController@statusIncompleto')
 	->name('postulants.statusIncompleto');
 
+});
 

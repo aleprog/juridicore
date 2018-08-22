@@ -116,11 +116,11 @@ class Consulta extends Model
     }
 
     public function getPracticanteNombreAttribute(){
-        return $this->practicante->name;
+        return $this->practicante ? $this->practicante->name : 'sin practicante';
     }
 
     public function getObservacionAttribute(){
-        return $this->detalle.' | Pasante Colaborador: '.$this->practicante_nombre;
+        return $this->detalle.' | '.$this->practicante_nombre;
     }
 
 

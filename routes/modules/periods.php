@@ -1,6 +1,8 @@
 <?php
 
-Route::get('admin/gestion/periodos', 'Solicitudescj\PeriodController@index')
+Route::middleware(['auth'])->group(function () {
+
+	Route::get('admin/gestion/periodos', 'Solicitudescj\PeriodController@index')
 	->name('periods.index');
 
 	Route::get('admin/gestion/periodos/data', 'Solicitudescj\PeriodController@getDatatable')
@@ -17,3 +19,5 @@ Route::get('admin/gestion/periodos', 'Solicitudescj\PeriodController@index')
 
 	Route::put('admin/gestion/{id}/periodos/editar', 'Solicitudescj\PeriodController@update')
 	->name('periods.update');
+
+});

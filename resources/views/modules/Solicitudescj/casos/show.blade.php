@@ -275,7 +275,7 @@
 
 	                <div class="col-xs-6 form-group">
 	                    {!! Form::label('practicante_id', 'Practicante', ['class' => 'control-label']) !!}
-	                    {!! Form::select('practicante_id',$practicantes->pluck('name','id'), Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '','practicante_id']) !!}                             
+	                    {!! Form::select('practicante_id',$practicantes->pluck('name','id'), Null, ['class' => 'form-control', 'placeholder' => '','practicante_id']) !!}                             
 	                </div>
 
 					<div class="col-xs-12">

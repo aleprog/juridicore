@@ -1,5 +1,8 @@
 <?php
 
+Route::middleware(['auth'])->group(function () {
+
+
 	Route::get('admin/gestion/pasantes', 'Solicitudescj\PassantsController@index')
 	->name('passants.index');
 
@@ -28,6 +31,12 @@
 	Route::post('admin/gestion/pasantes/rechazo', 'Solicitudescj\PassantsController@statusRejection')
 	->name('passants.statusRejection');
 
-	
+	Route::get('admin/gestion/pasantes/{id}/imprimir-asignacion-tutor', 'Solicitudescj\PassantsController@printPlanillaTutor')
+	->name('passants.printPlanillaTutor');
+
+	Route::get('admin/gestion/pasantes/{id}/imprimir-asignacion-supervisor', 'Solicitudescj\PassantsController@printPlanillaSupervisor')
+	->name('passants.printPlanillaSupervisor');
+
+});
 
 	
