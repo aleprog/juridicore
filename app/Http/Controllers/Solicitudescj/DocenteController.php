@@ -31,7 +31,7 @@ class DocenteController extends Controller
         ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
         ->join('postulants as p','p.identificacion','u.persona_id')
         ->where('et.estado','A')
-   
+   ->where('p.estado','A')
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
 
@@ -48,7 +48,7 @@ class DocenteController extends Controller
         ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
         ->join('postulants as p','p.identificacion','u.persona_id')
         ->where('et.estado','A')
-   
+   ->where('p.estado','A')
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->get()->pluck('apellidos','id')->toArray();
   
@@ -58,6 +58,7 @@ class DocenteController extends Controller
     }
     public function StateActividad($id)
     {
+        dd($id);
         $objA=Asistencia::Find($id);
         $objA->estado='A';
         $objA->save();
@@ -140,7 +141,7 @@ class DocenteController extends Controller
         ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
         ->join('postulants as p','p.identificacion','u.persona_id')
         ->where('et.estado','A')
-   
+   ->where('p.estado','A')
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->pluck('apellidos','id');
 
@@ -201,7 +202,7 @@ class DocenteController extends Controller
         ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
         ->join('postulants as p','p.identificacion','u.persona_id')
         ->where('et.estado','A')
-   
+   ->where('p.estado','A')
         ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
         ->get()->pluck('apellidos','id')->toArray();
              
@@ -347,7 +348,63 @@ class DocenteController extends Controller
             ->make(true);
     }
     
+    public function editAsistenciaD($id)
+    {
+        $objD=Asistencia::Find($id);
+        $semana=explode('Semana ', $objD->semana);
+        $semana=$semana[1];
+        return view('modules.Solicitudescj.docente.docenteAsistenciaEdit',
+        compact('objD','semana'));
 
+    }
+    public function saveAsistenciaD(request $request)
+    {
+       // dd($request);
+        $obj=Asistencia::Find($request->id);
+        $obj->user_id=$request->user_id;
+        $obj->docente_id=Auth::user()->id;
+        $obj->fecha=$request->fecha_registro;
+        $obj->semana='Semana '.$request->semana;
+        foreach($request->cant_horas as $ch)
+        {
+            $obj->horas=$ch;
+            if($ch==0)
+            {
+                $obj->estado='A';
+            }
+            else{
+                $obj->estado='I'; 
+            }
+            
+        }
+        foreach($request->hora_inicio as $hi)
+        {
+            $obj->hora_inicio=$hi;
+            
+        }
+        foreach($request->hf as $hf)
+        {
+            $obj->hora_fin=$hf;
+        
+        }
+        
+        $obj->save();
+       
+        $objD=DB::connection('mysql_solicitudescj')
+        ->table('students_teachers as et')
+        ->where('et.user_doc_id',Auth::user()->id)
+        ->join('juridicorebase_ant.users as u','u.id','et.user_est_id')
+        ->join('postulants as p','p.identificacion','u.persona_id')
+        ->where('et.estado','A')
+         ->where('p.estado','A')
+        ->select('u.id as id', DB::RAW('CONCAT(p.apellidos," ",p.nombres) as apellidos'))
+        ->get()->pluck('apellidos','id')->toArray();
+             
+        $sup= Auth::user()->evaluarole(['Supervisor']);
+        $m='Grabado correctamente';
+        return view('modules.Solicitudescj.docente.docenteindex',compact('objD','sup','m'));
+
+    }
     public function datatableAsistencia()
 	{   
         $Directora = Auth::user()->evaluarole(['Directora']);
@@ -362,7 +419,7 @@ class DocenteController extends Controller
         ->where('p.estado','A')
         ->orderby('a.estado','DESC')
         ->select(
-            'a.descripcion as descripcion',
+        'a.descripcion as descripcion',
         'a.id as id',
         'a.estado as estado',
         DB::RAW('CONCAT(p.apellidos," ",p.nombres) as estudiante'),
@@ -374,12 +431,13 @@ class DocenteController extends Controller
        return DataTables::of($result         
 
         )->addColumn('Estado', function ($select) {
+            $linka='<a href="'.route('docente.editAsistenciaD',$select->id).'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>';
 				switch($select->estado)
 				{
                     case 'A':
                     if(!$select->horas)
 					{
-						return '<span class="label label-success" >No hay Asistencia</span>';
+						return '<span class="label label-success" >No hay Asistencia</span>&nbsp'.$linka;
 						break;
 					}
 					return '<span class="label label-primary">Actividad Aprobada</span>';
@@ -387,7 +445,7 @@ class DocenteController extends Controller
 					case 'I':
 					
 					
-					return '<span class="label label-info">Asistencia</span>&nbsp;';
+					return '<span class="label label-info">Asistencia</span>&nbsp;&nbsp'.$linka;
 					break;
                     
                     case 'P':

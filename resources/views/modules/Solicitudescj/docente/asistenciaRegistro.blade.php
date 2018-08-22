@@ -28,6 +28,7 @@ Fecha/Registro:
 <td>Hora/Salida</td>
 </strong>
 </tr>
+
 @foreach($objD as $key => $value)
 
 <tr>
@@ -38,7 +39,7 @@ Fecha/Registro:
 
 </td>	
 <td>
-{!! Form::text('semana','1',['class' => 'form-control',"style"=>"width:100%","id"=>"semana","name"=>"semana[$key]","maxlength"=>"2","onKeypress"=>"return soloNumeros1_99(event)"]) !!}
+<input type="text" value="1" class="form-control" name="semana[{{$key}}]" id="semana" onkeypress="return soloNumeros1_99(event)" maxlength="2">
 
 </td>
 <td>

@@ -73,3 +73,8 @@ Route::get('datatablecheckout', 'Solicitudescj\DirectoraController@datatablechec
 Route::get('editarcheckout/{id}', 'Solicitudescj\DirectoraController@editarcheckout')->name('all.editarcheckout');
 Route::post('savecheckout', 'Solicitudescj\DirectoraController@savecheckout');
 Route::get('addCheckout/', 'Solicitudescj\DirectoraController@addCheckout')->name('all.addCheckout');
+Route::post('saveAsistenciaD', 'Solicitudescj\DocenteController@saveAsistenciaD')->name('d.saveEditAsistencia');
+
+
+Route::get('editAsistenciaD/{id}', 'Solicitudescj\DocenteController@editAsistenciaD')->name('docente.editAsistenciaD');
+
