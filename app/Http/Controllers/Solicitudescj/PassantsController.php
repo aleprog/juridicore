@@ -15,10 +15,12 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use App\Mail\CreateUserStudent as CreateUserStudent;
 use App\Mail\RejectionUserStudent as RejectionUserStudent;
+use App\Mail\AssignTeacherStudent as AssignTeacherStudent;
 use Yajra\Datatables\Datatables;
 use Mail;
 use App\Http\Controllers\Ajax\SelectController;
 use DB;
+use PDF;
 
 class PassantsController extends Controller
 {
@@ -79,7 +81,7 @@ class PassantsController extends Controller
         $student=User::where('persona_id',$postulant->identificacion)->get();
 
         $supervisors=User::whereHas('roles', function ($query) {
-            $query->whereIn('abv',['TUT']);
+            $query->whereIn('abv',['SUP']);
         })->pluck('name','id');
 
         $horarios = Schedule::pluck('descripcion','id');
@@ -158,7 +160,42 @@ class PassantsController extends Controller
         $students_teachers->estado = 'A';
         $students_teachers->save();
 
-        return redirect()->route('passants.index');
+
+        $postulante=Postulant::find($request->postulant_id);
+        
+        $teachers = StudentsSteachers::with(['docente'])->where('user_est_id',$request->id)->where('tipo','TUT')->get();
+
+        $practicante= User::find($request->id);
+
+
+        $path1=public_path() . '/images/ug.png';
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $im1 = file_get_contents($path1);
+        $imdata1 = base64_encode($im1);
+
+        $path2=public_path() . '/images/juris.png';
+        $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+        $im2 = file_get_contents($path2);
+        $imdata2 = base64_encode($im2);
+
+      
+        $pdf = PDF::loadView('modules.Solicitudescj.passants.imprimirPlanillaTutor', [
+           'postulante' => $postulante,
+           'docente' => $teachers[0]->docente,
+           'logo1'=>$imdata1,
+           'type_image1'=>$type1,
+           'logo2'=>$imdata2,
+           'type_image2'=>$type2,
+        ]);
+
+        $file=public_path('/file/planillas/planilla_tutor_asignado_'.$postulante->id.'.pdf');
+
+        $pdf->save($file);
+
+        Mail::to($practicante->email)->send(new AssignTeacherStudent($practicante,'Tutor', $file));
+
+        //return redirect()->route('passants.index');
+        return redirect()->route('passants.show',$request->postulant_id);
 
     }
 
@@ -182,7 +219,17 @@ class PassantsController extends Controller
         $this->validate($request, $rules, $messages);
         //dd($request->all());
 
+        
+
         $teachers = StudentsSteachers::where('user_est_id',$request->id)->where('tipo','SUP')->get();
+
+        $tutor = StudentsSteachers::with(['docente'])->where('user_est_id',$request->id)->where('tipo','TUT')->get();
+
+        $practicante= User::find($request->id);
+
+        $postulante=Postulant::find($request->postulant_id);
+
+        //dd($postulante,$request->postulant_id);
 
         if(count($teachers)>0){
            $students_teachers= StudentsSteachers::find($teachers[0]->id);
@@ -201,21 +248,86 @@ class PassantsController extends Controller
         $students_teachers->lugar_id = $request->lugar;
         $students_teachers->hora_inicio = $request->horario.':00';
         $students_teachers->hora_fin = $hora_final.':00';
-        //$students_teachers->horario_id = $request->horario_id;
+        $students_teachers->cant_horas = $request->hora;
         $students_teachers->estado = 'A';
         $students_teachers->save();
+
+        $path1=public_path() . '/images/ug.png';
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $im1 = file_get_contents($path1);
+        $imdata1 = base64_encode($im1);
+
+        $path2=public_path() . '/images/juris.png';
+        $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+        $im2 = file_get_contents($path2);
+        $imdata2 = base64_encode($im2);
+
+          
+        $pdf = PDF::loadView('modules.Solicitudescj.passants.imprimirPlanillaSupervisor', [
+               'postulante' => $postulante,
+               'docente' => $teachers[0]->docente,
+               'cant_horas' => $teachers[0]->cant_horas,
+               'tutor' => $tutor[0]->docente,
+               'logo1'=>$imdata1,
+               'type_image1'=>$type1,
+               'logo2'=>$imdata2,
+               'type_image2'=>$type2,
+        ]);
+
+        $file=public_path('/file/planillas/planilla_supervisor_asignado_'.$postulante->id.'.pdf');
+
+        $pdf->save($file);
+
+        Mail::to($practicante->email)->send(new AssignTeacherStudent($practicante,'Supervisor', $file));
+
 
         return redirect()->route('passants.show',$request->postulant_id);
     }
 
     public function activarSupervisor($id){
+
         $teachers = StudentsSteachers::where('user_est_id',$id)->where('tipo','SUP')->first();
+
+        $tutor = StudentsSteachers::with(['docente'])->where('user_est_id',$request->id)->where('tipo','TUT')->get();
+
+        $practicante= User::find($request->id);
+
+        $postulante=Postulant::where('identificacion',$practicante->persona_id)->get();
 
         //dd($teachers);
         $teachers->estado = 'A';
         $teachers->save();
 
-        return redirect()->route('passants.index');
+
+        $path1=public_path() . '/images/ug.png';
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $im1 = file_get_contents($path1);
+        $imdata1 = base64_encode($im1);
+
+        $path2=public_path() . '/images/juris.png';
+        $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+        $im2 = file_get_contents($path2);
+        $imdata2 = base64_encode($im2);
+
+          
+        $pdf = PDF::loadView('modules.Solicitudescj.passants.imprimirPlanillaSupervisor', [
+               'postulante' => $postulante,
+               'docente' => $teachers[0]->docente,
+               'cant_horas' => $teachers[0]->cant_horas,
+               'tutor' => $tutor[0]->docente,
+               'logo1'=>$imdata1,
+               'type_image1'=>$type1,
+               'logo2'=>$imdata2,
+               'type_image2'=>$type2,
+        ]);
+
+        $file=public_path('/file/planillas/planilla_supervisor_asignado_'.$postulante[0]->id.'.pdf');
+
+        $pdf->save($file);
+
+        Mail::to($practicante->email)->send(new AssignTeacherStudent($practicante,'Supervisor', $file));
+
+        return redirect()->route('passants.show',$postulante[0]->id);
     }
 
     public function statusRejection(Request $request)
@@ -292,6 +404,81 @@ class PassantsController extends Controller
         $teachers = StudentsSteachers::with(['docente','horario','lugar'])->where('user_est_id',$id)->where('tipo','SUP')->first();
 
         return $teachers;
+    }
+
+
+    public function printPlanillaTutor($id){
+
+      $postulante=Postulant::find($id);
+      $practicante=User::where('persona_id',$postulante->identificacion)->get();
+      //dd($practicante,$postulante);
+      $teachers = StudentsSteachers::with(['docente'])->where('user_est_id',$practicante[0]->id)->where('tipo','TUT')->get();
+
+      //dd($teachers);
+
+      //return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+
+      $path1=public_path() . '/images/ug.png';
+      $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+      $im1 = file_get_contents($path1);
+      $imdata1 = base64_encode($im1);
+
+      $path2=public_path() . '/images/juris.png';
+      $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+      $im2 = file_get_contents($path2);
+      $imdata2 = base64_encode($im2);
+
+      
+      $pdf = PDF::loadView('modules.Solicitudescj.passants.imprimirPlanillaTutor', [
+           'postulante' => $postulante,
+           'docente' => $teachers[0]->docente,
+           'logo1'=>$imdata1,
+           'type_image1'=>$type1,
+           'logo2'=>$imdata2,
+           'type_image2'=>$type2,
+       ]);
+
+      return $pdf->stream('planilla_tutor_asignado_'.$postulante->id.'.pdf');
+    }
+
+    public function printPlanillaSupervisor($id){
+
+      $postulante=Postulant::find($id);
+      $practicante=User::where('persona_id',$postulante->identificacion)->get();
+      //dd($practicante,$postulante);
+      $teachers = StudentsSteachers::with(['docente'])->where('user_est_id',$practicante[0]->id)->where('tipo','SUP')->get();
+
+      $tutor = StudentsSteachers::with(['docente'])->where('user_est_id',$practicante[0]->id)->where('tipo','TUT')->get();
+
+      //dd($teachers);
+
+      //dd($teachers);
+
+      //return view('modules.Solicitudescj.clients.imprimir', compact('client'));
+
+      $path1=public_path() . '/images/ug.png';
+      $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+      $im1 = file_get_contents($path1);
+      $imdata1 = base64_encode($im1);
+
+      $path2=public_path() . '/images/juris.png';
+      $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+      $im2 = file_get_contents($path2);
+      $imdata2 = base64_encode($im2);
+
+      
+      $pdf = PDF::loadView('modules.Solicitudescj.passants.imprimirPlanillaSupervisor', [
+           'postulante' => $postulante,
+           'docente' => $teachers[0]->docente,
+           'cant_horas' => $teachers[0]->cant_horas,
+           'tutor' => $tutor[0]->docente,
+           'logo1'=>$imdata1,
+           'type_image1'=>$type1,
+           'logo2'=>$imdata2,
+           'type_image2'=>$type2,
+       ]);
+
+      return $pdf->stream('planilla_supervisor_asignado_'.$postulante->id.'.pdf');
     }
 
 

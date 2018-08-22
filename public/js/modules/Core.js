@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 
 
-    var idleState = false;
+    /*var idleState = false;
     var idleTimer = null;
     $('*').bind('mousemove click mouseup mousedown keydown keypress keyup submit change mouseenter scroll resize dblclick', function () {
         clearTimeout(idleTimer);
@@ -19,7 +19,7 @@ $(document).ready(function(){
             idleState = true; }, (60000*15));
     });
     $("body").trigger("mousemove");
-    timeNow();
+    timeNow();*/
 
 
 

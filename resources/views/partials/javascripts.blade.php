@@ -63,7 +63,7 @@
 <script>
     +function (w, d, undefined) {
 
-        var id = new Date().getTime().toString();
+        /*var id = new Date().getTime().toString();
         if (w.localStorage.appID === undefined) {
             w.localStorage.appID = id;
             w.onbeforeunload = function () {
@@ -71,17 +71,17 @@
             };
         } else if (w.localStorage.appID !== id) {
             guardarDatos();
-        }
+        }*/
     } (window, document);
     function guardarDatos()
     {
-        var objApiRest = new AJAXRest('/admin/sessionAudita', {}, 'post');
+        /*var objApiRest = new AJAXRest('/admin/sessionAudita', {}, 'post');
         objApiRest.extractDataAjax(function (_resultContent) {
             if (_resultContent.status == 200) {
                 $("#cerrar").click();
             }
 
-        });
+        });*/
     }
 </script>
 <script type="text/javascript">

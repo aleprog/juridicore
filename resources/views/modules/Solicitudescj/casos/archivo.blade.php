@@ -5,7 +5,7 @@
 @endsection
 
 @section('contentheader_description')
-    Listado de Casos
+    Listado Archivo Casos
 @endsection
 @section('css')
     <link href="{{ url('adminlte/plugins/notifications/sweetalert.css') }}" rel="stylesheet">
@@ -36,14 +36,11 @@
                 "serverSide": true,
                 "deferRender": true,
                 "destroy": true,
-                "ajax": "/admin/casos/data/",
+                "ajax": "/admin/casos/archivo/data",
                 "columns":[
 
-                    {data: 'cliente.nombres', "width": "20%"},
-                    {data: 'cliente.apellidos', "width": "20%"},
-                    {data: 'cliente.cedula', "width": "20%"},                    
-                    {data: 'created_at',   "width": "10%"},
-                    {data: 'estado_label',   "width": "10%"},
+                    {data: 'nombre'}, 
+                    {data: 'created_at'} ,                 
                     {
                         data: 'actions',
                         "width": "10%",
@@ -67,7 +64,7 @@
 @endsection
 @section('content')
       <div class="col-lg-2 text-right" style="float:right">
-          
+          <a class="btn btn-primary" href="{{route('casos.archivoSubir')}}">Agregar</a>
       </div>
 <hr/>
 
@@ -81,10 +78,7 @@
                   <thead>
 
                   <th>Nombres</th>
-                  <th>Apellidos</th>                  
-                  <th>Cedula</th>                  
                   <th>Fecha</th>
-                  <th>Estado</th>
                   <th>Opciones</th>
 
                   </thead>

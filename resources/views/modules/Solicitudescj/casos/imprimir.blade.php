@@ -84,7 +84,7 @@ Guayaquil, {{ Carbon\Carbon::now()->format('j') . ' de ' . mes() . ' del ' . Car
 		<td style="width: 10%; border-right: 1px solid; padding: 5px; font-size: 10px;">NACIONALIDAD</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;">{{$client->nacionalidad}}</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;font-size: 10px;">EDAD</td>
-		<td style="width: 10%; border-right: 1px solid; padding: 5px;"></td>
+		<td style="width: 10%; border-right: 1px solid; padding: 5px;">{{$client->edad}}</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;font-size: 10px;">ETNIA</td>
 		<td style="width: 10%; border-right: 1px solid; padding: 5px;">{{$client->etnia}}</td>
 	</tr>

@@ -20,7 +20,7 @@ $(document).ready(function(){
 $(document.body).on("change","#select_tags",function(){
  //alert(this.option);
     $array=this.value.split('-');
-     if($array[0]=='SUP'){
+     if($array[0]=='SUP' || $array[0]=='MON'){
         $( "#lugar" ).prop( "disabled", false );
     }else{
         $( "#lugar" ).prop( "disabled", true );
@@ -111,7 +111,7 @@ function changeDatatable()
 }
 
 $array=$("#select_tags").val().split('-');
- if($array[0]=='SUP'){
+ if($array[0]=='SUP'  || $array[0]=='MON'){
     $( "#lugar" ).prop( "disabled", false );
  }else{
     $( "#lugar" ).prop( "disabled", true );

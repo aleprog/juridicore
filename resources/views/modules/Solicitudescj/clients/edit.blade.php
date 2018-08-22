@@ -208,8 +208,9 @@
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('ingresos', 'Ingresos', ['class' => 'control-label']) !!}
-                            {!! Form::select('ingresos',['NO'=>'NO','SI'=>'SI'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
-                        </div>                        
+                            {!! Form::select('ingresos',['0'=>'0','< 1 SBU'=>'< 1 SBU', '1 SBU'=>'1 SBU',
+                            '2 SBU'=>'2 SBU', '3 SBU'=>'3 SBU', '4 SBU'=>'4 SBU', '5 SBU'=>'5 SBU', '> 5 SBU'=> '> 5 SBU'], Null, ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}                             
+                        </div>                      
 
                         <div class="col-xs-4 form-group">
                             {!! Form::label('bono', 'Bono', ['class' => 'control-label']) !!}
